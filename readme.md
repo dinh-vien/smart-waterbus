@@ -119,3 +119,4 @@ npm run build
 ## 👨‍💻 Author
 
 Le Minh Vuong
+Email: vuongdev09@gmail.com
