@@ -6,10 +6,17 @@ interface BookingProgressProps {
   /** Zero-based index of the active step. Earlier steps are complete. */
   current: number
   variant: 'circles' | 'bars'
+  /** Circles only: show "01 Trip" above the detail instead of "Step 1". */
+  numbered?: boolean
 }
 
 /** Five-step booking tracker. `circles` is used on passenger details, `bars` on checkout. */
-export default function BookingProgress({ steps, current, variant }: BookingProgressProps) {
+export default function BookingProgress({
+  steps,
+  current,
+  variant,
+  numbered,
+}: BookingProgressProps) {
   if (variant === 'bars') {
     return (
       <div className="grid grid-cols-2 gap-space-md rounded-2xl bg-surface-container-lowest p-space-md shadow-[0_2px_16px_rgba(13,37,56,0.05)] md:grid-cols-5">
@@ -67,7 +74,11 @@ export default function BookingProgress({ steps, current, variant }: BookingProg
                   active ? 'text-teal-flow' : 'text-on-surface-variant'
                 }`}
               >
-                {active ? 'Active' : `Step ${i + 1}`}
+                {numbered
+                  ? `${String(i + 1).padStart(2, '0')} ${step.label}`
+                  : active
+                  ? 'Active'
+                  : `Step ${i + 1}`}
                 {active && <span className="h-1.5 w-1.5 rounded-full bg-teal-flow" />}
               </div>
               <div
