@@ -1,0 +1,95 @@
+import { Breadcrumb, Icon } from '../../components/ui'
+import BookingProgress from '../../features/booking/components/BookingProgress'
+import {
+  ETicketContactCard,
+  JourneyDetailsCard,
+  OrderSummary,
+  PassengerInfoCard,
+  TermsConfirm,
+  VoucherCard,
+} from '../../features/booking/components/CheckoutParts'
+import { useBooking } from '../../features/booking/hooks/useBooking'
+import type { BookingStep } from '../../features/booking/types'
+import { useDocumentTitle } from '../../hooks'
+import { ROUTES } from '../../routes/routes'
+
+export default function CheckoutReviewPage() {
+  useDocumentTitle('Review Your Booking')
+  const {
+    loading,
+    trip,
+    seat,
+    seatId,
+    passenger,
+    voucher,
+    totals,
+    termsAccepted,
+    setVoucher,
+    setTerms,
+  } = useBooking()
+
+  if (loading || !trip || !totals) return <div className="min-h-[60vh]" aria-busy="true" />
+
+  const steps: BookingStep[] = [
+    { label: 'Trip', detail: trip.lineLabel.replace('Line 1 Express', 'Express Line 1') },
+    { label: 'Seat', detail: 'Window Selected' },
+    { label: 'Details', detail: passenger.fullName },
+    { label: 'Checkout', detail: 'Review Order' },
+    { label: 'Payment', detail: 'Instant QR / Card' },
+  ]
+
+  return (
+    <div className="mx-auto w-full max-w-7xl px-margin pb-space-3xl pt-space-md">
+      <div className="flex flex-wrap items-center justify-between gap-space-sm">
+        <Breadcrumb
+          items={[
+            { label: 'Home', to: ROUTES.home },
+            { label: 'Booking', to: ROUTES.seatSelection },
+            { label: 'Checkout' },
+          ]}
+        />
+        <span className="inline-flex items-center gap-2 rounded-full bg-secondary-container/60 px-3 py-1 text-xs font-semibold text-on-secondary-container">
+          <span className="h-2 w-2 rounded-full bg-teal-flow" />
+          River Crossing {trip.vesselCode} • Review Stage
+        </span>
+      </div>
+
+      <div className="mt-space-md">
+        <BookingProgress steps={steps} current={3} variant="bars" />
+      </div>
+
+      <div className="mt-space-xl flex flex-col justify-between gap-space-md md:flex-row md:items-end">
+        <div>
+          <h1 className="font-headline-xl text-headline-xl-mobile tracking-tight text-deep-river md:text-headline-xl">
+            Review Your Booking
+          </h1>
+          <p className="text-body-md text-on-surface-variant">
+            Confirm your trip, passenger, seat, and fare before proceeding to payment.
+          </p>
+        </div>
+        <span className="inline-flex items-center gap-2 self-start rounded-full bg-sand-light px-space-md py-2 text-xs text-teal-flow md:self-auto">
+          <Icon name="verified_user" className="text-[16px]" />
+          Your selected seat remains reserved while you complete checkout.
+        </span>
+      </div>
+
+      <div className="mt-space-md grid grid-cols-1 items-start gap-space-lg lg:grid-cols-12">
+        <div className="space-y-space-md lg:col-span-8">
+          <JourneyDetailsCard trip={trip} seat={seat} seatId={seatId} />
+          <PassengerInfoCard passenger={passenger} />
+          <ETicketContactCard passenger={passenger} />
+          <VoucherCard fareVnd={totals.fareVnd} voucher={voucher} onApply={setVoucher} />
+          <TermsConfirm checked={termsAccepted} onChange={setTerms} />
+        </div>
+        <div className="lg:col-span-4">
+          <OrderSummary
+            trip={trip}
+            fareVnd={totals.fareVnd}
+            discountVnd={totals.discountVnd}
+            totalVnd={totals.totalVnd}
+          />
+        </div>
+      </div>
+    </div>
+  )
+}

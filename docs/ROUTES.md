@@ -11,9 +11,9 @@ Source of truth: `src/routes/routes.ts`.
 | `/search` | Search journey | feature/trip-search | done |
 | `/search/results` | Search results | feature/trip-search | done |
 | `/trip` | Trip detail | feature/trip-search | done |
-| `/booking/seats` | Seat selection | feature/booking-flow | placeholder |
-| `/booking/passenger` | Passenger details | feature/booking-flow | placeholder |
-| `/booking/review` | Review booking | feature/booking-flow | placeholder |
+| `/booking/seats` | Seat selection | feature/booking-flow | done |
+| `/booking/passenger` | Passenger details | feature/booking-flow | done |
+| `/booking/review` | Review booking | feature/booking-flow | done |
 | `/payment` | Payment | feature/payment | placeholder |
 | `/payment/success` | Booking confirmed | feature/payment | placeholder |
 | `/tickets` | My tickets | feature/my-tickets | placeholder |
