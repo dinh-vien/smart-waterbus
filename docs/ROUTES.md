@@ -7,7 +7,7 @@ Source of truth: `src/routes/routes.ts`.
 | Route | Screen | Branch | Status |
 |---|---|---|---|
 | `/` | Home | feature/home | done |
-| `/sign-in` | Sign in | feature/auth | placeholder |
+| `/sign-in` | Sign in | feature/auth | done |
 | `/search` | Search journey | feature/trip-search | placeholder |
 | `/search/results` | Search results | feature/trip-search | placeholder |
 | `/trip` | Trip detail | feature/trip-search | placeholder |

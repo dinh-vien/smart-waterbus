@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import HomePage from '../pages/home/HomePage'
+import SignInPage from '../pages/auth/SignInPage'
 import PlaceholderPage from '../pages/placeholder/PlaceholderPage'
 import SitemapPage from '../pages/sitemap/SitemapPage'
 import PublicRoute from './PublicRoute'
@@ -10,6 +11,7 @@ import { ROUTES, ROUTE_LIST } from './routes'
 // Screens that already have a real page. Everything else renders a placeholder.
 const PAGES: Partial<Record<string, ComponentType>> = {
   [ROUTES.home]: HomePage,
+  [ROUTES.signIn]: SignInPage,
 }
 
 export default function AppRoutes() {
