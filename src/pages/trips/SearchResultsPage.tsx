@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react'
-import { FeatureStrip, StatusPill } from '../../components/ui'
+import { FeatureStrip, PageLoader, StatusPill } from '../../components/ui'
 import CorridorSidebar from '../../features/trips/components/CorridorSidebar'
 import DateStrip from '../../features/trips/components/DateStrip'
 import ResultFilters from '../../features/trips/components/ResultFilters'
 import type { SortKey, TimeFilter } from '../../features/trips/components/ResultFilters'
 import SearchSummaryBar from '../../features/trips/components/SearchSummaryBar'
 import TripCard from '../../features/trips/components/TripCard'
+import { formatDateLabel } from '../../features/trips/utils'
 import { useSearchResults } from '../../features/trips/hooks/useTripSearch'
 import { useDocumentTitle } from '../../hooks'
 
@@ -47,14 +48,11 @@ export default function SearchResultsPage() {
     return [...list].sort(by[sort])
   }, [trips, time, vessel, sort])
 
-  if (loading || !piers || !dates || !trips)
-    return <div className="min-h-[60vh]" aria-busy="true" />
+  if (loading || !piers || !dates || !trips) return <PageLoader />
 
   const pier = (id: string) => piers.find((p) => p.id === id) ?? piers[0]
   const selectedDate = dates.find((d) => d.id === query.dateId) ?? dates[0]
-  const dateLabel = selectedDate.isToday
-    ? `Today, ${selectedDate.label}`
-    : `${selectedDate.weekday}, ${selectedDate.label}`
+  const dateLabel = formatDateLabel(selectedDate)
 
   return (
     <div className="bg-mist pb-16 pt-4">

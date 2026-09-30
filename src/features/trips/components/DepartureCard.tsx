@@ -6,10 +6,11 @@ import type { Departure } from '../types'
 
 interface DepartureCardProps {
   departure: Departure
+  onSelect: (tripId: string) => void
 }
 
 /** Compact departure row: time/status tile, route + details, price and a select action. */
-export default function DepartureCard({ departure }: DepartureCardProps) {
+export default function DepartureCard({ departure, onSelect }: DepartureCardProps) {
   const sightseeing = departure.kind === 'sightseeing'
   const statusClass = sightseeing
     ? 'text-coral-glow font-semibold'
@@ -72,6 +73,7 @@ export default function DepartureCard({ departure }: DepartureCardProps) {
         </span>
         <Link
           to={ROUTES.tripDetail}
+          onClick={() => onSelect(departure.tripId)}
           className={`mt-1 rounded-full px-3.5 py-1 text-xs font-semibold text-on-primary transition-colors ${
             sightseeing ? 'bg-coral-glow hover:opacity-90' : 'bg-teal-flow hover:bg-secondary'
           }`}

@@ -8,11 +8,8 @@ export function getSeatMap(): Promise<SeatMap> {
 }
 
 /** Resolves with the voucher when valid, or null. The result never blocks the flow. */
-export function validateVoucher(code: string, fareVnd: number): Promise<Voucher | null> {
+export function validateVoucher(code: string): Promise<Voucher | null> {
   const normalized = code.trim().toUpperCase()
   if (normalized !== VALID_VOUCHER.code) return withDelay(null, 200)
-  return withDelay(
-    { code: normalized, discountVnd: Math.round((fareVnd * VALID_VOUCHER.percentOff) / 100) },
-    200,
-  )
+  return withDelay({ code: normalized, percentOff: VALID_VOUCHER.percentOff }, 200)
 }

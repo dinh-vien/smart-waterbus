@@ -39,7 +39,8 @@ export interface AssistanceOption {
 
 export interface Voucher {
   code: string
-  discountVnd: number
+  /** Discount as a percentage of the fare, applied to whichever trip is currently selected. */
+  percentOff: number
 }
 
 export interface BookingStep {

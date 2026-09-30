@@ -1,4 +1,4 @@
-import { FeatureStrip, Icon, StatusPill } from '../../components/ui'
+import { FeatureStrip, Icon, PageLoader, StatusPill } from '../../components/ui'
 import DiscoverBanner from '../../features/trips/components/DiscoverBanner'
 import NetworkSection from '../../features/trips/components/NetworkSection'
 import SearchForm from '../../features/trips/components/SearchForm'
@@ -25,9 +25,9 @@ const CUES = [
 
 export default function SearchJourneyPage() {
   useDocumentTitle('Search Journey')
-  const { piers, routes, loading } = useSearchForm()
+  const { piers, routes, dates, loading } = useSearchForm()
 
-  if (loading || !piers || !routes) return <div className="min-h-[60vh]" aria-busy="true" />
+  if (loading || !piers || !routes || !dates) return <PageLoader />
 
   return (
     <div className="bg-mist pb-20 pt-6">
@@ -52,7 +52,7 @@ export default function SearchJourneyPage() {
       </section>
 
       <section className="mx-auto mb-10 max-w-7xl px-6 lg:px-12">
-        <SearchForm piers={piers} />
+        <SearchForm piers={piers} dates={dates} />
       </section>
 
       <section className="mx-auto mb-12 max-w-7xl px-6 lg:px-12">

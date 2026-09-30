@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
 import { useSearchQuery } from '../hooks/useTripSearch'
-import type { PierOption, TripType } from '../types'
+import type { DateOption, PierOption, TripType } from '../types'
+import { formatDateLabel } from '../utils'
 import PierField from './PierField'
 
 interface SearchFormProps {
   piers: PierOption[]
+  dates: DateOption[]
 }
 
 const TRIP_TYPES: { id: TripType; label: string }[] = [
@@ -45,10 +47,25 @@ function StaticField({
   )
 }
 
-export default function SearchForm({ piers }: SearchFormProps) {
+export default function SearchForm({ piers, dates }: SearchFormProps) {
   const navigate = useNavigate()
   const { query, updateQuery } = useSearchQuery()
   const pier = (id: string) => piers.find((p) => p.id === id) ?? piers[0]
+  const date = dates.find((d) => d.id === query.dateId) ?? dates[0]
+
+  // A trip needs two different piers: picking the other field's pier swaps them instead.
+  const chooseOrigin = (id: string) =>
+    updateQuery(
+      id === query.destinationId
+        ? { originId: id, destinationId: query.originId }
+        : { originId: id },
+    )
+  const chooseDestination = (id: string) =>
+    updateQuery(
+      id === query.originId
+        ? { destinationId: id, originId: query.destinationId }
+        : { destinationId: id },
+    )
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -95,7 +112,7 @@ export default function SearchForm({ piers }: SearchFormProps) {
           dotClass="bg-emerald-500 ring-4 ring-emerald-100"
           value={pier(query.originId)}
           options={piers}
-          onChange={(id) => updateQuery({ originId: id })}
+          onChange={chooseOrigin}
         />
         <div className="z-10 hidden items-center justify-center lg:col-span-1 lg:-mx-3 lg:flex">
           <button
@@ -118,13 +135,13 @@ export default function SearchForm({ piers }: SearchFormProps) {
           dotClass="bg-teal-flow ring-4 ring-teal-100"
           value={pier(query.destinationId)}
           options={piers}
-          onChange={(id) => updateQuery({ destinationId: id })}
+          onChange={chooseDestination}
         />
         <div className="lg:col-span-2">
           <StaticField
             icon="calendar_today"
             label="Date"
-            value="Today, Dec 16"
+            value={formatDateLabel(date)}
             note="Service Every 15 min"
           />
         </div>

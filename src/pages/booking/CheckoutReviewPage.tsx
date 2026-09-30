@@ -1,4 +1,4 @@
-import { Breadcrumb, Icon } from '../../components/ui'
+import { Breadcrumb, Icon, PageLoader } from '../../components/ui'
 import BookingProgress from '../../features/booking/components/BookingProgress'
 import {
   ETicketContactCard,
@@ -28,11 +28,11 @@ export default function CheckoutReviewPage() {
     setTerms,
   } = useBooking()
 
-  if (loading || !trip || !totals) return <div className="min-h-[60vh]" aria-busy="true" />
+  if (loading || !trip || !totals) return <PageLoader />
 
   const steps: BookingStep[] = [
     { label: 'Trip', detail: trip.lineLabel.replace('Line 1 Express', 'Express Line 1') },
-    { label: 'Seat', detail: 'Window Selected' },
+    { label: 'Seat', detail: seat?.window ? 'Window Selected' : 'Aisle Selected' },
     { label: 'Details', detail: passenger.fullName },
     { label: 'Checkout', detail: 'Review Order' },
     { label: 'Payment', detail: 'Instant QR / Card' },
@@ -78,7 +78,7 @@ export default function CheckoutReviewPage() {
           <JourneyDetailsCard trip={trip} seat={seat} seatId={seatId} />
           <PassengerInfoCard passenger={passenger} />
           <ETicketContactCard passenger={passenger} />
-          <VoucherCard fareVnd={totals.fareVnd} voucher={voucher} onApply={setVoucher} />
+          <VoucherCard voucher={voucher} onApply={setVoucher} />
           <TermsConfirm checked={termsAccepted} onChange={setTerms} />
         </div>
         <div className="lg:col-span-4">
@@ -87,6 +87,7 @@ export default function CheckoutReviewPage() {
             fareVnd={totals.fareVnd}
             discountVnd={totals.discountVnd}
             totalVnd={totals.totalVnd}
+            canContinue={termsAccepted}
           />
         </div>
       </div>

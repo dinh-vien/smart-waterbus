@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import RiverMap from '../../../components/map/RiverMap'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
+import { useAppDispatch } from '../../../store/hooks'
+import { selectTrip } from '../../booking/bookingSlice'
 import DepartureCard from '../../trips/components/DepartureCard'
 import type { CorridorMap, Departure } from '../../trips/types'
 import type { RouteFilter } from '../types'
@@ -22,6 +24,7 @@ const FILTER_LINES: Record<RouteFilter['id'], Departure['line'][] | null> = {
 }
 
 export default function CorridorSection({ filters, map, departures }: CorridorSectionProps) {
+  const dispatch = useAppDispatch()
   const [active, setActive] = useState<RouteFilter['id']>('all')
   const lines = FILTER_LINES[active]
   const visible = lines ? departures.filter((d) => lines.includes(d.line)) : departures
@@ -96,7 +99,13 @@ export default function CorridorSection({ filters, map, departures }: CorridorSe
 
             <div className="space-y-space-sm">
               {visible.length > 0 ? (
-                visible.map((d) => <DepartureCard key={d.id} departure={d} />)
+                visible.map((d) => (
+                  <DepartureCard
+                    key={d.id}
+                    departure={d}
+                    onSelect={(id) => dispatch(selectTrip(id))}
+                  />
+                ))
               ) : (
                 <p className="rounded-2xl border border-dashed border-outline-variant bg-surface p-space-lg text-center text-body-md text-on-surface-variant">
                   No departures on this line right now.

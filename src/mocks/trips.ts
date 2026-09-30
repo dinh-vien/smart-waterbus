@@ -32,6 +32,7 @@ export const PIERS: Pier[] = [
 export const NEXT_DEPARTURES: Departure[] = [
   {
     id: 'dep-0800',
+    tripId: 'wb-01',
     time: '08:00',
     status: 'On time',
     kind: 'transit',
@@ -44,6 +45,7 @@ export const NEXT_DEPARTURES: Departure[] = [
   },
   {
     id: 'dep-0830',
+    tripId: 'wb-02',
     time: '08:30',
     status: 'Boarding',
     kind: 'transit',
@@ -56,6 +58,7 @@ export const NEXT_DEPARTURES: Departure[] = [
   },
   {
     id: 'dep-0915',
+    tripId: 'wb-03',
     time: '09:15',
     status: 'Scheduled',
     kind: 'transit',
@@ -68,6 +71,7 @@ export const NEXT_DEPARTURES: Departure[] = [
   },
   {
     id: 'dep-1730',
+    tripId: 'wb-07',
     time: '17:30',
     status: 'Twilight',
     kind: 'sightseeing',

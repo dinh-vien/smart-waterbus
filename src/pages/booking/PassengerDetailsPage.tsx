@@ -1,4 +1,4 @@
-import { Breadcrumb } from '../../components/ui'
+import { Breadcrumb, PageLoader } from '../../components/ui'
 import BookingProgress from '../../features/booking/components/BookingProgress'
 import CrossingSummary from '../../features/booking/components/CrossingSummary'
 import PassengerFormCard from '../../features/booking/components/PassengerFormCard'
@@ -12,7 +12,7 @@ export default function PassengerDetailsPage() {
   useDocumentTitle('Passenger Details')
   const { loading, trip, seat, seatId, passenger, totals, editPassenger } = useBooking()
 
-  if (loading || !trip || !totals) return <div className="min-h-[60vh]" aria-busy="true" />
+  if (loading || !trip || !totals) return <PageLoader />
 
   const steps: BookingStep[] = [
     { label: 'Trip', detail: 'Trip' },

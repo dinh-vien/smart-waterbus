@@ -4,6 +4,8 @@ export type DepartureKind = 'transit' | 'sightseeing'
 
 export interface Departure {
   id: string
+  /** Id of the matching Trip, so "Select" opens the right trip detail. */
+  tripId: string
   time: string
   status: DepartureStatus
   kind: DepartureKind

@@ -8,6 +8,7 @@ import {
   TRIPS,
 } from '../../../mocks/tripSearch'
 import { addMinutes } from '../../../utils/time'
+import { formatDateLabel, stripDistrictSuffix } from '../utils'
 import type { DateOption, NetworkRoute, PierOption, SearchQuery, Trip, TripDetail } from '../types'
 
 // Mock service layer: swap for real API calls later without touching the UI.
@@ -42,11 +43,11 @@ export function getTripDetail(tripId: string | null, query: SearchQuery): Promis
     ...trip,
     originPierLabel: origin.name,
     destinationPierLabel: destination.name,
-    originPierName: origin.name.replace(/ \(.*\)$/, ''),
-    destinationPierName: destination.name.replace(/ \(.*\)$/, ''),
+    originPierName: stripDistrictSuffix(origin.name),
+    destinationPierName: stripDistrictSuffix(destination.name),
     originDistrict: origin.subtitle.split(' •')[0].replace(/ Terminal$/, ''),
     destinationDistrict: destination.subtitle.split(' •')[0].replace(/ Waterfront$/, ''),
-    dateLabel: date.isToday ? `Today, ${date.label}` : `${date.weekday}, ${date.label}`,
+    dateLabel: formatDateLabel(date),
     timeline: [
       {
         time: addMinutes(trip.departTime, -15),

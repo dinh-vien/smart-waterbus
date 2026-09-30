@@ -1,4 +1,4 @@
-import { Breadcrumb, FeatureStrip, Icon } from '../../components/ui'
+import { Breadcrumb, FeatureStrip, Icon, PageLoader } from '../../components/ui'
 import TripAside from '../../features/trips/components/TripAside'
 import {
   BoardingSteps,
@@ -32,7 +32,7 @@ export default function TripDetailPage() {
   const { detail, loading } = useTripDetail()
   useDocumentTitle(detail ? `Trip Detail (${detail.vesselCode})` : 'Trip Detail')
 
-  if (loading || !detail) return <div className="min-h-[60vh]" aria-busy="true" />
+  if (loading || !detail) return <PageLoader />
 
   return (
     <div className="mx-auto w-full max-w-7xl px-margin pb-space-3xl pt-space-md">

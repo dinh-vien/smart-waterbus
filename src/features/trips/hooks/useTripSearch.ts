@@ -19,10 +19,12 @@ export function useSearchQuery() {
 export function useSearchForm() {
   const piers = useFetch(getPierOptions)
   const routes = useFetch(getNetworkRoutes)
+  const dates = useFetch(getDateOptions)
   return {
     piers: piers.data,
     routes: routes.data,
-    loading: piers.loading || routes.loading,
+    dates: dates.data,
+    loading: piers.loading || routes.loading || dates.loading,
   }
 }
 

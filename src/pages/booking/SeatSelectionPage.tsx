@@ -1,4 +1,4 @@
-import { Breadcrumb, FeatureStrip, Icon } from '../../components/ui'
+import { Breadcrumb, FeatureStrip, Icon, PageLoader } from '../../components/ui'
 import SeatMapView, { SeatLegend } from '../../features/booking/components/SeatMapView'
 import {
   BookingSummary,
@@ -29,10 +29,9 @@ const CUES = [
 
 export default function SeatSelectionPage() {
   useDocumentTitle('Choose Your Seat')
-  const { loading, trip, seatMap, seat, seatId, totals, chooseSeat } = useBooking()
+  const { loading, trip, seatMap, seat, seatId, totals, passenger, chooseSeat } = useBooking()
 
-  if (loading || !trip || !seatMap || !totals)
-    return <div className="min-h-[60vh]" aria-busy="true" />
+  if (loading || !trip || !seatMap || !totals) return <PageLoader />
 
   return (
     <div className="mx-auto w-full max-w-7xl px-margin pb-space-3xl pt-space-md">
@@ -100,7 +99,13 @@ export default function SeatSelectionPage() {
           <SeatRecommendation />
         </div>
         <div className="lg:col-span-5">
-          <BookingSummary trip={trip} seat={seat} seatId={seatId} totalVnd={totals.totalVnd} />
+          <BookingSummary
+            trip={trip}
+            seat={seat}
+            seatId={seatId}
+            totalVnd={totals.totalVnd}
+            category={passenger.category.charAt(0).toUpperCase() + passenger.category.slice(1)}
+          />
         </div>
       </div>
 

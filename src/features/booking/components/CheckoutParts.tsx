@@ -167,11 +167,9 @@ export function ETicketContactCard({ passenger }: { passenger: PassengerForm }) 
 }
 
 export function VoucherCard({
-  fareVnd,
   voucher,
   onApply,
 }: {
-  fareVnd: number
   voucher: Voucher | null
   onApply: (v: Voucher | null) => void
 }) {
@@ -181,11 +179,11 @@ export function VoucherCard({
 
   const apply = async () => {
     setBusy(true)
-    const result = await validateVoucher(code, fareVnd)
+    const result = await validateVoucher(code)
     setBusy(false)
     onApply(result)
     setMessage(
-      result ? `Voucher applied: −${formatVnd(result.discountVnd)}` : 'This code is not valid.',
+      result ? `Voucher applied: ${result.percentOff}% off your fare.` : 'This code is not valid.',
     )
   }
 
@@ -252,11 +250,14 @@ export function OrderSummary({
   fareVnd,
   discountVnd,
   totalVnd,
+  canContinue,
 }: {
   trip: TripDetail
   fareVnd: number
   discountVnd: number
   totalVnd: number
+  /** False until the passenger accepts the carriage rules. */
+  canContinue: boolean
 }) {
   return (
     <BookingCard className="p-space-lg lg:sticky lg:top-24">
@@ -303,16 +304,32 @@ export function OrderSummary({
         </span>
       </div>
 
-      <Link
-        to={ROUTES.payment}
-        className="group mt-space-md flex w-full items-center justify-center gap-2 rounded-xl bg-teal-flow py-3 font-headline-sm text-base font-semibold text-on-primary shadow-[0_2px_12px_rgba(20,122,126,0.25)] transition-all hover:bg-secondary"
-      >
-        Continue to Payment
-        <Icon
-          name="arrow_forward"
-          className="text-[18px] transition-transform group-hover:translate-x-1"
-        />
-      </Link>
+      {canContinue ? (
+        <Link
+          to={ROUTES.payment}
+          className="group mt-space-md flex w-full items-center justify-center gap-2 rounded-xl bg-teal-flow py-3 font-headline-sm text-base font-semibold text-on-primary shadow-[0_2px_12px_rgba(20,122,126,0.25)] transition-all hover:bg-secondary"
+        >
+          Continue to Payment
+          <Icon
+            name="arrow_forward"
+            className="text-[18px] transition-transform group-hover:translate-x-1"
+          />
+        </Link>
+      ) : (
+        <>
+          <button
+            type="button"
+            disabled
+            className="mt-space-md flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl bg-teal-flow py-3 font-headline-sm text-base font-semibold text-on-primary opacity-50"
+          >
+            Continue to Payment
+            <Icon name="arrow_forward" className="text-[18px]" />
+          </button>
+          <p role="status" className="mt-2 text-center text-xs text-on-surface-variant">
+            Please accept the Waterway Carriage Rules to continue.
+          </p>
+        </>
+      )}
       <div className="mt-space-sm text-center">
         <Link
           to={ROUTES.passengerDetails}

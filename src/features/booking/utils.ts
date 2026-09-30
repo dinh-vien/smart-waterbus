@@ -8,7 +8,7 @@ export interface BookingTotals {
 }
 
 export function computeTotals(trip: TripDetail, voucher: Voucher | null): BookingTotals {
-  const discountVnd = voucher?.discountVnd ?? 0
+  const discountVnd = voucher ? Math.round((trip.fareVnd * voucher.percentOff) / 100) : 0
   return {
     fareVnd: trip.fareVnd,
     discountVnd,

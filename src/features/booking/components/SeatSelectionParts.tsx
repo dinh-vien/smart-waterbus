@@ -87,9 +87,11 @@ interface BookingSummaryProps {
   seat: Seat | undefined
   seatId: string
   totalVnd: number
+  /** Passenger category shown in the fare line, e.g. "Adult". */
+  category: string
 }
 
-export function BookingSummary({ trip, seat, seatId, totalVnd }: BookingSummaryProps) {
+export function BookingSummary({ trip, seat, seatId, totalVnd, category }: BookingSummaryProps) {
   return (
     <div className="space-y-space-md lg:sticky lg:top-24">
       <BookingCard className="p-space-lg">
@@ -106,7 +108,7 @@ export function BookingSummary({ trip, seat, seatId, totalVnd }: BookingSummaryP
           <div className="flex items-center justify-between gap-2 pt-1 text-xs text-deep-river">
             <span className="flex items-center gap-1.5 font-medium">
               <Icon name="directions_boat" className="text-[16px] text-teal-flow" />
-              {trip.originPierName} Pier ➔ {trip.destinationPierName} Pier
+              {trip.originPierName} ➔ {trip.destinationPierName}
             </span>
             <span className="rounded border border-outline-variant/40 bg-white px-2 py-1 text-[11px] text-teal-flow">
               {trip.vesselCode} {trip.crossingKind} ({trip.durationMins} min)
@@ -139,7 +141,10 @@ export function BookingSummary({ trip, seat, seatId, totalVnd }: BookingSummaryP
         </div>
 
         <div className="mt-space-md space-y-1.5">
-          <SummaryRow label="Standard Transit Fare (1 Adult)" value={formatVnd(trip.fareVnd)} />
+          <SummaryRow
+            label={`Standard Transit Fare (1 ${category})`}
+            value={formatVnd(trip.fareVnd)}
+          />
           <SummaryRow label="Seat Reservation Fee" value="Included (0 VND)" accent />
           <SummaryRow label="Harbor Fees & VAT" value="Included" accent />
         </div>
@@ -179,7 +184,7 @@ export function BookingSummary({ trip, seat, seatId, totalVnd }: BookingSummaryP
         </div>
         <div className="min-w-0 flex-1">
           <div className="text-sm font-semibold text-deep-river">
-            {trip.originPierName} Pier Concierge
+            {trip.originPierName} Concierge
           </div>
           <div className="text-xs text-on-surface-variant">Daily 06:00 - 22:00 Live Assistance</div>
         </div>
