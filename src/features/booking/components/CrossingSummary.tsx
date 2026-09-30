@@ -4,19 +4,20 @@ import { ROUTES } from '../../../routes/routes'
 import { formatVnd } from '../../../utils/format'
 import type { TripDetail } from '../../trips/types'
 import type { Seat } from '../types'
-import { seatLabel } from '../utils'
-import { BookingCard, SummaryRow, TotalRow } from './SummaryParts'
+import type { BookingTotals } from '../utils'
+import { isVip, seatLabel } from '../utils'
+import { BookingCard, SeatFeeRow, SummaryRow, TotalRow } from './SummaryParts'
 import { t } from '../../../i18n'
 
 interface CrossingSummaryProps {
   trip: TripDetail
   seat: Seat | undefined
   seatId: string
-  totalVnd: number
+  totals: BookingTotals
 }
 
 /** Sticky sidebar on passenger details: timeline, vessel facts and fare lines. */
-export default function CrossingSummary({ trip, seat, seatId, totalVnd }: CrossingSummaryProps) {
+export default function CrossingSummary({ trip, seat, seatId, totals }: CrossingSummaryProps) {
   return (
     <BookingCard className="p-space-lg lg:sticky lg:top-24">
       <div className="mb-space-md flex items-center justify-between">
@@ -75,16 +76,19 @@ export default function CrossingSummary({ trip, seat, seatId, totalVnd }: Crossi
       <div className="mt-space-md space-y-2 rounded-xl bg-sand-light/60 p-space-md">
         <SummaryRow label={t('Vessel')} value={`${trip.vesselCode} ${trip.vesselName}`} />
         <SummaryRow label={t('Selected Seat')} value={seatLabel(seat, seatId)} accent />
-        <SummaryRow label={t('Cabin Class')} value={t('Main Deck • Air-Conditioned')} />
+        <SummaryRow
+          label={t('Cabin Class')}
+          value={isVip(seat) ? t('VIP Lounge • Air-Conditioned') : t('Main Deck • Air-Conditioned')}
+        />
         <SummaryRow label={t('Passengers')} value={t('1 Passenger')} />
       </div>
 
       <div className="mt-space-md space-y-1.5">
-        <SummaryRow label={t('Standard River Fare')} value={formatVnd(trip.fareVnd)} />
-        <SummaryRow
+        <SummaryRow label={t('Standard River Fare')} value={formatVnd(totals.fareVnd)} />
+        <SeatFeeRow
           label={t('Seat Reservation (Seat {id})', { id: seatId })}
-          value={t('Included (0 VND)')}
-          accent
+          seatFeeVnd={totals.seatFeeVnd}
+          includedText={t('Included (0 VND)')}
         />
         <SummaryRow label={t('Pier Dues & VAT')} value={t('Included')} accent />
       </div>
@@ -92,7 +96,7 @@ export default function CrossingSummary({ trip, seat, seatId, totalVnd }: Crossi
         <TotalRow
           label={t('Total Amount')}
           caption={t('All taxes & fees included')}
-          amountVnd={totalVnd}
+          amountVnd={totals.totalVnd}
         />
       </div>
 

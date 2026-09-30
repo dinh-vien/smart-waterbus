@@ -64,7 +64,7 @@ export default function PassengerDetailsPage() {
           />
         </div>
         <div className="lg:col-span-5">
-          <CrossingSummary trip={trip} seat={seat} seatId={seatId} totalVnd={totals.totalVnd} />
+          <CrossingSummary trip={trip} seat={seat} seatId={seatId} totals={totals} />
         </div>
       </div>
     </div>

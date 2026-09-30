@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import heroImage from '../../../assets/images/vessel.jpg'
+import heroVideo from '../../../assets/videos/saigon-waterbus.mp4'
+import heroPoster from '../../../assets/videos/saigon-waterbus-poster.jpg'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
 import type { HeroCue } from '../types'
@@ -19,17 +20,23 @@ export default function HeroSection({ cues }: HeroSectionProps) {
   return (
     <section className="relative flex min-h-[720px] w-full flex-col justify-between overflow-hidden bg-gradient-to-b from-mist via-[#EDF4F5] to-surface lg:h-[86vh] lg:max-h-[920px] lg:min-h-[780px]">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <img
-          alt={t(
+        <video
+          aria-label={t(
             'Smart Waterbus electric catamaran gliding across the Saigon River with the city skyline',
           )}
           className="h-full w-full object-cover object-[62%_center] saturate-[1.08] lg:object-[68%_center]"
-          src={heroImage}
+          src={heroVideo}
+          poster={heroPoster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-mist via-mist/85 to-transparent sm:via-mist/60 lg:w-[68%]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-deep-river/80 via-transparent to-transparent opacity-90 lg:opacity-75" />
+        <div className="absolute inset-0 bg-gradient-to-r from-deep-river/85 via-deep-river/55 to-transparent lg:w-[72%]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-deep-river/85 via-transparent to-deep-river/25" />
         <svg
-          className="absolute left-0 top-0 h-full w-full text-teal-flow opacity-20"
+          className="absolute left-0 top-0 h-full w-full text-sky-aqua opacity-25"
           fill="none"
           preserveAspectRatio="none"
           viewBox="0 0 1440 800"
@@ -63,20 +70,20 @@ export default function HeroSection({ cues }: HeroSectionProps) {
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-margin pt-10 sm:pt-14 lg:pt-20">
         <div className="max-w-2xl space-y-space-md">
-          <span className="inline-flex items-center gap-2 font-headline-sm text-sm font-semibold uppercase tracking-widest text-teal-flow">
+          <span className="inline-flex items-center gap-2 font-headline-sm text-sm font-semibold uppercase tracking-widest text-sky-aqua">
             {t('City Moves Differently from the River')}
           </span>
           <div className="relative space-y-1">
             <div className="inline-block -rotate-3 translate-y-1 select-none font-script text-3xl font-semibold text-sky-aqua drop-shadow-sm sm:text-4xl">
               {t('More than a ride ~')}
             </div>
-            <h1 className="font-headline-xl text-4xl font-extrabold leading-[1.08] tracking-tight text-deep-river sm:text-5xl lg:text-headline-xl">
+            <h1 className="font-headline-xl text-4xl font-extrabold leading-[1.08] tracking-tight text-white drop-shadow-[0_2px_16px_rgba(13,37,56,0.45)] sm:text-5xl lg:text-headline-xl">
               {t('A Smarter Journey,')}
               <br />
-              <span className="text-teal-flow">{t('A Brighter Saigon')}</span>
+              <span className="text-sky-aqua">{t('A Brighter Saigon')}</span>
             </h1>
           </div>
-          <p className="max-w-xl pt-1 text-base leading-relaxed text-ink/80 sm:text-body-lg">
+          <p className="max-w-xl pt-1 text-base leading-relaxed text-white/90 drop-shadow-[0_1px_8px_rgba(13,37,56,0.5)] sm:text-body-lg">
             {t(
               'Explore the city by water with real-time updates, seamless booking and unforgettable experiences.',
             )}
@@ -94,7 +101,7 @@ export default function HeroSection({ cues }: HeroSectionProps) {
             </Link>
             <Link
               to={ROUTES.explore}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/60 bg-surface/90 px-7 py-3.5 font-headline-sm text-base font-semibold text-deep-river shadow-md backdrop-blur-md transition-all hover:bg-surface hover:shadow-lg"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/40 bg-white/15 px-7 py-3.5 font-headline-sm text-base font-semibold text-white shadow-md backdrop-blur-md transition-all hover:bg-white/25 hover:shadow-lg"
             >
               {t('Discover Experience')}
             </Link>

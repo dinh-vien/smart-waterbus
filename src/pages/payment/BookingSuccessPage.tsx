@@ -1,6 +1,6 @@
 import { Breadcrumb, ErrorState, PageLoader } from '../../components/ui'
 import { useBooking } from '../../features/booking/hooks/useBooking'
-import { bookingReference } from '../../features/booking/utils'
+import { bookingReference, seatTags } from '../../features/booking/utils'
 import {
   ConfirmationHero,
   ConfirmationSteps,
@@ -77,7 +77,7 @@ export default function BookingSuccessPage() {
                 reference,
                 seatNote: t('Trip {code} • {kind}', {
                   code: trip.vesselCode,
-                  kind: seat?.window ? t('Window') : t('Aisle'),
+                  kind: seatTags(seat) || t('Aisle'),
                 }),
               }}
             />

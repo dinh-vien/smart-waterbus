@@ -1,14 +1,19 @@
+import { memo, useMemo } from 'react'
 import { Icon } from '../../../components/ui'
+import { formatVndSuffix } from '../../../utils/format'
 import type { Seat, SeatMap } from '../types'
+import { seatTags } from '../utils'
 import { t } from '../../../i18n'
 
 interface SeatMapViewProps {
   seatMap: SeatMap
   selectedId: string
+  /** Extra price of a VIP seat for the selected trip. */
+  vipFeeVnd: number
   onSelect: (id: string) => void
 }
 
-function SeatButton({
+const SeatButton = memo(function SeatButton({
   seat,
   selected,
   onSelect,
@@ -18,9 +23,20 @@ function SeatButton({
   onSelect: (id: string) => void
 }) {
   const occupied = seat.status === 'occupied'
+  const vip = seat.tier === 'vip'
+  const tags = seatTags(seat)
 
   return (
     <div className="relative">
+      {vip && (
+        <span
+          className={`absolute -left-1 -top-1 z-10 flex h-4 w-4 items-center justify-center rounded-full text-white ${
+            occupied ? 'bg-outline' : 'bg-signal-amber'
+          }`}
+        >
+          <Icon name="workspace_premium" className="text-[11px]" />
+        </span>
+      )}
       {seat.window && (
         <span
           className={`absolute -right-1 -top-1 z-10 flex h-4 w-4 items-center justify-center rounded-full text-[9px] font-bold text-white ${
@@ -39,7 +55,7 @@ function SeatButton({
         type="button"
         disabled={occupied}
         aria-pressed={selected}
-        aria-label={`${t('Seat {id}', { id: seat.id })}${seat.window ? `, ${t('window')}` : ''}${
+        aria-label={`${t('Seat {id}', { id: seat.id })}${tags ? `, ${tags}` : ''}${
           occupied ? `, ${t('occupied')}` : ''
         }`}
         onClick={() => onSelect(seat.id)}
@@ -48,6 +64,8 @@ function SeatButton({
             ? 'border-teal-flow bg-teal-flow text-white shadow-md'
             : occupied
             ? 'cursor-not-allowed border-transparent bg-outline-variant/50 text-outline'
+            : vip
+            ? 'border-signal-amber/60 bg-signal-amber/10 text-deep-river hover:border-signal-amber hover:bg-signal-amber/20'
             : 'border-teal-flow/40 bg-white text-deep-river hover:border-teal-flow hover:bg-sand-light'
         }`}
       >
@@ -56,9 +74,9 @@ function SeatButton({
       </button>
     </div>
   )
-}
+})
 
-export function SeatLegend() {
+export function SeatLegend({ vipFeeVnd }: { vipFeeVnd: number }) {
   return (
     <div className="flex flex-wrap items-center gap-space-md text-xs text-on-surface-variant">
       <span className="flex items-center gap-1.5">
@@ -72,6 +90,12 @@ export function SeatLegend() {
           {t('A2')}
         </span>
         {t('Selected')}
+      </span>
+      <span className="flex items-center gap-1.5">
+        <span className="flex h-5 w-5 items-center justify-center rounded border-2 border-signal-amber/60 bg-signal-amber/10 text-signal-amber">
+          <Icon name="workspace_premium" className="text-[13px]" />
+        </span>
+        {t('VIP (+{fee})', { fee: formatVndSuffix(vipFeeVnd) })}
       </span>
       <span className="flex items-center gap-1.5">
         <span className="flex h-5 w-5 items-center justify-center rounded-full border border-sky-aqua bg-sky-aqua/20">
@@ -90,9 +114,14 @@ export function SeatLegend() {
 }
 
 /** Top-down cabin plan: 6 rows, seats A-B | aisle | C-D, bow at the top and gangway at the stern. */
-export default function SeatMapView({ seatMap, selectedId, onSelect }: SeatMapViewProps) {
-  const seatAt = (row: number, column: Seat['column']) =>
-    seatMap.seats.find((s) => s.row === row && s.column === column) as Seat
+export default function SeatMapView({
+  seatMap,
+  selectedId,
+  vipFeeVnd,
+  onSelect,
+}: SeatMapViewProps) {
+  const seatsById = useMemo(() => new Map(seatMap.seats.map((s) => [s.id, s])), [seatMap.seats])
+  const seatAt = (row: number, column: Seat['column']) => seatsById.get(`${column}${row}`) as Seat
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-teal-flow/20 bg-gradient-to-b from-[#E0F2F5] via-[#EBF7F8] to-[#E3EFF3] p-space-lg">
@@ -128,32 +157,44 @@ export default function SeatMapView({ seatMap, selectedId, onSelect }: SeatMapVi
         </div>
 
         <div className="mt-2 space-y-3">
-          {seatMap.rows.map((row) => (
-            <div
-              key={row}
-              className="grid grid-cols-[repeat(2,62px)_28px_repeat(2,62px)] items-center justify-center gap-x-2"
-            >
-              {(['A', 'B'] as const).map((c) => (
-                <SeatButton
-                  key={c}
-                  seat={seatAt(row, c)}
-                  selected={selectedId === `${c}${row}`}
-                  onSelect={onSelect}
-                />
-              ))}
-              <span className="flex h-6 items-center justify-center rounded bg-mist text-[9px] font-bold text-outline">
-                {t('R{row}', { row })}
-              </span>
-              {(['C', 'D'] as const).map((c) => (
-                <SeatButton
-                  key={c}
-                  seat={seatAt(row, c)}
-                  selected={selectedId === `${c}${row}`}
-                  onSelect={onSelect}
-                />
-              ))}
-            </div>
-          ))}
+          {seatMap.rows.map((row, index) => {
+            const startsVip =
+              seatAt(row, 'A').tier === 'vip' &&
+              seatAt(seatMap.rows[index - 1], 'A')?.tier !== 'vip'
+            return (
+              <div key={row} className="space-y-3">
+                {startsVip && (
+                  <div className="flex items-center gap-2 pt-1 text-[10px] font-bold uppercase tracking-wider text-signal-amber">
+                    <span className="h-px flex-1 bg-signal-amber/40" />
+                    <Icon name="workspace_premium" className="text-[14px]" />
+                    {t('VIP Lounge • Priority exit • +{fee}', { fee: formatVndSuffix(vipFeeVnd) })}
+                    <span className="h-px flex-1 bg-signal-amber/40" />
+                  </div>
+                )}
+                <div className="grid grid-cols-[repeat(2,62px)_28px_repeat(2,62px)] items-center justify-center gap-x-2">
+                  {(['A', 'B'] as const).map((c) => (
+                    <SeatButton
+                      key={c}
+                      seat={seatAt(row, c)}
+                      selected={selectedId === `${c}${row}`}
+                      onSelect={onSelect}
+                    />
+                  ))}
+                  <span className="flex h-6 items-center justify-center rounded bg-mist text-[9px] font-bold text-outline">
+                    {t('R{row}', { row })}
+                  </span>
+                  {(['C', 'D'] as const).map((c) => (
+                    <SeatButton
+                      key={c}
+                      seat={seatAt(row, c)}
+                      selected={selectedId === `${c}${row}`}
+                      onSelect={onSelect}
+                    />
+                  ))}
+                </div>
+              </div>
+            )
+          })}
         </div>
 
         <div className="mt-space-md flex items-center gap-2 border-t border-dashed border-outline-variant pt-space-md text-[11px] font-semibold text-on-surface-variant">

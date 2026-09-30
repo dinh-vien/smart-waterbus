@@ -1,7 +1,14 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Icon } from '../../../components/ui'
-import { BookingCard, SummaryRow, TotalRow } from '../../booking/components/SummaryParts'
+import {
+  BookingCard,
+  SeatFeeRow,
+  SummaryRow,
+  TotalRow,
+} from '../../booking/components/SummaryParts'
+import { seatLabel } from '../../booking/utils'
+import type { BookingTotals } from '../../booking/utils'
 import type { PassengerForm, Seat } from '../../booking/types'
 import type { TripDetail } from '../../trips/types'
 import { ROUTES } from '../../../routes/routes'
@@ -18,9 +25,7 @@ interface PaymentOrderSummaryProps {
   seat: Seat | undefined
   seatId: string
   passenger: PassengerForm
-  fareVnd: number
-  discountVnd: number
-  totalVnd: number
+  totals: BookingTotals
 }
 
 export default function PaymentOrderSummary({
@@ -28,9 +33,7 @@ export default function PaymentOrderSummary({
   seat,
   seatId,
   passenger,
-  fareVnd,
-  discountVnd,
-  totalVnd,
+  totals,
 }: PaymentOrderSummaryProps) {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -52,7 +55,7 @@ export default function PaymentOrderSummary({
           seat,
           seatId,
           passenger,
-          totalVnd,
+          totalVnd: totals.totalVnd,
         }),
       )
       navigate(ROUTES.bookingSuccess)
@@ -95,7 +98,7 @@ export default function PaymentOrderSummary({
         <div className="flex items-center justify-between text-sm">
           <span className="text-on-surface-variant">{t('Selected Seat')}</span>
           <span className="rounded bg-surface-container px-2 py-0.5 text-xs font-semibold text-deep-river">
-            {t('Seat {seatId}', { seatId })}
+            {seatLabel(seat, seatId)}
           </span>
         </div>
         <SummaryRow
@@ -106,19 +109,23 @@ export default function PaymentOrderSummary({
       </div>
 
       <div className="mt-space-md space-y-1.5 border-t border-surface-container pt-space-md">
-        <SummaryRow label={t('Trip Fare')} value={formatVnd(fareVnd)} />
-        <SummaryRow label={t('Seat Fee')} value={t('Included')} accent />
+        <SummaryRow label={t('Trip Fare')} value={formatVnd(totals.fareVnd)} />
+        <SeatFeeRow
+          label={t('Seat Fee')}
+          seatFeeVnd={totals.seatFeeVnd}
+          includedText={t('Included')}
+        />
         <SummaryRow
           label={t('Discount')}
-          value={`${discountVnd > 0 ? '−' : ''}${formatVndSuffix(discountVnd)}`}
-          accent={discountVnd > 0}
+          value={`${totals.discountVnd > 0 ? '−' : ''}${formatVndSuffix(totals.discountVnd)}`}
+          accent={totals.discountVnd > 0}
         />
       </div>
       <div className="mt-space-sm border-t border-surface-container pt-space-sm">
         <TotalRow
           label={t('Total Amount')}
           caption={t('All taxes & fees included')}
-          amountVnd={totalVnd}
+          amountVnd={totals.totalVnd}
         />
       </div>
 

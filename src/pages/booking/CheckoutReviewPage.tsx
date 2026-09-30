@@ -87,13 +87,7 @@ export default function CheckoutReviewPage() {
           <TermsConfirm checked={termsAccepted} onChange={setTerms} />
         </div>
         <div className="lg:col-span-4">
-          <OrderSummary
-            trip={trip}
-            fareVnd={totals.fareVnd}
-            discountVnd={totals.discountVnd}
-            totalVnd={totals.totalVnd}
-            canContinue={termsAccepted}
-          />
+          <OrderSummary trip={trip} totals={totals} canContinue={termsAccepted} />
         </div>
       </div>
     </div>
