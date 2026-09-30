@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
+import bookingReducer from '../features/booking/bookingSlice'
 
-// Feature slices (booking flow, etc.) are registered here as their branches land.
+// Feature slices are registered here as their branches land.
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    booking: bookingReducer,
+  },
 })
 
 export type RootState = ReturnType<typeof store.getState>
