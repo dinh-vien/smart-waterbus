@@ -124,6 +124,6 @@ export const ROUTE_LIST: RouteMeta[] = [
     path: ROUTES.explore,
     title: 'Explore river journeys',
     branch: 'feature/explore',
-    built: false,
+    built: true,
   },
 ]
