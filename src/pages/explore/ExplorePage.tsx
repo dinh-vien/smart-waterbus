@@ -10,13 +10,14 @@ import {
 } from '../../features/explore/components/ExploreSections'
 import { getExploreData } from '../../features/explore/services/exploreService'
 import { useDocumentTitle, useFetch } from '../../hooks'
+import { PageLoader } from '../../components/ui'
 
 export default function ExplorePage() {
   useDocumentTitle('Explore River Journeys')
   const { data, loading } = useFetch(getExploreData)
   const storiesRef = useRef<HTMLElement>(null)
 
-  if (loading || !data) return <div className="min-h-[60vh]" aria-busy="true" />
+  if (loading || !data) return <PageLoader />
 
   return (
     <div>

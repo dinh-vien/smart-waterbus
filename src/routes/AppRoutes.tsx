@@ -1,72 +1,63 @@
-import type { ComponentType } from 'react'
+import { lazy } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import HomePage from '../pages/home/HomePage'
-import SignInPage from '../pages/auth/SignInPage'
-import SearchJourneyPage from '../pages/trips/SearchJourneyPage'
-import SearchResultsPage from '../pages/trips/SearchResultsPage'
-import TripDetailPage from '../pages/trips/TripDetailPage'
-import CheckoutReviewPage from '../pages/booking/CheckoutReviewPage'
-import PassengerDetailsPage from '../pages/booking/PassengerDetailsPage'
-import SeatSelectionPage from '../pages/booking/SeatSelectionPage'
-import BookingSuccessPage from '../pages/payment/BookingSuccessPage'
-import PaymentPage from '../pages/payment/PaymentPage'
-import ManageBookingPage from '../pages/tickets/ManageBookingPage'
-import MyTicketsPage from '../pages/tickets/MyTicketsPage'
-import TicketDetailPage from '../pages/tickets/TicketDetailPage'
-import LiveTrackingPage from '../pages/tracking/LiveTrackingPage'
-import ExplorePage from '../pages/explore/ExplorePage'
-import PlaceholderPage from '../pages/placeholder/PlaceholderPage'
-import SitemapPage from '../pages/sitemap/SitemapPage'
 import PublicRoute from './PublicRoute'
 import RouteWithLayout from './RouteWithLayout'
-import { ROUTES, ROUTE_LIST } from './routes'
+import { ROUTES } from './routes'
 
-// Screens that already have a real page. Everything else renders a placeholder.
-const PAGES: Partial<Record<string, ComponentType>> = {
-  [ROUTES.home]: HomePage,
-  [ROUTES.signIn]: SignInPage,
-  [ROUTES.search]: SearchJourneyPage,
-  [ROUTES.searchResults]: SearchResultsPage,
-  [ROUTES.tripDetail]: TripDetailPage,
-  [ROUTES.seatSelection]: SeatSelectionPage,
-  [ROUTES.passengerDetails]: PassengerDetailsPage,
-  [ROUTES.checkoutReview]: CheckoutReviewPage,
-  [ROUTES.payment]: PaymentPage,
-  [ROUTES.bookingSuccess]: BookingSuccessPage,
-  [ROUTES.myTickets]: MyTicketsPage,
-  [ROUTES.ticketDetail]: TicketDetailPage,
-  [ROUTES.manageBooking]: ManageBookingPage,
-  [ROUTES.liveTracking]: LiveTrackingPage,
-  [ROUTES.explore]: ExplorePage,
-}
+// Each page is its own chunk, loaded on first visit.
+const HomePage = lazy(() => import('../pages/home/HomePage'))
+const SignInPage = lazy(() => import('../pages/auth/SignInPage'))
+const SearchJourneyPage = lazy(() => import('../pages/trips/SearchJourneyPage'))
+const SearchResultsPage = lazy(() => import('../pages/trips/SearchResultsPage'))
+const TripDetailPage = lazy(() => import('../pages/trips/TripDetailPage'))
+const SeatSelectionPage = lazy(() => import('../pages/booking/SeatSelectionPage'))
+const PassengerDetailsPage = lazy(() => import('../pages/booking/PassengerDetailsPage'))
+const CheckoutReviewPage = lazy(() => import('../pages/booking/CheckoutReviewPage'))
+const PaymentPage = lazy(() => import('../pages/payment/PaymentPage'))
+const BookingSuccessPage = lazy(() => import('../pages/payment/BookingSuccessPage'))
+const MyTicketsPage = lazy(() => import('../pages/tickets/MyTicketsPage'))
+const TicketDetailPage = lazy(() => import('../pages/tickets/TicketDetailPage'))
+const ManageBookingPage = lazy(() => import('../pages/tickets/ManageBookingPage'))
+const LiveTrackingPage = lazy(() => import('../pages/tracking/LiveTrackingPage'))
+const ExplorePage = lazy(() => import('../pages/explore/ExplorePage'))
+const SitemapPage = lazy(() => import('../pages/sitemap/SitemapPage'))
 
+const PAGES = [
+  { path: ROUTES.home, Page: HomePage },
+  { path: ROUTES.signIn, Page: SignInPage },
+  { path: ROUTES.search, Page: SearchJourneyPage },
+  { path: ROUTES.searchResults, Page: SearchResultsPage },
+  { path: ROUTES.tripDetail, Page: TripDetailPage },
+  { path: ROUTES.seatSelection, Page: SeatSelectionPage },
+  { path: ROUTES.passengerDetails, Page: PassengerDetailsPage },
+  { path: ROUTES.checkoutReview, Page: CheckoutReviewPage },
+  { path: ROUTES.payment, Page: PaymentPage },
+  { path: ROUTES.bookingSuccess, Page: BookingSuccessPage },
+  { path: ROUTES.myTickets, Page: MyTicketsPage },
+  { path: ROUTES.ticketDetail, Page: TicketDetailPage },
+  { path: ROUTES.manageBooking, Page: ManageBookingPage },
+  { path: ROUTES.liveTracking, Page: LiveTrackingPage },
+  { path: ROUTES.explore, Page: ExplorePage },
+  { path: ROUTES.sitemap, Page: SitemapPage },
+]
+
+// No guards or login redirects: every page opens directly by URL.
 export default function AppRoutes() {
   return (
     <Routes>
-      {ROUTE_LIST.map((route) => {
-        const Page = PAGES[route.path]
-        return (
-          <Route
-            key={route.key}
-            path={route.path}
-            element={
-              <PublicRoute>
-                <RouteWithLayout>
-                  {Page ? <Page /> : <PlaceholderPage title={route.title} branch={route.branch} />}
-                </RouteWithLayout>
-              </PublicRoute>
-            }
-          />
-        )
-      })}
-      <Route
-        path={ROUTES.sitemap}
-        element={
-          <RouteWithLayout>
-            <SitemapPage />
-          </RouteWithLayout>
-        }
-      />
+      {PAGES.map(({ path, Page }) => (
+        <Route
+          key={path}
+          path={path}
+          element={
+            <PublicRoute>
+              <RouteWithLayout>
+                <Page />
+              </RouteWithLayout>
+            </PublicRoute>
+          }
+        />
+      ))}
       <Route path="*" element={<Navigate to={ROUTES.home} replace />} />
     </Routes>
   )

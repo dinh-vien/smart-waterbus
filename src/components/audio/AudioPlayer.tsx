@@ -39,24 +39,23 @@ export default function AudioPlayer({
   const [language, setLanguage] = useState(languages[0])
   const dark = tone === 'dark'
 
+  // Playback stops by itself at the end, without touching state from inside an effect.
+  const isPlaying = playing && position < durationSec
+
   useEffect(() => {
-    if (!playing) return
-    const timer = setInterval(() => {
-      setPosition((p) => {
-        if (p + 1 >= durationSec) {
-          setPlaying(false)
-          return durationSec
-        }
-        return p + 1
-      })
-    }, 1000)
+    if (!isPlaying) return
+    const timer = setInterval(() => setPosition((p) => Math.min(p + 1, durationSec)), 1000)
     return () => clearInterval(timer)
-  }, [playing, durationSec])
+  }, [isPlaying, durationSec])
 
   const seek = (delta: number) => setPosition((p) => Math.min(Math.max(p + delta, 0), durationSec))
   const toggle = () => {
-    if (position >= durationSec) setPosition(0)
-    setPlaying((v) => !v)
+    if (position >= durationSec) {
+      setPosition(0)
+      setPlaying(true)
+    } else {
+      setPlaying((v) => !v)
+    }
   }
   const percent = durationSec ? (position / durationSec) * 100 : 0
 
@@ -161,11 +160,11 @@ export default function AudioPlayer({
         </button>
         <button
           type="button"
-          aria-label={playing ? 'Pause' : 'Play'}
+          aria-label={isPlaying ? 'Pause' : 'Play'}
           onClick={toggle}
           className="flex h-12 w-12 items-center justify-center rounded-full bg-teal-flow text-on-primary shadow-md hover:bg-secondary"
         >
-          <Icon name={playing ? 'pause' : 'play_arrow'} className="text-[26px]" filled />
+          <Icon name={isPlaying ? 'pause' : 'play_arrow'} className="text-[26px]" filled />
         </button>
         <button
           type="button"

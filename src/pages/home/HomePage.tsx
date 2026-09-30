@@ -7,13 +7,14 @@ import TechSection from '../../features/home/components/TechSection'
 import WhyRiverSection from '../../features/home/components/WhyRiverSection'
 import { useHomeData } from '../../features/home/hooks/useHomeData'
 import { useDocumentTitle } from '../../hooks'
+import { PageLoader } from '../../components/ui'
 
 export default function HomePage() {
   useDocumentTitle('River Connects Greater Stories')
   const { home, departures, corridor, loading } = useHomeData()
 
   if (loading || !home || !departures || !corridor) {
-    return <div className="min-h-[60vh]" aria-busy="true" />
+    return <PageLoader />
   }
 
   return (

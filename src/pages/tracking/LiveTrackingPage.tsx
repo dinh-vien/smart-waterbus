@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import LiveTripMap from '../../components/map/LiveTripMap'
-import { Breadcrumb, Icon } from '../../components/ui'
+import { Breadcrumb, Icon, PageLoader } from '../../components/ui'
 import { Itinerary, ModeToggle, SidePanel } from '../../features/tracking/components/TrackingParts'
 import { getTrackingData } from '../../features/tracking/services/trackingService'
 import type { TrackingMode } from '../../features/tracking/types'
@@ -13,7 +13,7 @@ export default function LiveTrackingPage() {
   const [mode, setMode] = useState<TrackingMode>('sightseeing')
   const [selectedId, setSelectedId] = useState<string | null>(null)
 
-  if (loading || !data) return <div className="min-h-[60vh]" aria-busy="true" />
+  if (loading || !data) return <PageLoader />
 
   const activeId = selectedId ?? data.activePoiId
   const activePoi = data.pois.find((p) => p.id === activeId) ?? data.pois[0]
