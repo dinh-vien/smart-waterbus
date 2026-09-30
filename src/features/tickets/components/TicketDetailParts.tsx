@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import QrCode from '../../../components/ticket/QrCode'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
-import { formatVnd } from '../../../utils/format'
+import { formatVnd, formatVndSuffix } from '../../../utils/format'
 import type { Ticket } from '../types'
+import { t } from '../../../i18n'
 
 interface BoardingPassProps {
   ticket: Ticket
@@ -88,7 +89,7 @@ export function TicketBoardingPass({ ticket, onEnlarge }: BoardingPassProps) {
             <dt className="text-[11px] text-on-surface-variant">Travel Date</dt>
             <dd className="text-sm font-semibold text-deep-river">{ticket.dateLabel}</dd>
             <div className="text-[11px] text-teal-flow">
-              {ticket.status === 'Completed' ? 'Completed' : 'Today'}
+              {ticket.completed ? t('Completed') : t('Today')}
             </div>
           </div>
           <div>
@@ -166,9 +167,7 @@ export function TicketCorridorCard({ ticket }: { ticket: Ticket }) {
         </svg>
         <span className="absolute left-3 top-3 rounded-lg bg-white/95 px-2.5 py-1 text-[11px] shadow-sm">
           <b className="text-deep-river">{ticket.departPier}</b>
-          <span className="block text-on-surface-variant">
-            {ticket.departDistrict.replace(' Central', '')} • Departure
-          </span>
+          <span className="block text-on-surface-variant">{ticket.departDistrict} • Departure</span>
         </span>
         <span className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 rounded-full bg-deep-river px-3 py-1.5 text-[11px] font-bold text-white shadow-lg">
           <Icon name="directions_boat" className="text-[14px]" />
@@ -176,9 +175,7 @@ export function TicketCorridorCard({ ticket }: { ticket: Ticket }) {
         </span>
         <span className="absolute bottom-3 right-3 rounded-lg bg-white/95 px-2.5 py-1 text-[11px] shadow-sm">
           <b className="text-deep-river">{ticket.arrivePier}</b>
-          <span className="block text-on-surface-variant">
-            {ticket.arriveDistrict.replace(' Waterfront', '')} • Arrival
-          </span>
+          <span className="block text-on-surface-variant">{ticket.arriveDistrict} • Arrival</span>
         </span>
       </div>
       <div className="mt-space-md grid grid-cols-3 gap-2 text-center">
@@ -308,7 +305,7 @@ export function QrModal({ ticket, onClose }: { ticket: Ticket; onClose: () => vo
           {ticket.ticketCode}
         </div>
         <div className="text-xs text-on-surface-variant">
-          Single Crossing Pass • {formatVnd(ticket.fareVnd).replace('VND ', '')} VND
+          {t('Single Crossing Pass • {price}', { price: formatVndSuffix(ticket.fareVnd) })}
         </div>
         <button
           type="button"

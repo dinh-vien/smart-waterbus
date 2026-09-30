@@ -22,7 +22,7 @@ interface ResultFiltersProps {
   time: TimeFilter
   vessel: string
   sort: SortKey
-  onTime: (t: TimeFilter) => void
+  onTime: (time: TimeFilter) => void
   onVessel: (v: string) => void
   onSort: (s: SortKey) => void
 }
@@ -65,9 +65,9 @@ export default function ResultFilters({
           <span className="text-xs text-outline">Vessel:</span>
           <select className={selectClass} value={vessel} onChange={(e) => onVessel(e.target.value)}>
             <option value="all">All Vessels ({trips.length})</option>
-            {trips.map((t) => (
-              <option key={t.id} value={t.id}>
-                {t.vesselName} ({t.vesselCode})
+            {trips.map((trip) => (
+              <option key={trip.id} value={trip.id}>
+                {trip.vesselName} ({trip.vesselCode})
               </option>
             ))}
           </select>

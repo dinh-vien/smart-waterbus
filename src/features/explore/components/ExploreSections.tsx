@@ -119,12 +119,12 @@ export function JourneysSection({ journeys }: { journeys: ExploreData['journeys'
               </div>
               <div className="space-y-space-sm p-space-lg">
                 <div className="flex gap-2">
-                  {j.tags.map((t) => (
+                  {j.tags.map((tag) => (
                     <span
-                      key={t}
+                      key={tag}
                       className="rounded-full bg-sand-light px-2.5 py-0.5 text-[11px] font-semibold text-teal-flow"
                     >
-                      {t}
+                      {tag}
                     </span>
                   ))}
                 </div>

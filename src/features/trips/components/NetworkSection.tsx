@@ -1,8 +1,9 @@
 import NetworkMap from '../../../components/map/NetworkMap'
 import { Icon } from '../../../components/ui'
-import { formatVnd } from '../../../utils/format'
+import { formatVndSuffix } from '../../../utils/format'
 import { useSearchQuery } from '../hooks/useTripSearch'
 import type { NetworkRoute, PierOption } from '../types'
+import { t } from '../../../i18n'
 
 interface NetworkSectionProps {
   routes: NetworkRoute[]
@@ -82,7 +83,7 @@ export default function NetworkSection({ routes, piers }: NetworkSectionProps) {
                     Standard Fare
                   </span>
                   <span className="font-headline-sm text-sm font-bold text-teal-flow">
-                    From {formatVnd(route.fromFareVnd).replace('VND ', '')} VND
+                    {t('From {price}', { price: formatVndSuffix(route.fromFareVnd) })}
                   </span>
                 </div>
                 <button

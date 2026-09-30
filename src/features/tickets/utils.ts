@@ -1,3 +1,4 @@
+import { t } from '../../i18n'
 import { bookingReference, seatPosition } from '../booking/utils'
 import type { PassengerForm, Seat } from '../booking/types'
 import type { TripDetail } from '../trips/types'
@@ -19,26 +20,29 @@ export function buildBookedTicket({
   passenger,
   totalVnd,
 }: BuildTicketInput): Ticket {
-  const bookingRef = bookingReference(seatId)
   return {
     id: `tkt-${trip.id}-${seatId.toLowerCase()}`,
     tripCode: trip.vesselCode,
-    lineName: `Smart Waterbus • ${trip.lineLabel}`,
-    routeTag: 'Central Route',
-    bookingRef,
+    lineName: t('Smart Waterbus • {line}', { line: trip.lineLabel }),
+    routeTag: t('Central Route'),
+    bookingRef: bookingReference(seatId),
     ticketCode: `TKT-${trip.vesselCode.replace('-', '')}-0842-${seatId}`,
-    status: 'Confirmed',
+    status: t('Confirmed'),
+    completed: false,
     departTime: trip.departTime,
     departPier: trip.originPierName,
+    departShort: trip.originShortName,
     departDistrict: trip.originDistrict,
     arriveTime: trip.arriveTime,
     arrivePier: trip.destinationPierName,
+    arriveShort: trip.destinationShortName,
     arriveDistrict: trip.destinationDistrict,
     durationMins: trip.durationMins,
-    dateLabel: `${trip.dateLabel.replace(/^[A-Za-z]+, /, '')}, 2025`,
+    dateLabel: trip.dateFull,
     passenger: passenger.fullName,
-    seat: `Seat ${seatId}`,
-    seatNote: `${seatPosition(seat)} • Main Deck`,
+    seat: t('Seat {id}', { id: seatId }),
+    seatNote: `${seatPosition(seat)} • ${t('Main Deck')}`,
+    windowSeat: Boolean(seat?.window),
     fareVnd: totalVnd,
     vesselNote: `${trip.vesselName} ${trip.vesselCode}`,
     gate: trip.originGate,

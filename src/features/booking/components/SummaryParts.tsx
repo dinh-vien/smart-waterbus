@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { formatNumber } from '../../../utils/format'
 
 /** "Label ........ value" row used in every fare/summary card. */
 export function SummaryRow({
@@ -31,7 +32,7 @@ export function TotalRow({
   /** Puts the VND unit under the number, as on the checkout order summary. */
   stacked?: boolean
 }) {
-  const amount = amountVnd.toLocaleString('en-US')
+  const amount = formatNumber(amountVnd)
   return (
     <div className="flex items-end justify-between gap-3 py-space-sm">
       <div>

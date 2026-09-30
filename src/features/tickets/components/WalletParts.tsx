@@ -4,6 +4,7 @@ import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
 import { formatVnd } from '../../../utils/format'
 import type { Ticket } from '../types'
+import { t } from '../../../i18n'
 
 function Fact({ label, value, icon }: { label: string; value: string; icon?: string }) {
   return (
@@ -91,7 +92,7 @@ export function NextDepartureCard({
             <Fact label="Passenger" value={ticket.passenger} />
             <Fact
               label="Assigned Seat"
-              value={`${ticket.seat}${ticket.seatNote.includes('Window') ? ' (Window)' : ''}`}
+              value={ticket.windowSeat ? t('{seat} (Window)', { seat: ticket.seat }) : ticket.seat}
               icon="chair"
             />
             <Fact label="Fare Paid" value={formatVnd(ticket.fareVnd)} />
@@ -258,7 +259,7 @@ export function PastJourneyRow({
         </span>
         <div>
           <div className="flex flex-wrap items-center gap-2 text-sm font-semibold text-deep-river">
-            {ticket.departPier.replace(' Pier', '')} → {ticket.arrivePier.replace(' Pier', '')}
+            {ticket.departShort} → {ticket.arriveShort}
             <span className="rounded bg-secondary-container px-2 py-0.5 text-[10px] font-semibold text-on-secondary-container">
               Completed
             </span>

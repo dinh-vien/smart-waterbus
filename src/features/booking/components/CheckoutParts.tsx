@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 import { Icon } from '../../../components/ui'
 import { CATEGORY_LABEL } from '../../../mocks/booking'
 import { ROUTES } from '../../../routes/routes'
-import { formatVnd } from '../../../utils/format'
+import { formatNumber, formatVnd, formatVndSuffix } from '../../../utils/format'
 import type { TripDetail } from '../../trips/types'
 import { validateVoucher } from '../services/bookingService'
 import type { PassengerForm, Seat, Voucher } from '../types'
-import { seatLabel } from '../utils'
 import { BookingCard, CardHeading, SummaryRow } from './SummaryParts'
+import { t } from '../../../i18n'
 
 function EditLink({
   to,
@@ -55,7 +55,10 @@ export function JourneyDetailsCard({
       <CardHeading
         icon="directions_boat"
         title="Journey Details"
-        subtitle={`Saigon River ${trip.lineLabel.replace(/^Line /, 'Line ')} • ${trip.vesselCode}`}
+        subtitle={t('Saigon River {line} • {code}', {
+          line: trip.lineLabel,
+          code: trip.vesselCode,
+        })}
         aside={<EditLink to={ROUTES.seatSelection}>Change Trip / Seat</EditLink>}
       />
       <div className="grid grid-cols-1 items-center gap-space-md rounded-xl bg-mist/70 p-space-md md:grid-cols-12">
@@ -104,7 +107,11 @@ export function JourneyDetailsCard({
       </div>
       <div className="mt-space-sm grid grid-cols-1 gap-space-sm md:grid-cols-2">
         <Fact label="Vessel" value={trip.vesselCode} />
-        <Fact label="Selected Seat" value={seatLabel(seat, seatId).replace('Seat ', '')} accent />
+        <Fact
+          label="Selected Seat"
+          value={seat?.window ? t('{id} (Window)', { id: seatId }) : seatId}
+          accent
+        />
         <Fact label="Date" value={`${trip.dateLabel}, 2025`} />
       </div>
     </BookingCard>
@@ -301,7 +308,7 @@ export function OrderSummary({
         <SummaryRow label="Seat Fee" value="Included" accent />
         <SummaryRow
           label="Discount"
-          value={`${discountVnd > 0 ? '−' : ''}${discountVnd.toLocaleString('en-US')} VND`}
+          value={`${discountVnd > 0 ? '−' : ''}${formatVndSuffix(discountVnd)}`}
           accent={discountVnd > 0}
         />
       </div>
@@ -310,7 +317,7 @@ export function OrderSummary({
         <span className="font-headline-sm text-lg font-bold text-deep-river">Total</span>
         <span className="text-right">
           <span className="block font-numeric-lg text-numeric-lg font-bold leading-none text-deep-river">
-            {totalVnd.toLocaleString('en-US')}
+            {formatNumber(totalVnd)}
           </span>
           <span className="text-xs font-semibold text-teal-flow">VND</span>
         </span>

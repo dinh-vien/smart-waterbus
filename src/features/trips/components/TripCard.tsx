@@ -3,6 +3,8 @@ import vesselImage from '../../../assets/images/vessel.jpg'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
 import type { PierOption, Trip } from '../types'
+import { formatNumber } from '../../../utils/format'
+import { seatsLabel } from '../utils'
 
 interface TripCardProps {
   trip: Trip
@@ -56,7 +58,7 @@ export default function TripCard({ trip, origin, destination, onSelect }: TripCa
           <span
             className={`h-2 w-2 rounded-full ${trip.seatsLow ? 'bg-coral-glow' : 'bg-teal-flow'}`}
           />
-          {trip.seatsLabel}
+          {seatsLabel(trip)}
         </div>
       </div>
 
@@ -135,7 +137,7 @@ export default function TripCard({ trip, origin, destination, onSelect }: TripCa
               {trip.fareLabel}
             </span>
             <div className="font-headline-md text-xl font-bold text-deep-river">
-              {trip.fareVnd.toLocaleString('en-US')}{' '}
+              {formatNumber(trip.fareVnd)}{' '}
               <span className="text-xs font-medium text-on-surface-variant">VND</span>
             </div>
           </div>

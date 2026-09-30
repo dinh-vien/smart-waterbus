@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
-import { formatVnd } from '../../../utils/format'
+import { formatVnd, formatVndSuffix } from '../../../utils/format'
 import type { TripDetail } from '../../trips/types'
 import type { Seat } from '../types'
 import { seatPosition } from '../utils'
@@ -43,7 +43,7 @@ export function TripStrip({ trip }: { trip: TripDetail }) {
         <div className="text-right">
           <div className="text-[11px] text-on-surface-variant">1 Passenger • Eco Class</div>
           <div className="font-headline-sm text-lg font-bold text-deep-river">
-            {formatVnd(trip.fareVnd).replace('VND ', '')} VND
+            {formatVndSuffix(trip.fareVnd)}
           </div>
         </div>
         <Link

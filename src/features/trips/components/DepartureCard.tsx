@@ -14,7 +14,7 @@ export default function DepartureCard({ departure, onSelect }: DepartureCardProp
   const sightseeing = departure.kind === 'sightseeing'
   const statusClass = sightseeing
     ? 'text-coral-glow font-semibold'
-    : departure.status === 'Scheduled'
+    : departure.statusKind === 'scheduled'
     ? 'text-on-surface-variant'
     : 'text-teal-flow font-semibold'
 

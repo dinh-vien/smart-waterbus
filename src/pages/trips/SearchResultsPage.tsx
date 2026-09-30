@@ -39,7 +39,7 @@ export default function SearchResultsPage() {
   const visible = useMemo(() => {
     if (!trips) return []
     const list = trips.filter(
-      (t) => (time === 'all' || t.band === time) && (vessel === 'all' || t.id === vessel),
+      (trip) => (time === 'all' || trip.band === time) && (vessel === 'all' || trip.id === vessel),
     )
     const by: Record<SortKey, (a: (typeof list)[number], b: (typeof list)[number]) => number> = {
       time: (a, b) => a.departTime.localeCompare(b.departTime),

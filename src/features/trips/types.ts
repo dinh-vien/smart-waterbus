@@ -1,4 +1,4 @@
-export type DepartureStatus = 'On time' | 'Boarding' | 'Scheduled' | 'Twilight'
+export type DepartureStatusKind = 'ontime' | 'boarding' | 'scheduled' | 'twilight'
 
 export type DepartureKind = 'transit' | 'sightseeing'
 
@@ -7,7 +7,10 @@ export interface Departure {
   /** Id of the matching Trip, so "Select" opens the right trip detail. */
   tripId: string
   time: string
-  status: DepartureStatus
+  /** Display text, already in the active language. */
+  status: string
+  /** Language-independent status, used for styling. */
+  statusKind: DepartureStatusKind
   kind: DepartureKind
   /** Origin pier, or the tour name for sightseeing trips. */
   from: string
@@ -53,6 +56,10 @@ export interface PierOption {
   id: string
   /** Full label used in forms, e.g. "Bach Dang Pier (D1)". */
   name: string
+  /** Pier name without the district code, e.g. "Bach Dang Pier". */
+  pierName: string
+  /** District the pier is in, e.g. "District 1". */
+  district: string
   /** Short label used on route cards, e.g. "Bach Dang". */
   shortName: string
   subtitle: string
@@ -72,6 +79,8 @@ export interface DateOption {
   id: string
   weekday: string
   label: string
+  /** Full date with year, e.g. "Dec 16, 2025". */
+  fullLabel: string
   fromFareVnd: number
   isToday?: boolean
   tripCount?: number
@@ -112,8 +121,10 @@ export interface Trip {
   durationMins: number
   /** "Direct", "Leisure Speed", "Landmark Loop"... */
   crossingKind: string
+  /** True for a non-stop direct crossing. */
+  direct: boolean
   crossingCaption: string
-  seatsLabel: string
+  seatsCount: number
   /** True for "Limited" / low availability styling. */
   seatsLow?: boolean
   band: TimeBand
@@ -146,9 +157,14 @@ export interface TripDetail extends Trip {
   destinationPierLabel: string
   originPierName: string
   destinationPierName: string
+  /** Short names without "Pier", e.g. "Bach Dang". */
+  originShortName: string
+  destinationShortName: string
   originDistrict: string
   destinationDistrict: string
   dateLabel: string
+  /** Full date with year, e.g. "Dec 16, 2025". */
+  dateFull: string
   timeline: TimelineStep[]
   amenityDetails: AmenityDetail[]
   boardingSteps: BoardingStep[]

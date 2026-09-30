@@ -4,10 +4,11 @@ import vesselImage from '../../../assets/images/vessel.jpg'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
 import type { TripDetail } from '../types'
+import { formatNumber } from '../../../utils/format'
 
 /** Right-hand column of the trip detail page: vessel photo, crossing map and fare summary. */
 export default function TripAside({ trip }: { trip: TripDetail }) {
-  const fare = trip.fareVnd.toLocaleString('en-US')
+  const fare = formatNumber(trip.fareVnd)
 
   return (
     <aside className="space-y-space-lg lg:sticky lg:top-24 lg:col-span-5">
@@ -21,8 +22,7 @@ export default function TripAside({ trip }: { trip: TripDetail }) {
           <div className="absolute inset-0 bg-gradient-to-t from-deep-river/80 to-transparent" />
           <div className="absolute inset-x-space-md bottom-space-sm flex items-end justify-between text-white">
             <span className="font-headline-sm text-headline-sm">
-              Trip {trip.vesselCode} •{' '}
-              {trip.crossingKind === 'Direct' ? 'Direct Service' : trip.crossingKind}
+              Trip {trip.vesselCode} • {trip.direct ? 'Direct Service' : trip.crossingKind}
             </span>
             <span className="rounded bg-teal-flow px-2 py-0.5 text-xs font-semibold">
               Scheduled

@@ -35,7 +35,7 @@ export default function CheckoutReviewPage() {
   if (loading || !trip || !totals) return <PageLoader />
 
   const steps: BookingStep[] = [
-    { label: 'Trip', detail: trip.lineLabel.replace('Line 1 Express', 'Express Line 1') },
+    { label: 'Trip', detail: trip.lineLabel },
     { label: 'Seat', detail: seat?.window ? 'Window Selected' : 'Aisle Selected' },
     { label: 'Details', detail: passenger.fullName },
     { label: 'Checkout', detail: 'Review Order' },

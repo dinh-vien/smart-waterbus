@@ -4,6 +4,7 @@ import QrCode from '../../../components/ticket/QrCode'
 import { useFetch } from '../../../hooks'
 import { getEwallets, getPaymentMethods } from '../services/paymentService'
 import type { PaymentMethodId } from '../types'
+import { formatVndSuffix } from '../../../utils/format'
 
 interface PaymentMethodPanelProps {
   tripCode: string
@@ -39,7 +40,7 @@ function QrPanel({
           <QrCode value={`${reference}-${amountVnd}`} size={170} className="mx-auto" />
           <div className="mt-2 text-[11px] text-on-surface-variant">Amount to pay</div>
           <div className="font-headline-sm text-lg font-bold text-deep-river">
-            {amountVnd.toLocaleString('en-US')} VND
+            {formatVndSuffix(amountVnd)}
           </div>
         </div>
         <div className="flex-1 space-y-space-md">

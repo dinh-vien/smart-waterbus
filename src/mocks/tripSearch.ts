@@ -12,30 +12,40 @@ export const PIER_OPTIONS: PierOption[] = [
   {
     id: 'bach-dang',
     name: 'Bach Dang Pier (D1)',
+    pierName: 'Bach Dang Pier',
+    district: 'District 1',
     shortName: 'Bach Dang',
     subtitle: 'District 1 Terminal • Gate 2',
   },
   {
     id: 'thu-thiem',
     name: 'Thu Thiem Pier (D2)',
+    pierName: 'Thu Thiem Pier',
+    district: 'District 2',
     shortName: 'Thu Thiem',
     subtitle: 'District 2 Waterfront • Pontoon A',
   },
   {
     id: 'van-thanh',
     name: 'Van Thanh Pier',
+    pierName: 'Van Thanh Pier',
+    district: 'District 1',
     shortName: 'Van Thanh',
     subtitle: 'Park Interchange • Pontoon B',
   },
   {
     id: 'binh-an',
     name: 'Binh An Pier',
+    pierName: 'Binh An Pier',
+    district: 'Binh Thanh',
     shortName: 'Binh An',
     subtitle: 'Binh Thanh • Pontoon A',
   },
   {
     id: 'linh-dong',
     name: 'Linh Dong Hub',
+    pierName: 'Linh Dong Hub',
+    district: 'Thu Duc City',
     shortName: 'Linh Dong',
     subtitle: 'Thu Duc Terminus • Gate 1',
   },
@@ -51,19 +61,20 @@ export const DEFAULT_SEARCH_QUERY: SearchQuery = {
 }
 
 export const DATE_OPTIONS: DateOption[] = [
-  { id: 'dec-14', weekday: 'Sun', label: 'Dec 14', fromFareVnd: 15000 },
-  { id: 'dec-15', weekday: 'Mon', label: 'Dec 15', fromFareVnd: 15000 },
+  { id: 'dec-14', weekday: 'Sun', label: 'Dec 14', fullLabel: 'Dec 14, 2025', fromFareVnd: 15000 },
+  { id: 'dec-15', weekday: 'Mon', label: 'Dec 15', fullLabel: 'Dec 15, 2025', fromFareVnd: 15000 },
   {
     id: 'dec-16',
     weekday: 'Mon',
     label: 'Dec 16',
+    fullLabel: 'Dec 16, 2025',
     fromFareVnd: 15000,
     isToday: true,
     tripCount: 5,
   },
-  { id: 'dec-17', weekday: 'Tue', label: 'Dec 17', fromFareVnd: 15000 },
-  { id: 'dec-18', weekday: 'Wed', label: 'Dec 18', fromFareVnd: 15000 },
-  { id: 'dec-19', weekday: 'Thu', label: 'Dec 19', fromFareVnd: 15000 },
+  { id: 'dec-17', weekday: 'Tue', label: 'Dec 17', fullLabel: 'Dec 17, 2025', fromFareVnd: 15000 },
+  { id: 'dec-18', weekday: 'Wed', label: 'Dec 18', fullLabel: 'Dec 18, 2025', fromFareVnd: 15000 },
+  { id: 'dec-19', weekday: 'Thu', label: 'Dec 19', fullLabel: 'Dec 19, 2025', fromFareVnd: 15000 },
 ]
 
 export const NETWORK_ROUTES: NetworkRoute[] = [
@@ -107,8 +118,9 @@ export const TRIPS: Trip[] = [
     destinationGate: 'Pontoon A',
     durationMins: 12,
     crossingKind: 'Direct',
+    direct: true,
     crossingCaption: 'Express crossing',
-    seatsLabel: '28 Seats Left',
+    seatsCount: 28,
     band: 'morning',
     amenities: [
       { icon: 'ac_unit', label: 'Air-Conditioned' },
@@ -131,8 +143,9 @@ export const TRIPS: Trip[] = [
     destinationGate: 'Pontoon A',
     durationMins: 12,
     crossingKind: 'Direct',
+    direct: true,
     crossingCaption: 'Regular crossing',
-    seatsLabel: '54 Seats Available',
+    seatsCount: 54,
     band: 'morning',
     amenities: [
       { icon: 'ac_unit', label: 'Air-Conditioned' },
@@ -155,8 +168,9 @@ export const TRIPS: Trip[] = [
     destinationGate: 'Pontoon B',
     durationMins: 18,
     crossingKind: 'Leisure Speed',
+    direct: false,
     crossingCaption: 'Scenic glide',
-    seatsLabel: '42 Seats Left',
+    seatsCount: 42,
     band: 'morning',
     amenities: [
       { icon: 'air', label: 'Open Deck Breeze' },
@@ -179,8 +193,9 @@ export const TRIPS: Trip[] = [
     destinationGate: 'Pontoon A',
     durationMins: 12,
     crossingKind: 'Direct',
+    direct: true,
     crossingCaption: 'Direct crossing',
-    seatsLabel: '36 Seats Left',
+    seatsCount: 36,
     band: 'morning',
     amenities: [
       { icon: 'ac_unit', label: 'Air-Conditioned' },
@@ -203,8 +218,9 @@ export const TRIPS: Trip[] = [
     destinationGate: 'Pontoon A',
     durationMins: 45,
     crossingKind: 'Landmark Loop',
+    direct: false,
     crossingCaption: 'Includes Ba Son Bridge view',
-    seatsLabel: 'Limited: Only 12 Seats Left',
+    seatsCount: 12,
     seatsLow: true,
     band: 'sunset',
     amenities: [

@@ -1,3 +1,5 @@
+import { localize } from '../i18n'
+
 // Lets you see and test the error screens without a backend: open any page with `?mockError=1`
 // (e.g. http://localhost:5173/tickets?mockError=1). Every mock request made in the first
 // N seconds after the page loads fails; clicking "Try again" afterwards succeeds.
@@ -17,7 +19,7 @@ export function withDelay<T>(value: T, ms = 150): Promise<T> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (Date.now() - loadedAt < windowMs) reject(new Error('Mock network error'))
-      else resolve(value)
+      else resolve(localize(value))
     }, ms)
   })
 }

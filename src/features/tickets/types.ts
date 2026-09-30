@@ -1,5 +1,3 @@
-export type TicketStatus = 'Confirmed' | 'Completed'
-
 export interface Ticket {
   id: string
   /** Vessel/trip code, e.g. "WB-01". */
@@ -10,18 +8,26 @@ export interface Ticket {
   bookingRef: string
   /** Code encoded in the boarding QR. */
   ticketCode: string
-  status: TicketStatus
+  /** Display text, already in the active language. */
+  status: string
   departTime: string
   departPier: string
+  /** Short name without "Pier", e.g. "Bach Dang". */
+  departShort: string
   departDistrict: string
   arriveTime: string
   arrivePier: string
+  arriveShort: string
   arriveDistrict: string
   durationMins: number
   dateLabel: string
   passenger: string
   seat: string
   seatNote: string
+  /** True for a window seat. */
+  windowSeat: boolean
+  /** True once the journey has been made. */
+  completed: boolean
   fareVnd: number
   vesselNote: string
   gate: string

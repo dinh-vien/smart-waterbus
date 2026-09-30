@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
 import type { TripDetail } from '../types'
+import { formatNumber } from '../../../utils/format'
+import { t } from '../../../i18n'
 
 interface TripRouteCardProps {
   trip: TripDetail
@@ -19,11 +21,11 @@ export default function TripRouteCard({ trip }: TripRouteCardProps) {
               Trip {trip.vesselCode}
             </span>
             <span className="rounded bg-mist px-space-sm py-1 text-xs font-semibold text-teal-flow">
-              {trip.crossingKind === 'Direct' ? 'Direct Crossing' : trip.crossingKind}
+              {trip.direct ? 'Direct Crossing' : trip.crossingKind}
             </span>
             <span className="flex items-center gap-1 rounded bg-sand-light px-space-sm py-1 text-xs font-semibold text-teal-flow">
               <Icon name="event_seat" className="text-[15px]" />
-              {trip.seatsLabel.replace('Left', 'Available')}
+              {t('{count} Seats Available', { count: trip.seatsCount })}
             </span>
           </div>
 
@@ -59,7 +61,7 @@ export default function TripRouteCard({ trip }: TripRouteCardProps) {
                 <div className="h-0.5 flex-1 rounded-full bg-gradient-to-r from-sky-aqua to-teal-flow" />
               </div>
               <span className="mt-1 text-body-sm text-on-surface-variant">
-                {trip.crossingKind === 'Direct' ? 'River Corridor Non-stop' : trip.crossingCaption}
+                {trip.direct ? 'River Corridor Non-stop' : trip.crossingCaption}
               </span>
             </div>
 
@@ -97,7 +99,7 @@ export default function TripRouteCard({ trip }: TripRouteCardProps) {
             </div>
             <div className="mt-1 flex items-baseline gap-1">
               <span className="font-numeric-lg text-numeric-lg font-bold text-deep-river">
-                {trip.fareVnd.toLocaleString('en-US')}
+                {formatNumber(trip.fareVnd)}
               </span>
               <span className="text-body-md font-medium text-on-surface-variant">VND</span>
             </div>

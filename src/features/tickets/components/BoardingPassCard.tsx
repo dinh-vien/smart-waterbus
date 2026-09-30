@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import QrCode from '../../../components/ticket/QrCode'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
-import { formatVnd } from '../../../utils/format'
+import { formatVndSuffix } from '../../../utils/format'
 
 export interface BoardingPassData {
   tripCode: string
@@ -91,9 +91,7 @@ export default function BoardingPassCard({ pass }: { pass: BoardingPassData }) {
             </div>
             <div>
               <dt className="text-[11px] text-on-surface-variant">Total Fare</dt>
-              <dd className="font-semibold text-deep-river">
-                {formatVnd(pass.totalVnd).replace('VND ', '')} VND
-              </dd>
+              <dd className="font-semibold text-deep-river">{formatVndSuffix(pass.totalVnd)}</dd>
             </div>
           </dl>
         </div>

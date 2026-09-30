@@ -197,7 +197,7 @@ export function ManageOptions({
 
 export function OptionPanel({ option, manage }: { option: ManageOption; manage: ManageBooking }) {
   const [refundState, setRefundState] = useState<'idle' | 'busy' | 'done' | 'failed'>('idle')
-  const t = manage.ticket
+  const ticket = manage.ticket
 
   const submitRefund = async () => {
     setRefundState('busy')
@@ -219,8 +219,8 @@ export function OptionPanel({ option, manage }: { option: ManageOption; manage: 
           Refund Request
         </h3>
         <p className="mt-space-sm text-sm text-on-surface-variant">
-          Refund {formatVnd(t.fareVnd)} for booking {manage.bookingCode} ({t.seat}). Refunds are
-          available up to 30 minutes before departure. Requests need your confirmation.
+          Refund {formatVnd(ticket.fareVnd)} for booking {manage.bookingCode} ({ticket.seat}).
+          Refunds are available up to 30 minutes before departure. Requests need your confirmation.
         </p>
         <div className="mt-space-md flex items-center justify-between border-t border-surface-container pt-space-md">
           <span
@@ -276,9 +276,12 @@ export function OptionPanel({ option, manage }: { option: ManageOption; manage: 
     )
   }
 
-  const route = `${t.departPier.replace(/ Pier$/, '')} → ${t.arrivePier.replace(/ Pier$/, '')}`
+  const route = `${ticket.departShort} → ${ticket.arriveShort}`
   // Suggested alternative: the same crossing 30 minutes later.
-  const alt = { departTime: addMinutes(t.departTime, 30), arriveTime: addMinutes(t.arriveTime, 30) }
+  const alt = {
+    departTime: addMinutes(ticket.departTime, 30),
+    arriveTime: addMinutes(ticket.arriveTime, 30),
+  }
   return (
     <div className={shell}>
       <div className="flex items-center justify-between">
@@ -296,10 +299,10 @@ export function OptionPanel({ option, manage }: { option: ManageOption; manage: 
             Current Trip
           </div>
           <div className="mt-1 font-headline-sm text-lg font-bold text-deep-river">
-            {t.departTime} → {t.arriveTime}
+            {ticket.departTime} → {ticket.arriveTime}
           </div>
           <div className="text-xs text-on-surface-variant">{route}</div>
-          <div className="mt-1 text-xs font-semibold text-teal-flow">{t.seat}</div>
+          <div className="mt-1 text-xs font-semibold text-teal-flow">{ticket.seat}</div>
         </div>
         <div className="rounded-xl border border-dashed border-teal-flow/50 bg-sand-light/40 p-space-md">
           <div className="text-[10px] font-bold uppercase tracking-wider text-teal-flow">

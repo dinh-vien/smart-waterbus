@@ -8,7 +8,7 @@ import { ROUTES } from '../../../routes/routes'
 import { useAppDispatch } from '../../../store/hooks'
 import { addBookedTicket } from '../../tickets/ticketsSlice'
 import { buildBookedTicket } from '../../tickets/utils'
-import { formatVnd } from '../../../utils/format'
+import { formatVnd, formatVndSuffix } from '../../../utils/format'
 import { confirmPayment } from '../services/paymentService'
 
 interface PaymentOrderSummaryProps {
@@ -94,7 +94,7 @@ export default function PaymentOrderSummary({
         <SummaryRow label="Seat Fee" value="Included" accent />
         <SummaryRow
           label="Discount"
-          value={`${discountVnd > 0 ? '−' : ''}${discountVnd.toLocaleString('en-US')} VND`}
+          value={`${discountVnd > 0 ? '−' : ''}${formatVndSuffix(discountVnd)}`}
           accent={discountVnd > 0}
         />
       </div>

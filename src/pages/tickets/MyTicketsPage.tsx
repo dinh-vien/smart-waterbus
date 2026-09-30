@@ -89,7 +89,7 @@ export default function MyTicketsPage() {
               <span className="h-2 w-2 rounded-full bg-teal-flow" /> Next Departure • Today
             </span>
             <span className="font-medium normal-case tracking-normal text-on-surface-variant">
-              Boarding Pier {wallet.next.gate.replace('Gate', 'Gate:')}
+              Boarding Pier {wallet.next.gate}
             </span>
           </div>
           <div className="mt-space-sm">
@@ -106,8 +106,8 @@ export default function MyTicketsPage() {
             </span>
           </div>
           <div className="mt-space-sm grid grid-cols-1 gap-space-md md:grid-cols-2">
-            {wallet.later.map((t) => (
-              <UpcomingTripCard key={t.id} ticket={t} onOpen={openTicket} />
+            {wallet.later.map((ticket) => (
+              <UpcomingTripCard key={ticket.id} ticket={ticket} onOpen={openTicket} />
             ))}
           </div>
         </>
@@ -131,8 +131,8 @@ export default function MyTicketsPage() {
         )}
       </div>
       <div className="mt-space-sm grid grid-cols-1 gap-space-md md:grid-cols-2">
-        {wallet.past.map((t) => (
-          <PastJourneyRow key={t.id} ticket={t} onOpen={openTicket} />
+        {wallet.past.map((ticket) => (
+          <PastJourneyRow key={ticket.id} ticket={ticket} onOpen={openTicket} />
         ))}
       </div>
 

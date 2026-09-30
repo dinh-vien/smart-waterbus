@@ -1,5 +1,6 @@
-import { formatVnd } from '../../../utils/format'
+import { formatVndSuffix } from '../../../utils/format'
 import type { DateOption } from '../types'
+import { t } from '../../../i18n'
 
 interface DateStripProps {
   dates: DateOption[]
@@ -45,7 +46,7 @@ export default function DateStrip({ dates, selectedId, tripCount, onSelect }: Da
               </span>
             ) : (
               <span className="text-[11px] font-medium text-teal-flow">
-                From {formatVnd(date.fromFareVnd).replace('VND ', '')} VND
+                {t('From {price}', { price: formatVndSuffix(date.fromFareVnd) })}
               </span>
             )}
           </button>
