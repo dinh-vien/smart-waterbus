@@ -13,6 +13,7 @@ import PaymentPage from '../pages/payment/PaymentPage'
 import ManageBookingPage from '../pages/tickets/ManageBookingPage'
 import MyTicketsPage from '../pages/tickets/MyTicketsPage'
 import TicketDetailPage from '../pages/tickets/TicketDetailPage'
+import LiveTrackingPage from '../pages/tracking/LiveTrackingPage'
 import PlaceholderPage from '../pages/placeholder/PlaceholderPage'
 import SitemapPage from '../pages/sitemap/SitemapPage'
 import PublicRoute from './PublicRoute'
@@ -34,6 +35,7 @@ const PAGES: Partial<Record<string, ComponentType>> = {
   [ROUTES.myTickets]: MyTicketsPage,
   [ROUTES.ticketDetail]: TicketDetailPage,
   [ROUTES.manageBooking]: ManageBookingPage,
+  [ROUTES.liveTracking]: LiveTrackingPage,
 }
 
 export default function AppRoutes() {

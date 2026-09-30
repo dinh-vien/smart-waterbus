@@ -19,6 +19,6 @@ Source of truth: `src/routes/routes.ts`.
 | `/tickets` | My tickets | feature/my-tickets | done |
 | `/tickets/detail` | Ticket detail | feature/my-tickets | done |
 | `/tickets/manage` | Manage booking | feature/my-tickets | done |
-| `/tracking` | Live trip tracking | feature/live-tracking | placeholder |
+| `/tracking` | Live trip tracking | feature/live-tracking | done |
 | `/explore` | Explore river journeys | feature/explore | placeholder |
 | `/sitemap` | All routes | feature/foundation | done |

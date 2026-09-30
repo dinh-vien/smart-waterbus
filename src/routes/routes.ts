@@ -117,7 +117,7 @@ export const ROUTE_LIST: RouteMeta[] = [
     path: ROUTES.liveTracking,
     title: 'Live trip tracking',
     branch: 'feature/live-tracking',
-    built: false,
+    built: true,
   },
   {
     key: 'explore',
