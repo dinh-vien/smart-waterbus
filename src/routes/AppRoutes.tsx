@@ -2,6 +2,9 @@ import type { ComponentType } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import HomePage from '../pages/home/HomePage'
 import SignInPage from '../pages/auth/SignInPage'
+import SearchJourneyPage from '../pages/trips/SearchJourneyPage'
+import SearchResultsPage from '../pages/trips/SearchResultsPage'
+import TripDetailPage from '../pages/trips/TripDetailPage'
 import PlaceholderPage from '../pages/placeholder/PlaceholderPage'
 import SitemapPage from '../pages/sitemap/SitemapPage'
 import PublicRoute from './PublicRoute'
@@ -12,6 +15,9 @@ import { ROUTES, ROUTE_LIST } from './routes'
 const PAGES: Partial<Record<string, ComponentType>> = {
   [ROUTES.home]: HomePage,
   [ROUTES.signIn]: SignInPage,
+  [ROUTES.search]: SearchJourneyPage,
+  [ROUTES.searchResults]: SearchResultsPage,
+  [ROUTES.tripDetail]: TripDetailPage,
 }
 
 export default function AppRoutes() {

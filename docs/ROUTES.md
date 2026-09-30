@@ -8,9 +8,9 @@ Source of truth: `src/routes/routes.ts`.
 |---|---|---|---|
 | `/` | Home | feature/home | done |
 | `/sign-in` | Sign in | feature/auth | done |
-| `/search` | Search journey | feature/trip-search | placeholder |
-| `/search/results` | Search results | feature/trip-search | placeholder |
-| `/trip` | Trip detail | feature/trip-search | placeholder |
+| `/search` | Search journey | feature/trip-search | done |
+| `/search/results` | Search results | feature/trip-search | done |
+| `/trip` | Trip detail | feature/trip-search | done |
 | `/booking/seats` | Seat selection | feature/booking-flow | placeholder |
 | `/booking/passenger` | Passenger details | feature/booking-flow | placeholder |
 | `/booking/review` | Review booking | feature/booking-flow | placeholder |
