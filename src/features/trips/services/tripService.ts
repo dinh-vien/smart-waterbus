@@ -40,6 +40,8 @@ export function getTripDetail(tripId: string | null, query: SearchQuery): Promis
 
   const detail: TripDetail = {
     ...trip,
+    originPierLabel: origin.name,
+    destinationPierLabel: destination.name,
     originPierName: origin.name.replace(/ \(.*\)$/, ''),
     destinationPierName: destination.name.replace(/ \(.*\)$/, ''),
     originDistrict: origin.subtitle.split(' •')[0].replace(/ Terminal$/, ''),

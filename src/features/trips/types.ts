@@ -139,6 +139,9 @@ export interface BoardingStep {
 }
 
 export interface TripDetail extends Trip {
+  /** Full pier labels, e.g. "Bach Dang Pier (D1)". */
+  originPierLabel: string
+  destinationPierLabel: string
   originPierName: string
   destinationPierName: string
   originDistrict: string
