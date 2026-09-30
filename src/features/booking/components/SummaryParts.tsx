@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { formatNumber } from '../../../utils/format'
+import { formatNumber, formatVnd } from '../../../utils/format'
 import { t } from '../../../i18n'
 
 /** "Label ........ value" row used in every fare/summary card. */
@@ -17,6 +17,25 @@ export function SummaryRow({
       <span className="text-on-surface-variant">{label}</span>
       <span className={accent ? 'font-medium text-teal-flow' : 'text-deep-river'}>{value}</span>
     </div>
+  )
+}
+
+/** Seat fee line: "+VND 9,000" for a VIP seat, or `includedText` when the seat is free to reserve. */
+export function SeatFeeRow({
+  label,
+  seatFeeVnd,
+  includedText,
+}: {
+  label: string
+  seatFeeVnd: number
+  includedText: string
+}) {
+  return (
+    <SummaryRow
+      label={label}
+      value={seatFeeVnd > 0 ? `+${formatVnd(seatFeeVnd)}` : includedText}
+      accent
+    />
   )
 }
 

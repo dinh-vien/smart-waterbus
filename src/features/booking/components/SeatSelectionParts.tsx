@@ -4,12 +4,13 @@ import { ROUTES } from '../../../routes/routes'
 import { formatVnd, formatVndSuffix } from '../../../utils/format'
 import type { TripDetail } from '../../trips/types'
 import type { Seat } from '../types'
-import { seatPosition } from '../utils'
-import { BookingCard, SummaryRow, TotalRow } from './SummaryParts'
+import type { BookingTotals } from '../utils'
+import { isVip, seatFeeFor, seatClassLabel, seatPosition, seatZone } from '../utils'
+import { BookingCard, SeatFeeRow, SummaryRow, TotalRow } from './SummaryParts'
 import { t } from '../../../i18n'
 
 /** White strip under the page title: vessel, times, duration, fare and "Change Trip". */
-export function TripStrip({ trip }: { trip: TripDetail }) {
+export function TripStrip({ trip, seat }: { trip: TripDetail; seat: Seat | undefined }) {
   return (
     <div className="flex flex-col items-start justify-between gap-space-md rounded-2xl bg-white p-space-md shadow-[0_2px_16px_rgba(13,37,56,0.05)] md:flex-row md:items-center">
       <div className="flex flex-wrap items-center gap-space-md">
@@ -45,9 +46,11 @@ export function TripStrip({ trip }: { trip: TripDetail }) {
       </div>
       <div className="flex items-center gap-space-lg">
         <div className="text-right">
-          <div className="text-[11px] text-on-surface-variant">{t('1 Passenger • Eco Class')}</div>
+          <div className="text-[11px] text-on-surface-variant">
+            {t('1 Passenger • {class}', { class: seatClassLabel(seat) })}
+          </div>
           <div className="font-headline-sm text-lg font-bold text-deep-river">
-            {formatVndSuffix(trip.fareVnd)}
+            {formatVndSuffix(trip.fareVnd + seatFeeFor(seat, trip.fareVnd))}
           </div>
         </div>
         <Link
@@ -80,6 +83,10 @@ export function SeatRecommendation() {
             <strong className="text-deep-river">{t('Fastest Pier Exit:')}</strong>{' '}
             {t('Aft seats (Row 5–6) are directly adjacent to the disembarkation gangway.')}
           </li>
+          <li>
+            <strong className="text-deep-river">{t('VIP Lounge:')}</strong>{' '}
+            {t('Rows 5–6 are VIP seats with priority disembarkation, for a small surcharge.')}
+          </li>
         </ul>
       </div>
     </div>
@@ -90,12 +97,15 @@ interface BookingSummaryProps {
   trip: TripDetail
   seat: Seat | undefined
   seatId: string
-  totalVnd: number
+  totals: BookingTotals
   /** Passenger category shown in the fare line, e.g. "Adult". */
   category: string
 }
 
-export function BookingSummary({ trip, seat, seatId, totalVnd, category }: BookingSummaryProps) {
+export function BookingSummary({ trip, seat, seatId, totals, category }: BookingSummaryProps) {
+  const vip = isVip(seat)
+  // An occupied or unknown seat (e.g. a stale selection) must not reach checkout.
+  const canContinue = seat?.status === 'available'
   return (
     <div className="space-y-space-md lg:sticky lg:top-24">
       <BookingCard className="p-space-lg">
@@ -143,42 +153,72 @@ export function BookingSummary({ trip, seat, seatId, totalVnd, category }: Booki
             <div className="text-right text-xs">
               <div className="font-semibold text-teal-flow">{seatPosition(seat)} •</div>
               <div className="text-teal-flow">{t('Main Saloon')}</div>
-              <div className="mt-1 rounded bg-white px-2 py-0.5 text-on-surface-variant">
-                {t('Main Deck')}
+              <div
+                className={`mt-1 rounded px-2 py-0.5 ${
+                  vip
+                    ? 'bg-signal-amber/20 font-semibold text-deep-river'
+                    : 'bg-white text-on-surface-variant'
+                }`}
+              >
+                {seatZone(seat)}
               </div>
             </div>
           </div>
           <p className="mt-2 text-xs text-on-surface-variant">
-            {t('Standard Climate-Controlled Catamaran Seating with panoramic river view.')}
+            {vip
+              ? t(
+                  'VIP lounge seating with extra legroom, priority disembarkation and panoramic river view.',
+                )
+              : t('Standard Climate-Controlled Catamaran Seating with panoramic river view.')}
           </p>
         </div>
 
         <div className="mt-space-md space-y-1.5">
           <SummaryRow
             label={t('Standard Transit Fare (1 {category})', { category: t(category) })}
-            value={formatVnd(trip.fareVnd)}
+            value={formatVnd(totals.fareVnd)}
           />
-          <SummaryRow label={t('Seat Reservation Fee')} value={t('Included (0 VND)')} accent />
+          <SeatFeeRow
+            label={vip ? t('VIP Seat Surcharge') : t('Seat Reservation Fee')}
+            seatFeeVnd={totals.seatFeeVnd}
+            includedText={t('Included (0 VND)')}
+          />
           <SummaryRow label={t('Harbor Fees & VAT')} value={t('Included')} accent />
         </div>
         <div className="mt-space-sm border-t border-surface-container">
           <TotalRow
             label={t('Total Fare')}
             caption={t('All fees & taxes included')}
-            amountVnd={totalVnd}
+            amountVnd={totals.totalVnd}
           />
         </div>
 
-        <Link
-          to={ROUTES.passengerDetails}
-          className="group mt-space-sm flex w-full items-center justify-between rounded-xl bg-teal-flow px-space-lg py-space-md font-headline-sm text-lg font-semibold text-on-primary shadow-[0_2px_12px_rgba(20,122,126,0.25)] transition-all hover:bg-secondary"
-        >
-          <span>{t('Continue to Passenger Details')}</span>
-          <Icon
-            name="arrow_forward"
-            className="text-[20px] transition-transform group-hover:translate-x-1"
-          />
-        </Link>
+        {canContinue ? (
+          <Link
+            to={ROUTES.passengerDetails}
+            className="group mt-space-sm flex w-full items-center justify-between rounded-xl bg-teal-flow px-space-lg py-space-md font-headline-sm text-lg font-semibold text-on-primary shadow-[0_2px_12px_rgba(20,122,126,0.25)] transition-all hover:bg-secondary"
+          >
+            <span>{t('Continue to Passenger Details')}</span>
+            <Icon
+              name="arrow_forward"
+              className="text-[20px] transition-transform group-hover:translate-x-1"
+            />
+          </Link>
+        ) : (
+          <>
+            <button
+              type="button"
+              disabled
+              className="mt-space-sm flex w-full cursor-not-allowed items-center justify-between rounded-xl bg-teal-flow px-space-lg py-space-md font-headline-sm text-lg font-semibold text-on-primary opacity-50"
+            >
+              <span>{t('Continue to Passenger Details')}</span>
+              <Icon name="arrow_forward" className="text-[20px]" />
+            </button>
+            <p role="status" className="mt-2 text-center text-xs text-on-surface-variant">
+              {t('Please choose an available seat to continue.')}
+            </p>
+          </>
+        )}
         <div className="mt-space-sm flex items-center justify-center gap-2 text-xs text-teal-flow">
           <Link to={ROUTES.searchResults} className="hover:underline">
             {t('Change Trip')}

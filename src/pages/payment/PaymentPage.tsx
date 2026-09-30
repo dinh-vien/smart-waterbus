@@ -2,7 +2,7 @@ import { Breadcrumb, ErrorState, Icon, PageLoader } from '../../components/ui'
 import BookingProgress from '../../features/booking/components/BookingProgress'
 import { useBooking } from '../../features/booking/hooks/useBooking'
 import type { BookingStep } from '../../features/booking/types'
-import { bookingReference } from '../../features/booking/utils'
+import { bookingReference, seatTags } from '../../features/booking/utils'
 import PaymentMethodPanel from '../../features/payment/components/PaymentMethodPanel'
 import PaymentOrderSummary from '../../features/payment/components/PaymentOrderSummary'
 import { useDocumentTitle } from '../../hooks'
@@ -22,7 +22,7 @@ export default function PaymentPage() {
     { label: 'Trip', detail: trip.lineLabel },
     {
       label: 'Seat',
-      detail: seat?.window ? t('{id} Window', { id: seatId }) : t('{id} Aisle', { id: seatId }),
+      detail: `${seatId} ${seatTags(seat) || t('Aisle')}`,
     },
     { label: 'Details', detail: passenger.fullName },
     { label: 'Checkout', detail: 'Order Confirmed' },
@@ -82,9 +82,7 @@ export default function PaymentPage() {
             seat={seat}
             seatId={seatId}
             passenger={passenger}
-            fareVnd={totals.fareVnd}
-            discountVnd={totals.discountVnd}
-            totalVnd={totals.totalVnd}
+            totals={totals}
           />
         </div>
       </div>

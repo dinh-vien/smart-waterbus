@@ -7,7 +7,9 @@ import { formatNumber, formatVnd, formatVndSuffix } from '../../../utils/format'
 import type { TripDetail } from '../../trips/types'
 import { validateVoucher } from '../services/bookingService'
 import type { PassengerForm, Seat, Voucher } from '../types'
-import { BookingCard, CardHeading, SummaryRow } from './SummaryParts'
+import type { BookingTotals } from '../utils'
+import { seatTags } from '../utils'
+import { BookingCard, CardHeading, SeatFeeRow, SummaryRow } from './SummaryParts'
 import { t } from '../../../i18n'
 
 function EditLink({
@@ -109,7 +111,7 @@ export function JourneyDetailsCard({
         <Fact label={t('Vessel')} value={trip.vesselCode} />
         <Fact
           label={t('Selected Seat')}
-          value={seat?.window ? t('{id} (Window)', { id: seatId }) : seatId}
+          value={seatTags(seat) ? `${seatId} (${seatTags(seat)})` : seatId}
           accent
         />
         <Fact label={t('Date')} value={`${trip.dateLabel}, 2025`} />
@@ -266,15 +268,11 @@ export function TermsConfirm({
 
 export function OrderSummary({
   trip,
-  fareVnd,
-  discountVnd,
-  totalVnd,
+  totals,
   canContinue,
 }: {
   trip: TripDetail
-  fareVnd: number
-  discountVnd: number
-  totalVnd: number
+  totals: BookingTotals
   /** False until the passenger accepts the carriage rules. */
   canContinue: boolean
 }) {
@@ -304,12 +302,16 @@ export function OrderSummary({
       </div>
 
       <div className="mt-space-md space-y-1.5">
-        <SummaryRow label={t('Trip Fare')} value={formatVnd(fareVnd)} />
-        <SummaryRow label={t('Seat Fee')} value={t('Included')} accent />
+        <SummaryRow label={t('Trip Fare')} value={formatVnd(totals.fareVnd)} />
+        <SeatFeeRow
+          label={t('Seat Fee')}
+          seatFeeVnd={totals.seatFeeVnd}
+          includedText={t('Included')}
+        />
         <SummaryRow
           label={t('Discount')}
-          value={`${discountVnd > 0 ? '−' : ''}${formatVndSuffix(discountVnd)}`}
-          accent={discountVnd > 0}
+          value={`${totals.discountVnd > 0 ? '−' : ''}${formatVndSuffix(totals.discountVnd)}`}
+          accent={totals.discountVnd > 0}
         />
       </div>
 
@@ -317,7 +319,7 @@ export function OrderSummary({
         <span className="font-headline-sm text-lg font-bold text-deep-river">{t('Total')}</span>
         <span className="text-right">
           <span className="block font-numeric-lg text-numeric-lg font-bold leading-none text-deep-river">
-            {formatNumber(totalVnd)}
+            {formatNumber(totals.totalVnd)}
           </span>
           <span className="text-xs font-semibold text-teal-flow">{t('VND')}</span>
         </span>

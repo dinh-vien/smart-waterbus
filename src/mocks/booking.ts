@@ -4,11 +4,14 @@ import type {
   PassengerForm,
   Seat,
   SeatMap,
+  SeatTier,
 } from '../features/booking/types'
 
-const OCCUPIED = new Set(['B1', 'D1', 'C2', 'D4', 'A5', 'D5', 'A6', 'B6', 'C6'])
+const OCCUPIED = new Set(['B1', 'D1', 'C2', 'D4', 'A5', 'C6'])
 const COLUMNS = ['A', 'B', 'C', 'D'] as const
 const ROWS = [1, 2, 3, 4, 5, 6]
+/** The aft rows form the VIP lounge, next to the disembarkation gangway. */
+const VIP_ROWS = new Set([5, 6])
 
 const seats: Seat[] = ROWS.flatMap((row) =>
   COLUMNS.map((column) => {
@@ -18,6 +21,7 @@ const seats: Seat[] = ROWS.flatMap((row) =>
       row,
       column,
       status: OCCUPIED.has(id) ? ('occupied' as const) : ('available' as const),
+      tier: (VIP_ROWS.has(row) ? 'vip' : 'standard') as SeatTier,
       window: column === 'A' || column === 'D',
     }
   }),
@@ -30,6 +34,7 @@ export const SEAT_MAP: SeatMap = {
   seats,
 }
 
+/** A standard window seat, so the default booking never carries a surcharge. */
 export const DEFAULT_SEAT_ID = 'A2'
 
 export const DEFAULT_PASSENGER: PassengerForm = {

@@ -1,11 +1,15 @@
 export type SeatStatus = 'available' | 'occupied'
 
+/** Standard seats are on the main deck; VIP seats are in the aft lounge and cost extra. */
+export type SeatTier = 'standard' | 'vip'
+
 export interface Seat {
   id: string
   row: number
   /** Column letter A-D. A and D are window seats. */
   column: 'A' | 'B' | 'C' | 'D'
   status: SeatStatus
+  tier: SeatTier
   window: boolean
 }
 

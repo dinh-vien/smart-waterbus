@@ -6,6 +6,7 @@ import {
   TripStrip,
 } from '../../features/booking/components/SeatSelectionParts'
 import { useBooking } from '../../features/booking/hooks/useBooking'
+import { seatFeeFor } from '../../features/booking/utils'
 import { useDocumentTitle } from '../../hooks'
 import { ROUTES } from '../../routes/routes'
 import { t } from '../../i18n'
@@ -36,6 +37,11 @@ export default function SeatSelectionPage() {
   if (error) return <ErrorState onRetry={retry} />
 
   if (loading || !trip || !seatMap || !totals) return <PageLoader />
+
+  const vipFeeVnd = seatFeeFor(
+    seatMap.seats.find((s) => s.tier === 'vip'),
+    trip.fareVnd,
+  )
 
   return (
     <div className="mx-auto w-full max-w-7xl px-margin pb-space-3xl pt-space-md">
@@ -73,7 +79,7 @@ export default function SeatSelectionPage() {
       </div>
 
       <div className="mt-space-md space-y-space-md">
-        <TripStrip trip={trip} />
+        <TripStrip trip={trip} seat={seat} />
         <div className="flex items-center justify-between gap-2 rounded-xl border border-teal-flow/20 bg-sand-light/60 px-space-md py-2 text-xs text-on-surface-variant">
           <span className="flex items-center gap-2">
             <Icon name="touch_app" className="text-[18px] text-teal-flow" />
@@ -98,9 +104,14 @@ export default function SeatSelectionPage() {
                 </h2>
                 <p className="text-xs text-on-surface-variant">{seatMap.vesselModel}</p>
               </div>
-              <SeatLegend />
+              <SeatLegend vipFeeVnd={vipFeeVnd} />
             </div>
-            <SeatMapView seatMap={seatMap} selectedId={seatId} onSelect={chooseSeat} />
+            <SeatMapView
+              seatMap={seatMap}
+              selectedId={seatId}
+              vipFeeVnd={vipFeeVnd}
+              onSelect={chooseSeat}
+            />
           </div>
           <SeatRecommendation />
         </div>
@@ -109,7 +120,7 @@ export default function SeatSelectionPage() {
             trip={trip}
             seat={seat}
             seatId={seatId}
-            totalVnd={totals.totalVnd}
+            totals={totals}
             category={passenger.category.charAt(0).toUpperCase() + passenger.category.slice(1)}
           />
         </div>
