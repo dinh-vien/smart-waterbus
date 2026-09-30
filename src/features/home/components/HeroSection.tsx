@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import heroImage from '../../../assets/images/home/hero.svg'
+import heroImage from '../../../assets/images/vessel.jpg'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
 import type { HeroCue } from '../types'

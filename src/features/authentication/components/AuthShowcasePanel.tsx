@@ -1,4 +1,4 @@
-import heroImage from '../../../assets/images/home/hero.svg'
+import heroImage from '../../../assets/images/vessel.jpg'
 import { Icon } from '../../../components/ui'
 import type { AuthShowcase } from '../authenticationTypes'
 
