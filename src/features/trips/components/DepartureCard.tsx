@@ -3,6 +3,7 @@ import { Icon } from '../../../components/ui'
 import { formatVnd } from '../../../utils/format'
 import { ROUTES } from '../../../routes/routes'
 import type { Departure } from '../types'
+import { t } from '../../../i18n'
 
 interface DepartureCardProps {
   departure: Departure
@@ -78,7 +79,7 @@ export default function DepartureCard({ departure, onSelect }: DepartureCardProp
             sightseeing ? 'bg-coral-glow hover:opacity-90' : 'bg-teal-flow hover:bg-secondary'
           }`}
         >
-          {sightseeing ? 'Reserve' : 'Select'}
+          {sightseeing ? t('Reserve') : t('Select')}
         </Link>
       </div>
     </div>

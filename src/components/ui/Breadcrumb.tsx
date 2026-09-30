@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Icon from './Icon'
+import { t } from '../../i18n'
 
 export interface BreadcrumbItem {
   label: string
@@ -15,7 +16,7 @@ interface BreadcrumbProps {
 export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
   return (
     <nav
-      aria-label="Breadcrumb"
+      aria-label={t('Breadcrumb')}
       className={`flex items-center gap-2 text-xs font-medium text-on-surface-variant ${className}`.trim()}
     >
       {items.map((item, i) => {
@@ -24,14 +25,14 @@ export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
           <span key={item.label} className="flex items-center gap-2">
             {item.to && !last ? (
               <Link to={item.to} className="transition-colors hover:text-deep-river">
-                {item.label}
+                {t(item.label)}
               </Link>
             ) : (
               <span
                 className="font-semibold text-deep-river"
                 aria-current={last ? 'page' : undefined}
               >
-                {item.label}
+                {t(item.label)}
               </span>
             )}
             {!last && <Icon name="chevron_right" className="text-[14px] text-outline" />}

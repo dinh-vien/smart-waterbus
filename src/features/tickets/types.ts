@@ -1,3 +1,6 @@
+import type { PassengerForm, Seat } from '../booking/types'
+import type { SearchQuery } from '../trips/types'
+
 export interface Ticket {
   id: string
   /** Vessel/trip code, e.g. "WB-01". */
@@ -21,6 +24,8 @@ export interface Ticket {
   arriveDistrict: string
   durationMins: number
   dateLabel: string
+  /** Date without the year, e.g. "Dec 15". */
+  dateShort: string
   passenger: string
   seat: string
   seatNote: string
@@ -31,6 +36,20 @@ export interface Ticket {
   fareVnd: number
   vesselNote: string
   gate: string
+}
+
+/**
+ * What is stored for a booking made in this session. The display ticket is rebuilt from it in the
+ * active language every time, so switching language never leaves half-translated tickets behind.
+ */
+export interface BookedSnapshot {
+  id: string
+  tripId: string
+  query: SearchQuery
+  seat: Seat | undefined
+  seatId: string
+  passenger: PassengerForm
+  totalVnd: number
 }
 
 export interface TicketWallet {

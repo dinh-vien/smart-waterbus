@@ -9,6 +9,7 @@ import TripCard from '../../features/trips/components/TripCard'
 import { formatDateLabel } from '../../features/trips/utils'
 import { useSearchResults } from '../../features/trips/hooks/useTripSearch'
 import { useDocumentTitle } from '../../hooks'
+import { t } from '../../i18n'
 
 const CUES = [
   {
@@ -65,17 +66,17 @@ export default function SearchResultsPage() {
             <div>
               <div className="mb-2 inline-flex items-center gap-space-xs rounded-full border border-teal-flow/20 bg-sand-light px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-deep-river">
                 <span className="h-2 w-2 rounded-full bg-teal-flow" />
-                Saigon River Corridor #1
+                {t('Saigon River Corridor #1')}
               </div>
               <h1 className="font-headline-lg text-2xl font-bold leading-tight tracking-tight text-deep-river md:text-3xl lg:text-[34px]">
-                Available Departures
+                {t('Available Departures')}
               </h1>
               <p className="mt-1 text-sm text-on-surface-variant">
-                Select your river crossing across the Saigon River transit corridor.
+                {t('Select your river crossing across the Saigon River transit corridor.')}
               </p>
             </div>
             <div className="self-start md:self-end">
-              <StatusPill variant="soft">All River Terminals Operational</StatusPill>
+              <StatusPill variant="soft">{t('All River Terminals Operational')}</StatusPill>
             </div>
           </div>
 
@@ -101,12 +102,14 @@ export default function SearchResultsPage() {
           <div className="flex flex-col gap-space-md lg:col-span-8">
             <div className="flex items-center justify-between px-1">
               <div className="flex items-center gap-space-xs text-sm text-deep-river">
-                <span className="font-bold text-teal-flow">{visible.length} Departures</span>
-                <span className="text-on-surface-variant">scheduled for today</span>
+                <span className="font-bold text-teal-flow">
+                  {t('{length} Departures', { length: visible.length })}
+                </span>
+                <span className="text-on-surface-variant">{t('scheduled for today')}</span>
               </div>
               <div className="flex items-center gap-space-xs text-xs text-on-surface-variant">
                 <span className="h-2 w-2 animate-pulse rounded-full bg-teal-flow" />
-                Real-time boarding gate &amp; turnstile sync
+                {t('Real-time boarding gate & turnstile sync')}
               </div>
             </div>
 
@@ -122,7 +125,7 @@ export default function SearchResultsPage() {
               ))
             ) : (
               <p className="rounded-2xl border border-dashed border-outline-variant bg-white p-space-xl text-center text-on-surface-variant">
-                No departures match these filters.
+                {t('No departures match these filters.')}
               </p>
             )}
           </div>

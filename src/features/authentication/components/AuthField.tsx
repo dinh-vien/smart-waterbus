@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { InputHTMLAttributes, ReactNode } from 'react'
 import { Icon } from '../../../components/ui'
+import { t } from '../../../i18n'
 
 interface AuthFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string
@@ -50,7 +51,7 @@ export default function AuthField({
         {revealable && (
           <button
             type="button"
-            aria-label={shown ? 'Hide password' : 'Show password'}
+            aria-label={shown ? t('Hide password') : t('Show password')}
             onClick={() => setShown((v) => !v)}
             className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-outline hover:text-on-surface-variant"
           >

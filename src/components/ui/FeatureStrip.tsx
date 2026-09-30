@@ -1,4 +1,5 @@
 import Icon from './Icon'
+import { t } from '../../i18n'
 
 export interface FeatureStripItem {
   icon: string
@@ -44,8 +45,10 @@ export default function FeatureStrip({
             <Icon name={item.icon} className="text-[24px]" />
           </div>
           <div>
-            <div className="font-headline-sm text-base font-bold text-deep-river">{item.title}</div>
-            <p className="text-xs text-on-surface-variant">{item.description}</p>
+            <div className="font-headline-sm text-base font-bold text-deep-river">
+              {t(item.title)}
+            </div>
+            <p className="text-xs text-on-surface-variant">{t(item.description)}</p>
           </div>
         </div>
       ))}

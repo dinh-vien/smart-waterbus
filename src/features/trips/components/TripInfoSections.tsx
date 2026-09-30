@@ -1,5 +1,6 @@
 import { Icon } from '../../../components/ui'
 import type { TripDetail } from '../types'
+import { t } from '../../../i18n'
 
 const DOT: Record<TripDetail['timeline'][number]['tone'], string> = {
   teal: 'bg-teal-flow',
@@ -36,7 +37,7 @@ function SectionCard({
 
 export function JourneyTimeline({ trip }: { trip: TripDetail }) {
   return (
-    <SectionCard icon="schedule" title="Journey Timeline" aside={trip.dateLabel}>
+    <SectionCard icon="schedule" title={t('Journey Timeline')} aside={trip.dateLabel}>
       <ol className="space-y-space-md">
         {trip.timeline.map((step) => (
           <li key={step.time + step.title} className="flex gap-space-sm">
@@ -56,7 +57,7 @@ export function JourneyTimeline({ trip }: { trip: TripDetail }) {
 
 export function OnboardAmenities({ trip }: { trip: TripDetail }) {
   return (
-    <SectionCard icon="directions_boat" title="Onboard Amenities">
+    <SectionCard icon="directions_boat" title={t('Onboard Amenities')}>
       <div className="grid grid-cols-1 gap-space-sm sm:grid-cols-2">
         {trip.amenityDetails.map((a) => (
           <div key={a.title} className="rounded-xl bg-mist/70 p-space-md">
@@ -74,7 +75,7 @@ export function OnboardAmenities({ trip }: { trip: TripDetail }) {
 
 export function BoardingSteps({ trip }: { trip: TripDetail }) {
   return (
-    <SectionCard icon="qr_code_2" title="Boarding & E-Ticket">
+    <SectionCard icon="qr_code_2" title={t('Boarding & E-Ticket')}>
       <div className="grid grid-cols-1 gap-space-sm sm:grid-cols-3">
         {trip.boardingSteps.map((s, i) => (
           <div key={s.title} className="rounded-xl bg-mist/70 p-space-md">

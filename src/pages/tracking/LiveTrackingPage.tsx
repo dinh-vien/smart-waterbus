@@ -6,6 +6,7 @@ import { getTrackingData } from '../../features/tracking/services/trackingServic
 import type { TrackingMode } from '../../features/tracking/types'
 import { useDocumentTitle, useFetch } from '../../hooks'
 import { ROUTES } from '../../routes/routes'
+import { t } from '../../i18n'
 
 export default function LiveTrackingPage() {
   useDocumentTitle('Live Trip Tracking')
@@ -34,7 +35,7 @@ export default function LiveTrackingPage() {
         <div className="max-w-2xl">
           <div className="flex flex-wrap items-center gap-3">
             <h1 className="font-headline-xl text-4xl font-bold tracking-tight text-deep-river">
-              Your Journey in Real Time
+              {t('Your Journey in Real Time')}
             </h1>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary-container px-3 py-1 text-xs font-semibold text-on-secondary-container">
               <span className="h-2 w-2 animate-pulse rounded-full bg-teal-flow" />
@@ -43,11 +44,12 @@ export default function LiveTrackingPage() {
           </div>
           <span className="mt-space-sm inline-flex items-center gap-1.5 rounded-full bg-deep-river px-3 py-1 text-xs font-semibold text-white">
             <Icon name="directions_boat" className="text-[15px]" />
-            Trip {data.trip.code}
+            {t('Trip {code}', { code: data.trip.code })}
           </span>
           <p className="mt-space-sm text-body-md text-on-surface-variant">
-            Follow your catamaran crossing along the central Saigon River with real-time
-            positioning, contextual river heritage stories, and synchronized audio commentary.
+            {t(
+              'Follow your catamaran crossing along the central Saigon River with real-time positioning, contextual river heritage stories, and synchronized audio commentary.',
+            )}
           </p>
         </div>
         <ModeToggle mode={mode} onMode={setMode} />

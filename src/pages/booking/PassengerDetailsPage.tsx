@@ -7,6 +7,7 @@ import type { BookingStep } from '../../features/booking/types'
 import { seatPosition } from '../../features/booking/utils'
 import { useDocumentTitle } from '../../hooks'
 import { ROUTES } from '../../routes/routes'
+import { t } from '../../i18n'
 
 export default function PassengerDetailsPage() {
   useDocumentTitle('Passenger Details')
@@ -19,7 +20,7 @@ export default function PassengerDetailsPage() {
 
   const steps: BookingStep[] = [
     { label: 'Trip', detail: 'Trip' },
-    { label: 'Seat', detail: `Seat (${seatId})` },
+    { label: 'Seat', detail: t('Seat ({id})', { id: seatId }) },
     { label: 'Passenger Details', detail: 'Passenger Details' },
     { label: 'Checkout', detail: 'Checkout' },
     { label: 'Payment', detail: 'Payment' },
@@ -41,15 +42,15 @@ export default function PassengerDetailsPage() {
       <div className="mt-space-lg flex flex-col justify-between gap-space-md md:flex-row md:items-end">
         <div>
           <h1 className="font-headline-xl text-headline-xl-mobile tracking-tight text-deep-river md:text-headline-lg">
-            Passenger Details
+            {t('Passenger Details')}
           </h1>
           <p className="text-body-md text-on-surface-variant">
-            Please enter traveler information for this crossing.
+            {t('Please enter traveler information for this crossing.')}
           </p>
         </div>
         <span className="inline-flex items-center gap-2 self-start rounded-full bg-secondary-container/60 px-3 py-1 text-xs font-semibold text-on-secondary-container md:self-auto">
           <span className="h-2 w-2 rounded-full bg-teal-flow" />
-          River Crossing {trip.vesselCode}
+          {t('River Crossing {vesselCode}', { vesselCode: trip.vesselCode })}
         </span>
       </div>
 

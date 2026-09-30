@@ -54,12 +54,12 @@ export function JourneyDetailsCard({
     <BookingCard>
       <CardHeading
         icon="directions_boat"
-        title="Journey Details"
+        title={t('Journey Details')}
         subtitle={t('Saigon River {line} • {code}', {
           line: trip.lineLabel,
           code: trip.vesselCode,
         })}
-        aside={<EditLink to={ROUTES.seatSelection}>Change Trip / Seat</EditLink>}
+        aside={<EditLink to={ROUTES.seatSelection}>{t('Change Trip / Seat')}</EditLink>}
       />
       <div className="grid grid-cols-1 items-center gap-space-md rounded-xl bg-mist/70 p-space-md md:grid-cols-12">
         <div className="flex items-start gap-3 md:col-span-4">
@@ -72,21 +72,21 @@ export function JourneyDetailsCard({
             </div>
             <div className="mt-1 text-sm font-semibold text-deep-river">{trip.originPierLabel}</div>
             <div className="text-xs text-on-surface-variant">
-              {trip.originGate} • Pontoon Terminal
+              {t('{originGate} • Pontoon Terminal', { originGate: trip.originGate })}
             </div>
           </div>
         </div>
         <div className="flex flex-col items-center md:col-span-4">
           <span className="inline-flex items-center gap-1 rounded-full bg-secondary-container px-3 py-0.5 text-xs font-semibold text-on-secondary-container">
             <Icon name="waves" className="text-[14px]" />
-            {trip.durationMins} min river crossing
+            {t('{durationMins} min river crossing', { durationMins: trip.durationMins })}
           </span>
           <div className="my-1 flex w-full items-center gap-2 text-outline">
             <span className="h-px flex-1 bg-outline-variant" />
             <Icon name="arrow_forward" className="text-[16px] text-teal-flow" />
             <span className="h-px flex-1 bg-outline-variant" />
           </div>
-          <span className="text-xs text-on-surface-variant">Non-stop express run</span>
+          <span className="text-xs text-on-surface-variant">{t('Non-stop express run')}</span>
         </div>
         <div className="flex items-start justify-end gap-3 text-right md:col-span-4">
           <div>
@@ -97,7 +97,7 @@ export function JourneyDetailsCard({
               {trip.destinationPierLabel}
             </div>
             <div className="text-xs text-on-surface-variant">
-              {trip.destinationGate} • Park Promenade
+              {t('{destinationGate} • Park Promenade', { destinationGate: trip.destinationGate })}
             </div>
           </div>
           <span className="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-teal-flow text-[10px] font-bold text-white">
@@ -106,13 +106,13 @@ export function JourneyDetailsCard({
         </div>
       </div>
       <div className="mt-space-sm grid grid-cols-1 gap-space-sm md:grid-cols-2">
-        <Fact label="Vessel" value={trip.vesselCode} />
+        <Fact label={t('Vessel')} value={trip.vesselCode} />
         <Fact
-          label="Selected Seat"
+          label={t('Selected Seat')}
           value={seat?.window ? t('{id} (Window)', { id: seatId }) : seatId}
           accent
         />
-        <Fact label="Date" value={`${trip.dateLabel}, 2025`} />
+        <Fact label={t('Date')} value={`${trip.dateLabel}, 2025`} />
       </div>
     </BookingCard>
   )
@@ -124,29 +124,29 @@ export function PassengerInfoCard({ passenger }: { passenger: PassengerForm }) {
     <BookingCard>
       <CardHeading
         icon="badge"
-        title="Passenger Information"
-        subtitle="Passenger 1 (Primary Traveler)"
-        aside={<EditLink to={ROUTES.passengerDetails}>Edit Passenger Details</EditLink>}
+        title={t('Passenger Information')}
+        subtitle={t('Passenger 1 (Primary Traveler)')}
+        aside={<EditLink to={ROUTES.passengerDetails}>{t('Edit Passenger Details')}</EditLink>}
       />
       <div className="grid grid-cols-1 gap-space-md rounded-xl bg-mist/70 p-space-md md:grid-cols-2">
         <div>
-          <div className="text-xs text-on-surface-variant">Full Legal Name</div>
+          <div className="text-xs text-on-surface-variant">{t('Full Legal Name')}</div>
           <div className="text-sm font-semibold text-deep-river">{passenger.fullName}</div>
         </div>
         <div>
-          <div className="text-xs text-on-surface-variant">Passenger Category</div>
+          <div className="text-xs text-on-surface-variant">{t('Passenger Category')}</div>
           <div className="text-sm font-semibold text-deep-river">
-            {CATEGORY_LABEL[passenger.category]} • Born {dob}
+            {t('{category} • Born {dob}', { category: t(CATEGORY_LABEL[passenger.category]), dob })}
           </div>
         </div>
         <div>
-          <div className="text-xs text-on-surface-variant">Contact Mobile</div>
+          <div className="text-xs text-on-surface-variant">{t('Contact Mobile')}</div>
           <div className="text-sm font-semibold text-deep-river">
             {passenger.phoneCode} {passenger.phone}
           </div>
         </div>
         <div>
-          <div className="text-xs text-on-surface-variant">Notification Email</div>
+          <div className="text-xs text-on-surface-variant">{t('Notification Email')}</div>
           <div className="text-sm font-semibold text-deep-river">{passenger.email}</div>
         </div>
       </div>
@@ -159,11 +159,11 @@ export function ETicketContactCard({ passenger }: { passenger: PassengerForm }) 
     <BookingCard>
       <CardHeading
         icon="qr_code_2"
-        title="E-Ticket & Booking Contact"
-        subtitle="Your QR ticket will be available after successful payment."
+        title={t('E-Ticket & Booking Contact')}
+        subtitle={t('Your QR ticket will be available after successful payment.')}
       />
       <p className="text-xs text-on-surface-variant">
-        Sent to <span className="text-deep-river">{passenger.email}</span> and{' '}
+        {t('Sent to')} <span className="text-deep-river">{passenger.email}</span> {t('and')}{' '}
         <span className="text-deep-river">
           {passenger.phoneCode} {passenger.phone}
         </span>
@@ -192,12 +192,12 @@ export function VoucherCard({
       onApply(result)
       setMessage(
         result
-          ? `Voucher applied: ${result.percentOff}% off your fare.`
-          : 'This code is not valid.',
+          ? t('Voucher applied: {percent}% off your fare.', { percent: result.percentOff })
+          : t('This code is not valid.'),
       )
       setFailed(false)
     } catch {
-      setMessage('We couldn’t check this code. Please try again.')
+      setMessage(t('We couldn’t check this code. Please try again.'))
       setFailed(true)
     } finally {
       setBusy(false)
@@ -209,13 +209,13 @@ export function VoucherCard({
       <div className="flex flex-col items-start gap-space-md md:flex-row md:items-center">
         <span className="flex items-center gap-2 text-sm font-semibold text-deep-river">
           <Icon name="confirmation_number" className="text-[20px] text-teal-flow" />
-          Voucher / Corporate Discount
+          {t('Voucher / Corporate Discount')}
         </span>
         <input
           value={code}
           onChange={(e) => setCode(e.target.value)}
-          placeholder="Enter voucher or promo code"
-          aria-label="Voucher or promo code"
+          placeholder={t('Enter voucher or promo code')}
+          aria-label={t('Voucher or promo code')}
           className="flex-1 rounded-xl border-0 bg-mist px-space-md py-2.5 text-sm text-deep-river placeholder:text-outline focus:ring-2 focus:ring-teal-flow/30"
         />
         <button
@@ -224,7 +224,7 @@ export function VoucherCard({
           onClick={apply}
           className="rounded-xl bg-surface-container px-space-lg py-2.5 text-sm font-semibold text-deep-river transition-colors hover:bg-surface-container-high disabled:opacity-60"
         >
-          Apply
+          {t('Apply')}
         </button>
       </div>
       {message && (
@@ -257,8 +257,8 @@ export function TermsConfirm({
         className="h-5 w-5 rounded border-outline-variant text-teal-flow accent-teal-flow focus:ring-teal-flow"
       />
       <span>
-        I confirm that the booking details above are correct. I accept the{' '}
-        <span className="text-teal-flow underline">Waterway Carriage Rules</span>.
+        {t('I confirm that the booking details above are correct. I accept the')}{' '}
+        <span className="text-teal-flow underline">{t('Waterway Carriage Rules')}</span>.
       </span>
     </label>
   )
@@ -281,9 +281,9 @@ export function OrderSummary({
   return (
     <BookingCard className="p-space-lg lg:sticky lg:top-24">
       <div className="mb-space-md flex items-center justify-between">
-        <h2 className="font-headline-md text-headline-sm text-deep-river">Order Summary</h2>
+        <h2 className="font-headline-md text-headline-sm text-deep-river">{t('Order Summary')}</h2>
         <span className="rounded-full bg-secondary-container px-2.5 py-0.5 text-[11px] font-bold text-teal-flow">
-          Trip {trip.vesselCode}
+          {t('Trip {vesselCode}', { vesselCode: trip.vesselCode })}
         </span>
       </div>
 
@@ -297,29 +297,29 @@ export function OrderSummary({
           <div className="h-full w-3/4 rounded-full bg-teal-flow" />
         </div>
         <div className="mt-2 flex items-center justify-between text-[11px] text-on-surface-variant">
-          <span>Depart {trip.departTime}</span>
-          <span>Direct Line</span>
-          <span>Arrive {trip.arriveTime}</span>
+          <span>{t('Depart {departTime}', { departTime: trip.departTime })}</span>
+          <span>{t('Direct Line')}</span>
+          <span>{t('Arrive {arriveTime}', { arriveTime: trip.arriveTime })}</span>
         </div>
       </div>
 
       <div className="mt-space-md space-y-1.5">
-        <SummaryRow label="Trip Fare" value={formatVnd(fareVnd)} />
-        <SummaryRow label="Seat Fee" value="Included" accent />
+        <SummaryRow label={t('Trip Fare')} value={formatVnd(fareVnd)} />
+        <SummaryRow label={t('Seat Fee')} value={t('Included')} accent />
         <SummaryRow
-          label="Discount"
+          label={t('Discount')}
           value={`${discountVnd > 0 ? '−' : ''}${formatVndSuffix(discountVnd)}`}
           accent={discountVnd > 0}
         />
       </div>
 
       <div className="mt-space-md flex items-center justify-between rounded-xl bg-mist/70 px-space-md py-space-md">
-        <span className="font-headline-sm text-lg font-bold text-deep-river">Total</span>
+        <span className="font-headline-sm text-lg font-bold text-deep-river">{t('Total')}</span>
         <span className="text-right">
           <span className="block font-numeric-lg text-numeric-lg font-bold leading-none text-deep-river">
             {formatNumber(totalVnd)}
           </span>
-          <span className="text-xs font-semibold text-teal-flow">VND</span>
+          <span className="text-xs font-semibold text-teal-flow">{t('VND')}</span>
         </span>
       </div>
 
@@ -328,7 +328,7 @@ export function OrderSummary({
           to={ROUTES.payment}
           className="group mt-space-md flex w-full items-center justify-center gap-2 rounded-xl bg-teal-flow py-3 font-headline-sm text-base font-semibold text-on-primary shadow-[0_2px_12px_rgba(20,122,126,0.25)] transition-all hover:bg-secondary"
         >
-          Continue to Payment
+          {t('Continue to Payment')}
           <Icon
             name="arrow_forward"
             className="text-[18px] transition-transform group-hover:translate-x-1"
@@ -341,11 +341,11 @@ export function OrderSummary({
             disabled
             className="mt-space-md flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl bg-teal-flow py-3 font-headline-sm text-base font-semibold text-on-primary opacity-50"
           >
-            Continue to Payment
+            {t('Continue to Payment')}
             <Icon name="arrow_forward" className="text-[18px]" />
           </button>
           <p role="status" className="mt-2 text-center text-xs text-on-surface-variant">
-            Please accept the Waterway Carriage Rules to continue.
+            {t('Please accept the Waterway Carriage Rules to continue.')}
           </p>
         </>
       )}
@@ -354,12 +354,12 @@ export function OrderSummary({
           to={ROUTES.passengerDetails}
           className="text-xs text-on-surface-variant hover:text-deep-river"
         >
-          ← Back to Passenger Details
+          {t('← Back to Passenger Details')}
         </Link>
       </div>
       <div className="mt-space-md flex items-start gap-2 text-xs text-on-surface-variant">
         <Icon name="verified_user" className="text-[18px] text-teal-flow" />
-        Your selected seat remains reserved while you complete checkout.
+        {t('Your selected seat remains reserved while you complete checkout.')}
       </div>
     </BookingCard>
   )

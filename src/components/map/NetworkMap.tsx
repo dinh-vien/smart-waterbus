@@ -1,4 +1,5 @@
 import { Icon } from '../ui'
+import { t } from '../../i18n'
 
 interface NetworkPin {
   x: number
@@ -20,7 +21,9 @@ const PINS: NetworkPin[] = [
 const RIVER = 'M 10 400 C 140 375 220 325 290 280 C 375 225 445 175 540 135 C 620 100 680 85 730 70'
 
 function Pin({ pin }: { pin: NetworkPin }) {
-  const { x, y, label, sub, kind } = pin
+  const { x, y, kind } = pin
+  const label = t(pin.label)
+  const sub = pin.sub ? t(pin.sub) : undefined
   const dark = kind === 'primary' || kind === 'terminus'
   return (
     <g transform={`translate(${x}, ${y})`}>
@@ -181,7 +184,7 @@ export default function NetworkMap() {
           x="70"
           y="425"
         >
-          DISTRICT 1 WATERFRONT
+          {t('DISTRICT 1 WATERFRONT')}
         </text>
         <text
           fill="#0D2538"
@@ -193,7 +196,7 @@ export default function NetworkMap() {
           x="280"
           y="340"
         >
-          THU THIEM PENINSULA
+          {t('THU THIEM PENINSULA')}
         </text>
         {PINS.map((pin) => (
           <Pin key={pin.label} pin={pin} />
@@ -216,11 +219,11 @@ export default function NetworkMap() {
       <div className="relative z-10 flex items-center justify-between gap-2">
         <div className="inline-flex items-center gap-2 rounded-full border border-teal-flow/20 bg-white/95 px-3.5 py-1.5 font-headline-sm text-xs font-semibold text-deep-river backdrop-blur-md">
           <Icon name="alt_route" className="text-[16px] text-teal-flow" />
-          <span>Line 1 Express Corridor • 10.8 km Navigable Waterway</span>
+          <span>{t('Line 1 Express Corridor • 10.8 km Navigable Waterway')}</span>
         </div>
         <span className="hidden items-center gap-1.5 rounded-full border border-teal-flow/20 bg-[#EBF2F0] px-3 py-1 text-[11px] font-bold text-teal-flow sm:inline-flex">
           <span className="h-1.5 w-1.5 animate-ping rounded-full bg-teal-flow" />
-          GPS Live Fleet Radar
+          {t('GPS Live Fleet Radar')}
         </span>
       </div>
 
@@ -230,13 +233,15 @@ export default function NetworkMap() {
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <p className="font-headline-sm text-xs font-bold text-deep-river">WB-01 • In Transit</p>
+            <p className="font-headline-sm text-xs font-bold text-deep-river">
+              {t('WB-01 • In Transit')}
+            </p>
             <span className="rounded bg-secondary-container px-1.5 py-0.5 text-[10px] font-bold text-on-secondary-container">
-              42 km/h
+              {t('42 km/h')}
             </span>
           </div>
           <p className="text-[11px] font-medium text-on-surface-variant">
-            En route to Thu Thiem Pier • ETA 2 min
+            {t('En route to Thu Thiem Pier • ETA 2 min')}
           </p>
         </div>
       </div>

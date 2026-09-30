@@ -39,20 +39,20 @@ export function NextDepartureCard({
               <div>
                 <div className="text-sm font-semibold text-deep-river">{ticket.lineName}</div>
                 <div className="font-mono text-[11px] text-on-surface-variant">
-                  Ref: {ticket.bookingRef}
+                  {t('Ref: {bookingRef}', { bookingRef: ticket.bookingRef })}
                 </div>
               </div>
             </div>
             <span className="inline-flex items-center gap-1 rounded-full bg-secondary-container px-3 py-1 text-xs font-semibold text-on-secondary-container">
               <Icon name="verified" className="text-[14px]" />
-              Confirmed Booking
+              {t('Confirmed Booking')}
             </span>
           </div>
 
           <div className="mt-space-md grid grid-cols-1 items-center gap-space-md rounded-xl bg-mist/70 p-space-md md:grid-cols-12">
             <div className="md:col-span-4">
               <div className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">
-                Origin Pier
+                {t('Origin Pier')}
               </div>
               <div className="font-headline-sm text-3xl font-bold text-deep-river">
                 {ticket.departTime}
@@ -63,7 +63,9 @@ export function NextDepartureCard({
               <div className="text-xs text-on-surface-variant">{ticket.departDistrict}</div>
             </div>
             <div className="flex flex-col items-center md:col-span-4">
-              <span className="text-xs text-teal-flow">{ticket.durationMins} min crossing</span>
+              <span className="text-xs text-teal-flow">
+                {t('{durationMins} min crossing', { durationMins: ticket.durationMins })}
+              </span>
               <div className="my-1 flex w-full items-center gap-1">
                 <span className="h-2 w-2 rounded-full bg-deep-river" />
                 <span className="h-px flex-1 bg-outline-variant" />
@@ -71,11 +73,11 @@ export function NextDepartureCard({
                 <span className="h-px flex-1 bg-outline-variant" />
                 <span className="h-2 w-2 rounded-full bg-teal-flow" />
               </div>
-              <span className="text-[11px] text-on-surface-variant">Direct Waterway</span>
+              <span className="text-[11px] text-on-surface-variant">{t('Direct Waterway')}</span>
             </div>
             <div className="md:col-span-4 md:text-right">
               <div className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">
-                Destination Pier
+                {t('Destination Pier')}
               </div>
               <div className="font-headline-sm text-3xl font-bold text-deep-river">
                 {ticket.arriveTime}
@@ -88,14 +90,17 @@ export function NextDepartureCard({
           </div>
 
           <div className="mt-space-md grid grid-cols-2 gap-space-md border-t border-surface-container pt-space-md md:grid-cols-4">
-            <Fact label="Travel Date" value={`Today, ${ticket.dateLabel.slice(0, 6)}`} />
-            <Fact label="Passenger" value={ticket.passenger} />
             <Fact
-              label="Assigned Seat"
+              label={t('Travel Date')}
+              value={t('Today, {label}', { label: ticket.dateShort })}
+            />
+            <Fact label={t('Passenger')} value={ticket.passenger} />
+            <Fact
+              label={t('Assigned Seat')}
               value={ticket.windowSeat ? t('{seat} (Window)', { seat: ticket.seat }) : ticket.seat}
               icon="chair"
             />
-            <Fact label="Fare Paid" value={formatVnd(ticket.fareVnd)} />
+            <Fact label={t('Fare Paid')} value={formatVnd(ticket.fareVnd)} />
           </div>
 
           <div className="mt-auto flex items-center justify-between border-t border-surface-container pt-space-md text-xs">
@@ -104,18 +109,20 @@ export function NextDepartureCard({
               className="flex items-center gap-1 font-semibold text-teal-flow hover:underline"
             >
               <Icon name="info" className="text-[15px]" />
-              View Booking Details
+              {t('View Booking Details')}
             </Link>
-            <span className="text-on-surface-variant">Vessel: {ticket.vesselNote}</span>
+            <span className="text-on-surface-variant">
+              {t('Vessel: {vesselNote}', { vesselNote: ticket.vesselNote })}
+            </span>
           </div>
         </div>
 
         <div className="space-y-space-md bg-mist/60 p-space-lg lg:col-span-4">
           <div className="rounded-xl bg-white p-space-md shadow-sm">
             <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-wider text-on-surface-variant">
-              Corridor Tracking
+              {t('Corridor Tracking')}
               <span className="flex items-center gap-1 normal-case text-teal-flow">
-                <span className="h-1.5 w-1.5 rounded-full bg-teal-flow" /> Pier 01 → Pier 02
+                <span className="h-1.5 w-1.5 rounded-full bg-teal-flow" /> {t('Pier 01 → Pier 02')}
               </span>
             </div>
             <svg viewBox="0 0 240 60" className="mt-2 h-14 w-full" aria-hidden="true">
@@ -132,8 +139,8 @@ export function NextDepartureCard({
               <circle cx="120" cy="30" r="8" fill="#147A7E" stroke="#fff" strokeWidth="2" />
             </svg>
             <div className="mt-1 flex justify-between text-[10px] text-on-surface-variant">
-              <span>Bach Dang</span>
-              <span>Thu Thiem</span>
+              <span>{t('Bach Dang')}</span>
+              <span>{t('Thu Thiem')}</span>
             </div>
           </div>
 
@@ -145,7 +152,7 @@ export function NextDepartureCard({
               {ticket.ticketCode}
             </div>
             <div className="flex items-center justify-center gap-1 text-[11px] text-on-surface-variant">
-              <Icon name="sensors" className="text-[13px]" /> Scan at turnstile barrier
+              <Icon name="sensors" className="text-[13px]" /> {t('Scan at turnstile barrier')}
             </div>
           </div>
 
@@ -155,14 +162,14 @@ export function NextDepartureCard({
             className="flex w-full items-center justify-center gap-2 rounded-xl bg-teal-flow py-3 text-sm font-semibold text-on-primary transition-colors hover:bg-secondary"
           >
             <Icon name="qr_code_2" className="text-[18px]" />
-            View Full Ticket
+            {t('View Full Ticket')}
           </Link>
           <Link
             to={ROUTES.liveTracking}
             className="flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant/50 bg-white py-3 text-sm font-semibold text-deep-river transition-colors hover:bg-surface-container-low"
           >
             <Icon name="near_me" className="text-[18px]" />
-            Track Live Vessel
+            {t('Track Live Vessel')}
           </Link>
         </div>
       </div>
@@ -182,7 +189,7 @@ export function UpcomingTripCard({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 text-xs">
           <span className="rounded bg-mist px-2 py-1 font-semibold text-on-surface-variant">
-            Trip {ticket.tripCode}
+            {t('Trip {tripCode}', { tripCode: ticket.tripCode })}
           </span>
           <span className="text-on-surface-variant">• {ticket.routeTag}</span>
         </div>
@@ -199,7 +206,7 @@ export function UpcomingTripCard({
           <div className="text-xs text-on-surface-variant">{ticket.departDistrict}</div>
         </div>
         <div className="flex flex-col items-center text-xs text-teal-flow">
-          {ticket.durationMins} min
+          {t('{durationMins} min', { durationMins: ticket.durationMins })}
           <Icon name="arrow_forward" className="text-[20px]" />
         </div>
         <div className="text-right">
@@ -212,15 +219,17 @@ export function UpcomingTripCard({
       </div>
       <div className="mt-space-md grid grid-cols-3 gap-2 text-xs">
         <div>
-          <div className="text-on-surface-variant">Date</div>
+          <div className="text-on-surface-variant">{t('Date')}</div>
           <div className="font-semibold text-deep-river">{ticket.dateLabel}</div>
         </div>
         <div>
-          <div className="text-on-surface-variant">Seat / Pax</div>
-          <div className="font-semibold text-deep-river">{ticket.seat} • 1 Adt</div>
+          <div className="text-on-surface-variant">{t('Seat / Pax')}</div>
+          <div className="font-semibold text-deep-river">
+            {t('{seat} • 1 Adt', { seat: ticket.seat })}
+          </div>
         </div>
         <div className="text-right">
-          <div className="text-on-surface-variant">Fare</div>
+          <div className="text-on-surface-variant">{t('Fare')}</div>
           <div className="font-semibold text-deep-river">{formatVnd(ticket.fareVnd)}</div>
         </div>
       </div>
@@ -229,7 +238,7 @@ export function UpcomingTripCard({
           to={ROUTES.manageBooking}
           className="text-xs text-on-surface-variant hover:text-deep-river"
         >
-          Trip Details
+          {t('Trip Details')}
         </Link>
         <Link
           to={ROUTES.ticketDetail}
@@ -237,7 +246,7 @@ export function UpcomingTripCard({
           className="inline-flex items-center gap-1.5 rounded-lg bg-surface-container px-3 py-2 text-xs font-semibold text-teal-flow transition-colors hover:bg-surface-container-high"
         >
           <Icon name="qr_code" className="text-[16px]" />
-          View Ticket
+          {t('View Ticket')}
         </Link>
       </div>
     </div>
@@ -261,11 +270,15 @@ export function PastJourneyRow({
           <div className="flex flex-wrap items-center gap-2 text-sm font-semibold text-deep-river">
             {ticket.departShort} → {ticket.arriveShort}
             <span className="rounded bg-secondary-container px-2 py-0.5 text-[10px] font-semibold text-on-secondary-container">
-              Completed
+              {t('Completed')}
             </span>
           </div>
           <div className="text-xs text-on-surface-variant">
-            {ticket.dateLabel} • {ticket.departTime} Departure • {ticket.seat} (1 Passenger)
+            {t('{dateLabel} • {departTime} Departure • {seat} (1 Passenger)', {
+              dateLabel: ticket.dateLabel,
+              departTime: ticket.departTime,
+              seat: ticket.seat,
+            })}
           </div>
         </div>
       </div>
@@ -274,7 +287,7 @@ export function PastJourneyRow({
         onClick={() => onOpen(ticket.id)}
         className="whitespace-nowrap rounded-lg border border-outline-variant/50 bg-white px-3 py-1.5 text-xs font-semibold text-deep-river transition-colors hover:bg-surface-container-low"
       >
-        View Summary
+        {t('View Summary')}
       </Link>
     </div>
   )

@@ -4,6 +4,11 @@ import type { PassengerForm, Seat } from '../booking/types'
 import type { TripDetail } from '../trips/types'
 import type { Ticket } from './types'
 
+/** Stable id of the ticket for a trip and seat. */
+export function bookedTicketId(tripId: string, seatId: string): string {
+  return `tkt-${tripId}-${seatId.toLowerCase()}`
+}
+
 interface BuildTicketInput {
   trip: TripDetail
   seat: Seat | undefined
@@ -21,7 +26,7 @@ export function buildBookedTicket({
   totalVnd,
 }: BuildTicketInput): Ticket {
   return {
-    id: `tkt-${trip.id}-${seatId.toLowerCase()}`,
+    id: bookedTicketId(trip.id, seatId),
     tripCode: trip.vesselCode,
     lineName: t('Smart Waterbus • {line}', { line: trip.lineLabel }),
     routeTag: t('Central Route'),
@@ -39,6 +44,7 @@ export function buildBookedTicket({
     arriveDistrict: trip.destinationDistrict,
     durationMins: trip.durationMins,
     dateLabel: trip.dateFull,
+    dateShort: trip.dateShort,
     passenger: passenger.fullName,
     seat: t('Seat {id}', { id: seatId }),
     seatNote: `${seatPosition(seat)} • ${t('Main Deck')}`,

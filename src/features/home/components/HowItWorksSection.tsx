@@ -1,4 +1,5 @@
 import type { Step } from '../types'
+import { t } from '../../../i18n'
 
 interface HowItWorksSectionProps {
   steps: Step[]
@@ -10,13 +11,13 @@ export default function HowItWorksSection({ steps }: HowItWorksSectionProps) {
       <div className="mx-auto max-w-7xl space-y-space-2xl px-margin">
         <div className="mx-auto max-w-xl space-y-space-xs text-center">
           <span className="block text-body-sm font-bold uppercase tracking-wider text-teal-flow">
-            Effortless Commute
+            {t('Effortless Commute')}
           </span>
           <h2 className="font-headline-lg text-headline-lg font-bold tracking-tight text-deep-river">
-            How It Works
+            {t('How It Works')}
           </h2>
           <p className="text-body-md text-on-surface-variant">
-            From trip planning to boarding turnstiles in under sixty seconds.
+            {t('From trip planning to boarding turnstiles in under sixty seconds.')}
           </p>
         </div>
 

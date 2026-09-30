@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes } from 'react'
+import { t } from '../../../i18n'
 
 function GoogleIcon() {
   return (
@@ -25,7 +26,7 @@ function GoogleIcon() {
 
 /** "Continue with Google" button. Mock only: the parent decides what happens on click. */
 export default function AuthButton({
-  children = 'Continue with Google',
+  children = t('Continue with Google'),
   ...rest
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (

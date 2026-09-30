@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
+import { t } from '../../../i18n'
 
 export default function GuestLookupStrip() {
   return (
@@ -10,9 +11,11 @@ export default function GuestLookupStrip() {
           <Icon name="credit_card" className="text-[18px]" />
         </div>
         <div>
-          <span className="font-semibold text-deep-river">Traveling today without an account?</span>
+          <span className="font-semibold text-deep-river">
+            {t('Traveling today without an account?')}
+          </span>
           <span className="block text-on-surface-variant sm:ml-1 sm:inline">
-            You can look up your river journey using your booking code.
+            {t('You can look up your river journey using your booking code.')}
           </span>
         </div>
       </div>
@@ -20,7 +23,7 @@ export default function GuestLookupStrip() {
         to={ROUTES.ticketDetail}
         className="flex items-center gap-1 whitespace-nowrap font-semibold text-teal-flow hover:text-deep-river"
       >
-        <span>Guest Ticket Lookup</span>
+        <span>{t('Guest Ticket Lookup')}</span>
         <Icon name="arrow_forward" className="text-[16px]" />
       </Link>
     </div>

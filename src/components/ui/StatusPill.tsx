@@ -1,20 +1,20 @@
-import type { ReactNode } from 'react'
 import Icon from './Icon'
+import { t } from '../../i18n'
 
 interface StatusPillProps {
-  children?: ReactNode
+  children?: string
   variant?: 'card' | 'soft'
 }
 
 /** "All River Terminals Operational • Calm River Flow" service status pill. */
 export default function StatusPill({ children, variant = 'card' }: StatusPillProps) {
-  const label = children ?? 'All River Terminals Operational'
+  const label = children ?? t('All River Terminals Operational')
 
   if (variant === 'soft') {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full border border-teal-flow/20 bg-secondary-container/70 px-3 py-1.5 text-xs font-bold text-on-secondary-container">
         <Icon name="waves" className="text-[16px] text-teal-flow" />
-        {label} • Calm River Flow
+        {t('{label} • Calm River Flow', { label })}
       </span>
     )
   }
@@ -26,7 +26,7 @@ export default function StatusPill({ children, variant = 'card' }: StatusPillPro
         <span>{label}</span>
         <span className="text-outline-variant">•</span>
         <span className="flex items-center gap-1 font-bold text-teal-flow">
-          <Icon name="waves" className="text-[15px]" /> Calm River Flow
+          <Icon name="waves" className="text-[15px]" /> {t('Calm River Flow')}
         </span>
       </div>
     </div>

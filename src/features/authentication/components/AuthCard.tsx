@@ -8,6 +8,7 @@ import { getAuthShowcase, register, signIn, signInWithGoogle } from '../services
 import AuthShowcasePanel from './AuthShowcasePanel'
 import RegisterForm from './RegisterForm'
 import SignInForm from './SignInForm'
+import { t } from '../../../i18n'
 
 const COPY: Record<AuthMode, { title: string; subtitle: string }> = {
   signin: {
@@ -68,13 +69,13 @@ export default function AuthCard() {
           <div className="mb-7">
             <div className="mb-2 flex items-center justify-between gap-3">
               <h2 className="text-2xl font-bold tracking-tight text-deep-river">
-                {COPY[mode].title}
+                {t(COPY[mode].title)}
               </h2>
               <span className="shrink-0 rounded-full bg-teal-flow/10 px-2.5 py-1 text-xs font-semibold text-teal-flow">
-                Passenger Portal
+                {t('Passenger Portal')}
               </span>
             </div>
-            <p className="text-sm text-on-surface-variant">{COPY[mode].subtitle}</p>
+            <p className="text-sm text-on-surface-variant">{t(COPY[mode].subtitle)}</p>
           </div>
 
           <div
@@ -92,7 +93,7 @@ export default function AuthCard() {
                 name="login"
                 className={`text-[16px] ${mode === 'signin' ? 'text-teal-flow' : 'text-outline'}`}
               />
-              <span>Sign In</span>
+              <span>{t('Sign In')}</span>
             </button>
             <button
               type="button"
@@ -105,7 +106,7 @@ export default function AuthCard() {
                 name="person_add"
                 className={`text-[16px] ${mode === 'register' ? 'text-teal-flow' : 'text-outline'}`}
               />
-              <span>Create Account</span>
+              <span>{t('Create Account')}</span>
             </button>
           </div>
 
@@ -114,7 +115,7 @@ export default function AuthCard() {
               role="alert"
               className="mb-4 rounded-xl border border-coral-glow/30 bg-coral-glow/10 px-4 py-3 text-sm text-deep-river"
             >
-              We couldn’t complete that just now. Please check your connection and try again.
+              {t('We couldn’t complete that just now. Please check your connection and try again.')}
             </p>
           )}
 
@@ -138,9 +139,9 @@ export default function AuthCard() {
         <div className="mt-8 flex items-center justify-between border-t border-surface-container pt-5 text-xs text-outline">
           <div className="flex items-center gap-2">
             <Icon name="shield" className="text-[16px] text-teal-flow" />
-            <span>Secure Passenger Account</span>
+            <span>{t('Secure Passenger Account')}</span>
           </div>
-          <span>Access your saved trips and tickets</span>
+          <span>{t('Access your saved trips and tickets')}</span>
         </div>
       </div>
     </div>

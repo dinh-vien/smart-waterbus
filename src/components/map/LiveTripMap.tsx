@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Icon } from '../ui'
 import type { TrackingMode, TrackingPoi } from '../../features/tracking/types'
+import { t } from '../../i18n'
 
 interface LiveTripMapProps {
   pois: TrackingPoi[]
@@ -31,7 +32,7 @@ function MapControls({
       <div className="flex flex-col rounded-xl border border-outline-variant/40 bg-white/95 p-1 shadow-sm backdrop-blur-md">
         <button
           type="button"
-          aria-label="Zoom in"
+          aria-label={t('Zoom in')}
           disabled={zoom >= 1.6}
           onClick={() => onZoom(0.2)}
           className={btn}
@@ -40,7 +41,7 @@ function MapControls({
         </button>
         <button
           type="button"
-          aria-label="Zoom out"
+          aria-label={t('Zoom out')}
           disabled={zoom <= 1}
           onClick={() => onZoom(-0.2)}
           className={btn}
@@ -50,7 +51,7 @@ function MapControls({
       </div>
       <button
         type="button"
-        aria-label="Recenter view"
+        aria-label={t('Recenter view')}
         onClick={onRecenter}
         className="flex h-10 w-10 items-center justify-center rounded-xl border border-outline-variant/40 bg-white/95 text-teal-flow shadow-sm backdrop-blur-md hover:text-deep-river"
       >
@@ -114,7 +115,7 @@ function PoiPin({
             x="28"
             y="21"
           >
-            NOW APPROACHING • ACTIVE STORY
+            {t('NOW APPROACHING • ACTIVE STORY')}
           </text>
           <text
             fill="#fff"
@@ -185,12 +186,12 @@ export default function LiveTripMap({
           <div className="flex items-center gap-2 rounded-full border border-outline-variant/40 bg-white/95 px-space-md py-1.5 shadow-sm backdrop-blur-md">
             <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-teal-flow" />
             <span className="font-headline-sm text-body-sm font-bold text-deep-river">
-              Saigon River Central Corridor
+              {t('Saigon River Central Corridor')}
             </span>
           </div>
           <div className="hidden items-center gap-1.5 rounded-full bg-deep-river px-3 py-1.5 font-headline-sm text-body-sm font-semibold text-white shadow-sm sm:flex">
             <Icon name={sightseeing ? 'tour' : 'commute'} className="text-[16px] text-coral-glow" />
-            {sightseeing ? 'Sightseeing Layer Active' : 'Regular Transit View'}
+            {sightseeing ? t('Sightseeing Layer Active') : t('Regular Transit View')}
           </div>
         </div>
         <MapControls
@@ -208,7 +209,7 @@ export default function LiveTripMap({
           viewBox="0 0 920 660"
           preserveAspectRatio="xMidYMid slice"
           role="img"
-          aria-label="Live map of the river crossing"
+          aria-label={t('Live map of the river crossing')}
         >
           <defs>
             <linearGradient id="riverDepth" x1="0%" y1="30%" x2="100%" y2="70%">
@@ -303,7 +304,7 @@ export default function LiveTripMap({
               fontWeight="700"
               letterSpacing="0.3"
             >
-              BA SON BRIDGE
+              {t('BA SON BRIDGE')}
             </text>
           </g>
 
@@ -319,10 +320,10 @@ export default function LiveTripMap({
               x="28"
               y="16"
             >
-              DISTRICT 1 (D1)
+              {t('DISTRICT 1 (D1)')}
             </text>
             <text fill="#43474C" fontFamily="Inter" fontSize="9" fontWeight="500" x="28" y="28">
-              HISTORIC RIVERFRONT
+              {t('HISTORIC RIVERFRONT')}
             </text>
           </g>
           <g transform="translate(674, 42)">
@@ -337,10 +338,10 @@ export default function LiveTripMap({
               x="28"
               y="16"
             >
-              THU THIEM (D2)
+              {t('THU THIEM (D2)')}
             </text>
             <text fill="#43474C" fontFamily="Inter" fontSize="9" fontWeight="500" x="28" y="28">
-              PROMENADE &amp; FINANCIAL CORRIDOR
+              {t('PROMENADE & FINANCIAL CORRIDOR')}
             </text>
           </g>
 
@@ -384,7 +385,7 @@ export default function LiveTripMap({
                 x="16"
                 y="21"
               >
-                Bach Dang Pier
+                {t('Bach Dang Pier')}
               </text>
               <text
                 fill="#147A7E"
@@ -394,7 +395,7 @@ export default function LiveTripMap({
                 x="16"
                 y="37"
               >
-                Departed 08:30
+                {t('Departed 08:30')}
               </text>
             </g>
           </g>
@@ -412,10 +413,10 @@ export default function LiveTripMap({
                 x="16"
                 y="21"
               >
-                Thu Thiem Pier
+                {t('Thu Thiem Pier')}
               </text>
               <text fill="#43474C" fontFamily="Inter" fontSize="10.5" x="16" y="37">
-                Scheduled 08:42
+                {t('Scheduled 08:42')}
               </text>
             </g>
           </g>
@@ -459,10 +460,10 @@ export default function LiveTripMap({
                 x="28"
                 y="19"
               >
-                WB-01 • En Route
+                {t('WB-01 • En Route')}
               </text>
               <text fill="#9BF1F5" fontFamily="Inter" fontSize="9.5" fontWeight="600" x="28" y="32">
-                Mid-Crossing
+                {t('Mid-Crossing')}
               </text>
             </g>
           </g>
@@ -476,10 +477,10 @@ export default function LiveTripMap({
               </div>
               <div>
                 <div className="font-headline-sm text-body-sm font-bold text-deep-river">
-                  Saigon Scenic River Corridor
+                  {t('Saigon Scenic River Corridor')}
                 </div>
                 <div className="text-body-sm text-on-surface-variant">
-                  Estimated remaining crossing:{' '}
+                  {t('Estimated remaining crossing:')}{' '}
                   <strong className="font-semibold text-deep-river">{remainingDetail}</strong>
                 </div>
               </div>
@@ -487,19 +488,19 @@ export default function LiveTripMap({
             <div className="flex flex-wrap items-center gap-space-md text-body-sm font-medium text-on-surface-variant">
               <span className="flex items-center gap-1.5">
                 <span className="h-1.5 w-3.5 rounded-full bg-teal-flow" />
-                Completed track
+                {t('Completed track')}
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="h-1.5 w-3.5 rounded-full border-t-2 border-dashed border-sky-aqua" />
-                Remaining track
+                {t('Remaining track')}
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-coral-glow" />
-                Active Audio POI
+                {t('Active Audio POI')}
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-deep-river" />
-                Terminal Pier
+                {t('Terminal Pier')}
               </span>
             </div>
           </div>

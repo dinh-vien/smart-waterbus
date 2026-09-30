@@ -1,5 +1,6 @@
 import { Icon } from '../ui'
 import type { CorridorMap, Pier } from '../../features/trips/types'
+import { t } from '../../i18n'
 
 interface RiverMapProps {
   map: CorridorMap
@@ -127,7 +128,10 @@ export default function RiverMap({ map, className = '' }: RiverMapProps) {
                 {vessel.code} • {vessel.status}
               </div>
               <div className="text-[11px] font-semibold text-sky-aqua">
-                {vessel.speedKmh} km/h • Next: {vessel.nextPier}
+                {t('{speedKmh} km/h • Next: {nextPier}', {
+                  speedKmh: vessel.speedKmh,
+                  nextPier: vessel.nextPier,
+                })}
               </div>
             </div>
           </div>
@@ -139,13 +143,13 @@ export default function RiverMap({ map, className = '' }: RiverMapProps) {
 
       <div className="absolute bottom-4 left-4 flex items-center gap-3 rounded-xl border border-outline-variant/30 bg-surface-container-lowest/90 px-3 py-1.5 text-[11px] font-medium text-deep-river shadow-sm backdrop-blur-md">
         <span className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-teal-flow" /> Operational
+          <span className="h-2.5 w-2.5 rounded-full bg-teal-flow" /> {t('Operational')}
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-sky-aqua" /> Vessel Tracking
+          <span className="h-2.5 w-2.5 rounded-full bg-sky-aqua" /> {t('Vessel Tracking')}
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-signal-amber" /> Tide Alert: Clear
+          <span className="h-2.5 w-2.5 rounded-full bg-signal-amber" /> {t('Tide Alert: Clear')}
         </span>
       </div>
     </div>

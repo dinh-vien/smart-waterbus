@@ -3,6 +3,7 @@ import QrCode from '../../../components/ticket/QrCode'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
 import { formatVndSuffix } from '../../../utils/format'
+import { t } from '../../../i18n'
 
 export interface BoardingPassData {
   tripCode: string
@@ -28,7 +29,9 @@ export default function BoardingPassCard({ pass }: { pass: BoardingPassData }) {
         <div className="flex items-center gap-3">
           <Icon name="directions_boat" className="text-[22px]" />
           <div>
-            <div className="font-headline-sm text-sm font-bold">Trip {pass.tripCode}</div>
+            <div className="font-headline-sm text-sm font-bold">
+              {t('Trip {tripCode}', { tripCode: pass.tripCode })}
+            </div>
             <div className="text-[11px] text-sand-light/80">{pass.lineName}</div>
           </div>
         </div>
@@ -52,14 +55,14 @@ export default function BoardingPassCard({ pass }: { pass: BoardingPassData }) {
                   {pass.departTime}
                 </span>
                 <span className="ml-2 text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">
-                  Departure
+                  {t('Departure')}
                 </span>
                 <div className="font-headline-sm text-lg font-semibold text-deep-river">
                   {pass.departPier}
                 </div>
                 <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-secondary-container/60 px-2.5 py-0.5 text-[11px] text-teal-flow">
                   <Icon name="schedule" className="text-[13px]" />
-                  {pass.durationMins} min river crossing
+                  {t('{durationMins} min river crossing', { durationMins: pass.durationMins })}
                 </span>
               </div>
               <div>
@@ -67,7 +70,7 @@ export default function BoardingPassCard({ pass }: { pass: BoardingPassData }) {
                   {pass.arriveTime}
                 </span>
                 <span className="ml-2 text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">
-                  Arrival
+                  {t('Arrival')}
                 </span>
                 <div className="font-headline-sm text-lg font-semibold text-deep-river">
                   {pass.arrivePier}
@@ -78,19 +81,19 @@ export default function BoardingPassCard({ pass }: { pass: BoardingPassData }) {
 
           <dl className="mt-space-md grid grid-cols-2 gap-space-sm rounded-xl bg-mist/70 p-space-md text-sm">
             <div>
-              <dt className="text-[11px] text-on-surface-variant">Seat</dt>
+              <dt className="text-[11px] text-on-surface-variant">{t('Seat')}</dt>
               <dd className="font-semibold text-teal-flow">{pass.seat}</dd>
             </div>
             <div>
-              <dt className="text-[11px] text-on-surface-variant">Passenger</dt>
+              <dt className="text-[11px] text-on-surface-variant">{t('Passenger')}</dt>
               <dd className="truncate font-semibold text-deep-river">{pass.passenger}</dd>
             </div>
             <div>
-              <dt className="text-[11px] text-on-surface-variant">Status</dt>
+              <dt className="text-[11px] text-on-surface-variant">{t('Status')}</dt>
               <dd className="font-semibold text-teal-flow">{pass.status}</dd>
             </div>
             <div>
-              <dt className="text-[11px] text-on-surface-variant">Total Fare</dt>
+              <dt className="text-[11px] text-on-surface-variant">{t('Total Fare')}</dt>
               <dd className="font-semibold text-deep-river">{formatVndSuffix(pass.totalVnd)}</dd>
             </div>
           </dl>
@@ -98,7 +101,7 @@ export default function BoardingPassCard({ pass }: { pass: BoardingPassData }) {
 
         <div className="flex flex-col items-center justify-center rounded-xl bg-mist/70 p-space-md text-center md:col-span-2">
           <div className="mb-2 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
-            Boarding QR
+            {t('Boarding QR')}
           </div>
           <div className="rounded-xl bg-white p-2 shadow-sm">
             <QrCode value={pass.reference} size={132} />
@@ -116,7 +119,7 @@ export default function BoardingPassCard({ pass }: { pass: BoardingPassData }) {
         <div className="flex flex-col items-start justify-between gap-space-sm sm:flex-row sm:items-center">
           <span className="flex items-center gap-2 text-xs text-on-surface-variant">
             <Icon name="directions_boat" className="text-[16px]" />
-            Saigon Central River Crossing
+            {t('Saigon Central River Crossing')}
           </span>
           <div className="flex gap-space-sm">
             <Link
@@ -124,14 +127,14 @@ export default function BoardingPassCard({ pass }: { pass: BoardingPassData }) {
               className="inline-flex items-center gap-2 rounded-lg bg-surface-container px-4 py-2 text-xs font-semibold text-deep-river transition-colors hover:bg-surface-container-high"
             >
               <Icon name="qr_code_2" className="text-[16px]" />
-              Access QR Ticket
+              {t('Access QR Ticket')}
             </Link>
             <Link
               to={ROUTES.myTickets}
               className="inline-flex items-center gap-2 rounded-lg bg-teal-flow px-4 py-2 text-xs font-semibold text-on-primary transition-colors hover:bg-secondary"
             >
               <Icon name="confirmation_number" className="text-[16px]" />
-              View My Ticket
+              {t('View My Ticket')}
             </Link>
           </div>
         </div>

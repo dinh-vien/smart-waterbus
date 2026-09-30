@@ -54,6 +54,7 @@ export function getTripDetail(tripId: string | null, query: SearchQuery): Promis
     destinationDistrict: destination.district,
     dateLabel: formatDateLabel(date),
     dateFull: date.fullLabel,
+    dateShort: date.label,
     timeline: [
       {
         time: addMinutes(trip.departTime, -15),

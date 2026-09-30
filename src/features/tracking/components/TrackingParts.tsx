@@ -4,6 +4,7 @@ import AudioPlayer from '../../../components/audio/AudioPlayer'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
 import type { TrackingMode, TrackingPoi, TrackingTrip } from '../types'
+import { t } from '../../../i18n'
 
 export function ModeToggle({
   mode,
@@ -32,7 +33,7 @@ export function ModeToggle({
           className={tab(mode === 'sightseeing')}
         >
           <Icon name="headphones" className="text-[18px]" />
-          Sightseeing Experience
+          {t('Sightseeing Experience')}
           {mode === 'sightseeing' && <span className="h-1.5 w-1.5 rounded-full bg-coral-glow" />}
         </button>
         <button
@@ -43,16 +44,16 @@ export function ModeToggle({
           className={tab(mode === 'transit')}
         >
           <Icon name="commute" className="text-[18px]" />
-          Regular Transit
+          {t('Regular Transit')}
         </button>
       </div>
       <Link to={ROUTES.ticketDetail} className={link}>
         <Icon name="qr_code_2" className="text-[18px] text-teal-flow" />
-        View Ticket
+        {t('View Ticket')}
       </Link>
       <Link to={ROUTES.tripDetail} className={`${link} bg-surface-container shadow-none`}>
         <Icon name="info" className="text-[18px] text-teal-flow" />
-        Trip Details
+        {t('Trip Details')}
       </Link>
     </div>
   )
@@ -93,12 +94,14 @@ export function SidePanel({ trip, poi, languages, mode }: SidePanelProps) {
             <img alt={poi.storyTitle} src={vesselImage} className="h-44 w-full object-cover" />
             <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-deep-river/85 px-2.5 py-1 text-[11px] font-semibold text-white">
               <Icon name="volume_up" className="text-[14px]" />
-              River Story • {poi.audio ? Math.round(poi.audio.durationSec / 60) : 0} min
+              {t('River Story • {minutes} min', {
+                minutes: poi.audio ? Math.round(poi.audio.durationSec / 60) : 0,
+              })}
             </span>
             <div className="absolute inset-x-3 bottom-3 flex items-center justify-between text-[11px] font-semibold">
               <span className="text-sky-aqua">{poi.storyMeta}</span>
               <span className="rounded bg-deep-river/70 px-2 py-0.5 text-white">
-                GPS Auto-Triggered
+                {t('GPS Auto-Triggered')}
               </span>
             </div>
           </div>
@@ -113,7 +116,9 @@ export function SidePanel({ trip, poi, languages, mode }: SidePanelProps) {
             />
           ) : (
             <p className="rounded-2xl bg-mist/60 p-space-md text-sm text-on-surface-variant">
-              No audio story at the terminal pier. Walking tour suggestions are ready after docking.
+              {t(
+                'No audio story at the terminal pier. Walking tour suggestions are ready after docking.',
+              )}
             </p>
           )}
         </>
@@ -121,14 +126,15 @@ export function SidePanel({ trip, poi, languages, mode }: SidePanelProps) {
         <>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary-container px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-on-secondary-container">
             <Icon name="commute" className="text-[14px]" />
-            Regular Transit
+            {t('Regular Transit')}
           </span>
           <h2 className="font-headline-md text-headline-md leading-tight text-deep-river">
-            Direct crossing in progress
+            {t('Direct crossing in progress')}
           </h2>
           <p className="text-sm text-on-surface-variant">
-            Sightseeing stories are switched off. Follow the live vessel position and the remaining
-            track on the map.
+            {t(
+              'Sightseeing stories are switched off. Follow the live vessel position and the remaining track on the map.',
+            )}
           </p>
         </>
       )}
@@ -139,11 +145,13 @@ export function SidePanel({ trip, poi, languages, mode }: SidePanelProps) {
             <Icon name="airline_seat_recline_extra" className="text-[16px] text-teal-flow" />
             {trip.seatLabel}
           </span>
-          <span className="font-semibold text-teal-flow">Est. Arrival {trip.arrivalTime}</span>
+          <span className="font-semibold text-teal-flow">
+            {t('Est. Arrival {arrivalTime}', { arrivalTime: trip.arrivalTime })}
+          </span>
         </div>
         <div className="mt-1 flex items-center justify-between text-xs text-on-surface-variant">
           <span>
-            Trip {trip.code} • {trip.vesselType}
+            {t('Trip {code} • {vesselType}', { code: trip.code, vesselType: trip.vesselType })}
           </span>
           <span>{trip.remainingLabel}</span>
         </div>
@@ -153,14 +161,14 @@ export function SidePanel({ trip, poi, languages, mode }: SidePanelProps) {
             className="flex items-center justify-center gap-1.5 rounded-lg bg-teal-flow py-2.5 text-xs font-semibold text-on-primary transition-colors hover:bg-secondary"
           >
             <Icon name="qr_code" className="text-[16px]" />
-            View QR Ticket
+            {t('View QR Ticket')}
           </Link>
           <Link
             to={ROUTES.manageBooking}
             className="flex items-center justify-center gap-1.5 rounded-lg bg-white py-2.5 text-xs font-semibold text-deep-river transition-colors hover:bg-surface-container-low"
           >
             <Icon name="receipt_long" className="text-[16px]" />
-            Trip Receipt
+            {t('Trip Receipt')}
           </Link>
         </div>
       </div>
@@ -189,15 +197,15 @@ export function Itinerary({
       <div className="mb-space-md flex flex-col justify-between gap-space-sm md:flex-row md:items-end">
         <div>
           <span className="text-[11px] font-bold uppercase tracking-wider text-teal-flow">
-            Spatial Itinerary
+            {t('Spatial Itinerary')}
           </span>
           <h2 className="font-headline-lg text-headline-md text-deep-river">
-            Along Your River Journey
+            {t('Along Your River Journey')}
           </h2>
         </div>
         <span className="flex items-center gap-2 text-xs text-on-surface-variant">
           <Icon name="explore" className="text-[18px] text-coral-glow" />
-          Interactive Audio &amp; Sightseeing POIs
+          {t('Interactive Audio & Sightseeing POIs')}
         </span>
       </div>
 
@@ -218,7 +226,7 @@ export function Itinerary({
             >
               {active && (
                 <span className="absolute -top-3 right-4 rounded-full bg-coral-glow px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
-                  Listening Now
+                  {t('Listening Now')}
                 </span>
               )}
               <div className="flex items-center justify-between">

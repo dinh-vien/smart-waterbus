@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Icon } from '../ui'
+import { t } from '../../i18n'
 
 interface AudioPlayerProps {
   title: string
@@ -28,7 +29,7 @@ export default function AudioPlayer({
   durationSec,
   startAtSec = 0,
   languages,
-  eyebrow = 'Audio Guide',
+  eyebrow = t('Audio Guide'),
   subtitle,
   thumbnail,
   tone = 'light',
@@ -106,7 +107,7 @@ export default function AudioPlayer({
             dark ? 'bg-white/10' : 'bg-white'
           }`}
           role="group"
-          aria-label="Audio language"
+          aria-label={t('Audio language')}
         >
           {languages.map((l) => (
             <button
@@ -136,7 +137,7 @@ export default function AudioPlayer({
         max={durationSec}
         value={position}
         onChange={(e) => setPosition(Number(e.target.value))}
-        aria-label="Audio position"
+        aria-label={t('Audio position')}
         className="mt-space-md h-1.5 w-full cursor-pointer appearance-none rounded-full accent-teal-flow"
         style={{
           background: `linear-gradient(to right, #4FC3D8 ${percent}%, ${trackBg} ${percent}%)`,
@@ -152,7 +153,7 @@ export default function AudioPlayer({
       <div className="mt-space-sm flex items-center justify-center gap-space-md">
         <button
           type="button"
-          aria-label="Back 10 seconds"
+          aria-label={t('Back 10 seconds')}
           onClick={() => seek(-10)}
           className={`flex h-9 w-9 items-center justify-center rounded-full ${ctrl}`}
         >
@@ -160,7 +161,7 @@ export default function AudioPlayer({
         </button>
         <button
           type="button"
-          aria-label={isPlaying ? 'Pause' : 'Play'}
+          aria-label={isPlaying ? t('Pause') : t('Play')}
           onClick={toggle}
           className="flex h-12 w-12 items-center justify-center rounded-full bg-teal-flow text-on-primary shadow-md hover:bg-secondary"
         >
@@ -168,7 +169,7 @@ export default function AudioPlayer({
         </button>
         <button
           type="button"
-          aria-label="Forward 10 seconds"
+          aria-label={t('Forward 10 seconds')}
           onClick={() => seek(10)}
           className={`flex h-9 w-9 items-center justify-center rounded-full ${ctrl}`}
         >

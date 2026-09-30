@@ -7,6 +7,7 @@ import { formatVnd } from '../../../utils/format'
 import { addMinutes } from '../../../utils/time'
 import { askAssistant, requestRefund } from '../services/ticketService'
 import type { ChatMessage, ManageBooking, Ticket } from '../types'
+import { t } from '../../../i18n'
 
 export type ManageOption = 'change' | 'refund' | 'voucher'
 
@@ -50,7 +51,7 @@ export function BookingSummaryCard({ ticket }: { ticket: Ticket }) {
           </span>
           <div>
             <div className="text-[11px] font-semibold uppercase tracking-wider text-teal-flow">
-              Trip {ticket.tripCode}
+              {t('Trip {tripCode}', { tripCode: ticket.tripCode })}
             </div>
             <div className="font-headline-sm text-xl font-bold text-deep-river">
               {ticket.departPier} → {ticket.arrivePier}
@@ -63,14 +64,14 @@ export function BookingSummaryCard({ ticket }: { ticket: Ticket }) {
             className="inline-flex items-center gap-1.5 rounded-lg border border-outline-variant/50 bg-white px-4 py-2 text-xs font-semibold text-deep-river shadow-sm transition-colors hover:bg-surface-container-low"
           >
             <Icon name="confirmation_number" className="text-[16px]" />
-            View Ticket
+            {t('View Ticket')}
           </Link>
           <Link
             to={ROUTES.liveTracking}
             className="inline-flex items-center gap-1.5 rounded-lg border border-outline-variant/50 bg-white px-4 py-2 text-xs font-semibold text-deep-river shadow-sm transition-colors hover:bg-surface-container-low"
           >
             <Icon name="map" className="text-[16px]" />
-            Track Trip
+            {t('Track Trip')}
           </Link>
         </div>
       </div>
@@ -78,7 +79,7 @@ export function BookingSummaryCard({ ticket }: { ticket: Ticket }) {
       <div className="mt-space-lg grid grid-cols-1 items-center gap-space-md border-t border-surface-container pt-space-lg md:grid-cols-12">
         <div className="md:col-span-4">
           <div className="text-[11px] font-semibold uppercase tracking-wider text-on-surface-variant">
-            Departure
+            {t('Departure')}
           </div>
           <div className="font-headline-sm text-2xl font-bold text-deep-river">
             {ticket.departPier}
@@ -88,7 +89,9 @@ export function BookingSummaryCard({ ticket }: { ticket: Ticket }) {
           </div>
         </div>
         <div className="flex flex-col items-center md:col-span-4">
-          <span className="text-xs text-teal-flow">{ticket.durationMins} min crossing</span>
+          <span className="text-xs text-teal-flow">
+            {t('{durationMins} min crossing', { durationMins: ticket.durationMins })}
+          </span>
           <div className="mt-1 flex w-full items-center">
             <span className="h-2.5 w-2.5 rounded-full border-2 border-teal-flow bg-white" />
             <span className="h-1 flex-1 rounded-full bg-gradient-to-r from-teal-flow to-sky-aqua" />
@@ -97,7 +100,7 @@ export function BookingSummaryCard({ ticket }: { ticket: Ticket }) {
         </div>
         <div className="md:col-span-4 md:text-right">
           <div className="text-[11px] font-semibold uppercase tracking-wider text-on-surface-variant">
-            Arrival
+            {t('Arrival')}
           </div>
           <div className="font-headline-sm text-2xl font-bold text-deep-river">
             {ticket.arrivePier}
@@ -110,19 +113,19 @@ export function BookingSummaryCard({ ticket }: { ticket: Ticket }) {
 
       <dl className="mt-space-lg grid grid-cols-2 gap-space-md border-t border-surface-container pt-space-md md:grid-cols-4">
         <div>
-          <dt className="text-xs text-on-surface-variant">Seat</dt>
+          <dt className="text-xs text-on-surface-variant">{t('Seat')}</dt>
           <dd className="font-semibold text-deep-river">{ticket.seat}</dd>
         </div>
         <div>
-          <dt className="text-xs text-on-surface-variant">Passenger</dt>
-          <dd className="font-semibold text-deep-river">1 Passenger</dd>
+          <dt className="text-xs text-on-surface-variant">{t('Passenger')}</dt>
+          <dd className="font-semibold text-deep-river">{t('1 Passenger')}</dd>
         </div>
         <div>
-          <dt className="text-xs text-on-surface-variant">Fare</dt>
+          <dt className="text-xs text-on-surface-variant">{t('Fare')}</dt>
           <dd className="font-semibold text-deep-river">{formatVnd(ticket.fareVnd)}</dd>
         </div>
         <div>
-          <dt className="text-xs text-on-surface-variant">Status</dt>
+          <dt className="text-xs text-on-surface-variant">{t('Status')}</dt>
           <dd className="font-semibold text-teal-flow">{ticket.status}</dd>
         </div>
       </dl>
@@ -137,8 +140,10 @@ export function OperatingBanner({ vessel }: { vessel: string }) {
         <Icon name="check" className="text-[18px]" />
       </span>
       <span>
-        <b className="text-deep-river">Trip Operating Normally.</b>{' '}
-        <span className="text-teal-flow">Vessel {vessel} is operating on schedule.</span>
+        <b className="text-deep-river">{t('Trip Operating Normally.')}</b>{' '}
+        <span className="text-teal-flow">
+          {t('Vessel {vessel} is operating on schedule.', { vessel })}
+        </span>
       </span>
     </div>
   )
@@ -153,8 +158,10 @@ export function ManageOptions({
 }) {
   return (
     <div>
-      <h2 className="font-headline-lg text-headline-md text-deep-river">Manage Your Trip</h2>
-      <p className="text-sm text-on-surface-variant">Choose a support option for this booking.</p>
+      <h2 className="font-headline-lg text-headline-md text-deep-river">{t('Manage Your Trip')}</h2>
+      <p className="text-sm text-on-surface-variant">
+        {t('Choose a support option for this booking.')}
+      </p>
       <div className="mt-space-md grid grid-cols-1 gap-space-md md:grid-cols-3">
         {OPTIONS.map((o) => {
           const on = active === o.id
@@ -172,9 +179,9 @@ export function ManageOptions({
                 {on && <span className="h-2 w-2 rounded-full bg-teal-flow" />}
               </div>
               <div className="mt-space-sm font-headline-sm text-base font-bold text-deep-river">
-                {o.title}
+                {t(o.title)}
               </div>
-              <p className="text-xs text-on-surface-variant">{o.description}</p>
+              <p className="text-xs text-on-surface-variant">{t(o.description)}</p>
               <button
                 type="button"
                 onClick={() => onSelect(o.id)}
@@ -185,7 +192,7 @@ export function ManageOptions({
                     : 'border border-outline-variant/50 bg-white text-deep-river hover:bg-surface-container-low'
                 }`}
               >
-                {o.cta}
+                {t(o.cta)}
               </button>
             </div>
           )
@@ -216,19 +223,25 @@ export function OptionPanel({ option, manage }: { option: ManageOption; manage: 
       <div className={shell}>
         <h3 className="flex items-center gap-2 font-headline-sm text-lg font-bold text-deep-river">
           <span className="h-2 w-2 rounded-full bg-teal-flow" />
-          Refund Request
+          {t('Refund Request')}
         </h3>
         <p className="mt-space-sm text-sm text-on-surface-variant">
-          Refund {formatVnd(ticket.fareVnd)} for booking {manage.bookingCode} ({ticket.seat}).
-          Refunds are available up to 30 minutes before departure. Requests need your confirmation.
+          {t(
+            'Refund {amount} for booking {bookingCode} ({seat}). Refunds are available up to 30 minutes before departure. Requests need your confirmation.',
+            {
+              amount: formatVnd(ticket.fareVnd),
+              bookingCode: manage.bookingCode,
+              seat: ticket.seat,
+            },
+          )}
         </p>
         <div className="mt-space-md flex items-center justify-between border-t border-surface-container pt-space-md">
           <span
             role={refundState === 'failed' ? 'alert' : 'status'}
             className={`text-xs ${refundState === 'failed' ? 'text-coral-glow' : 'text-teal-flow'}`}
           >
-            {refundState === 'done' && 'Refund request submitted. We will email you an update.'}
-            {refundState === 'failed' && 'We couldn’t submit your request. Please try again.'}
+            {refundState === 'done' && t('Refund request submitted. We will email you an update.')}
+            {refundState === 'failed' && t('We couldn’t submit your request. Please try again.')}
           </span>
           <button
             type="button"
@@ -237,12 +250,12 @@ export function OptionPanel({ option, manage }: { option: ManageOption; manage: 
             className="rounded-lg bg-teal-flow px-5 py-2.5 text-sm font-semibold text-on-primary transition-colors hover:bg-secondary disabled:opacity-60"
           >
             {refundState === 'busy'
-              ? 'Submitting…'
+              ? t('Submitting…')
               : refundState === 'done'
-              ? 'Submitted'
+              ? t('Submitted')
               : refundState === 'failed'
-              ? 'Try again'
-              : 'Confirm Refund Request'}
+              ? t('Try again')
+              : t('Confirm Refund Request')}
           </button>
         </div>
       </div>
@@ -254,7 +267,7 @@ export function OptionPanel({ option, manage }: { option: ManageOption; manage: 
       <div className={shell}>
         <h3 className="flex items-center gap-2 font-headline-sm text-lg font-bold text-deep-river">
           <span className="h-2 w-2 rounded-full bg-teal-flow" />
-          Voucher / Credit
+          {t('Voucher / Credit')}
         </h3>
         <ul className="mt-space-sm space-y-space-sm">
           {manage.voucherCredit.map((v) => (
@@ -287,16 +300,16 @@ export function OptionPanel({ option, manage }: { option: ManageOption; manage: 
       <div className="flex items-center justify-between">
         <h3 className="flex items-center gap-2 font-headline-sm text-lg font-bold text-deep-river">
           <span className="h-2 w-2 rounded-full bg-teal-flow" />
-          Change Trip Preview
+          {t('Change Trip Preview')}
         </h3>
         <span className="rounded-full bg-secondary-container px-3 py-0.5 text-[11px] font-semibold text-teal-flow">
-          Active Selection
+          {t('Active Selection')}
         </span>
       </div>
       <div className="mt-space-md grid grid-cols-1 gap-space-md md:grid-cols-2">
         <div className="rounded-xl border border-outline-variant/50 bg-mist/60 p-space-md">
           <div className="text-[10px] font-bold uppercase tracking-wider text-teal-flow">
-            Current Trip
+            {t('Current Trip')}
           </div>
           <div className="mt-1 font-headline-sm text-lg font-bold text-deep-river">
             {ticket.departTime} → {ticket.arriveTime}
@@ -306,22 +319,22 @@ export function OptionPanel({ option, manage }: { option: ManageOption; manage: 
         </div>
         <div className="rounded-xl border border-dashed border-teal-flow/50 bg-sand-light/40 p-space-md">
           <div className="text-[10px] font-bold uppercase tracking-wider text-teal-flow">
-            Suggested Alternative
+            {t('Suggested Alternative')}
           </div>
           <div className="mt-1 font-headline-sm text-lg font-bold text-deep-river">
             {alt.departTime} → {alt.arriveTime}
           </div>
           <div className="text-xs text-on-surface-variant">{route}</div>
-          <div className="mt-1 text-xs text-on-surface-variant">Seats available</div>
+          <div className="mt-1 text-xs text-on-surface-variant">{t('Seats available')}</div>
         </div>
       </div>
       <div className="mt-space-md flex items-center justify-between border-t border-surface-container pt-space-md">
-        <span className="text-xs text-on-surface-variant">Need another time today?</span>
+        <span className="text-xs text-on-surface-variant">{t('Need another time today?')}</span>
         <Link
           to={ROUTES.searchResults}
           className="inline-flex items-center gap-1.5 rounded-lg bg-teal-flow px-5 py-2.5 text-sm font-semibold text-on-primary transition-colors hover:bg-secondary"
         >
-          View Available Trips <Icon name="arrow_forward" className="text-[16px]" />
+          {t('View Available Trips')} <Icon name="arrow_forward" className="text-[16px]" />
         </Link>
       </div>
     </div>
@@ -332,13 +345,13 @@ const CHIPS = ['Change Trip', 'Refund Help', 'Explain Voucher', 'Trip Status']
 
 export function AssistantChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { id: 1, from: 'user', text: 'I need to change my trip.' },
-    { id: 2, from: 'assistant', text: 'I can help you review available options.' },
+    { id: 1, from: 'user', text: t('I need to change my trip.') },
+    { id: 2, from: 'assistant', text: t('I can help you review available options.') },
   ])
   const [draft, setDraft] = useState('')
   const [busy, setBusy] = useState(false)
 
-  const send = async (text: string) => {
+  const send = async (text: string, replyKey = text) => {
     const clean = text.trim()
     if (!clean || busy) return
     setMessages((m) => [...m, { id: m.length + 1, from: 'user', text: clean }])
@@ -346,9 +359,9 @@ export function AssistantChat() {
     setBusy(true)
     let reply: string
     try {
-      reply = await askAssistant(clean)
+      reply = await askAssistant(replyKey)
     } catch {
-      reply = 'Sorry, I couldn’t reach the assistant. Please try again in a moment.'
+      reply = t('Sorry, I couldn’t reach the assistant. Please try again in a moment.')
     }
     setMessages((m) => [...m, { id: m.length + 1, from: 'assistant', text: reply }])
     setBusy(false)
@@ -367,10 +380,10 @@ export function AssistantChat() {
         </span>
         <div>
           <div className="font-headline-sm text-sm font-bold uppercase tracking-wide text-deep-river">
-            Need Help?
+            {t('Need Help?')}
           </div>
           <div className="text-xs text-on-surface-variant">
-            Ask Smart Waterbus Assistant about this booking.
+            {t('Ask Smart Waterbus Assistant about this booking.')}
           </div>
         </div>
       </div>
@@ -389,7 +402,7 @@ export function AssistantChat() {
             </span>
           </div>
         ))}
-        {busy && <div className="text-xs text-on-surface-variant">Assistant is typing…</div>}
+        {busy && <div className="text-xs text-on-surface-variant">{t('Assistant is typing…')}</div>}
       </div>
 
       <div className="mt-space-md flex flex-wrap gap-2">
@@ -397,10 +410,10 @@ export function AssistantChat() {
           <button
             key={chip}
             type="button"
-            onClick={() => send(chip)}
+            onClick={() => send(t(chip), chip)}
             className="rounded-full border border-outline-variant/50 bg-white px-3 py-1 text-xs text-deep-river transition-colors hover:bg-surface-container-low"
           >
-            {chip}
+            {t(chip)}
           </button>
         ))}
       </div>
@@ -412,20 +425,20 @@ export function AssistantChat() {
         <input
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
-          placeholder="Ask about changing trips or refunds..."
-          aria-label="Ask the assistant"
+          placeholder={t('Ask about changing trips or refunds...')}
+          aria-label={t('Ask the assistant')}
           className="flex-1 rounded-lg border-0 bg-transparent px-2 py-1.5 text-xs text-deep-river placeholder:text-outline focus:ring-0"
         />
         <button
           type="submit"
-          aria-label="Send"
+          aria-label={t('Send')}
           className="flex h-8 w-8 items-center justify-center text-teal-flow hover:text-deep-river"
         >
           <Icon name="arrow_forward" className="text-[18px]" />
         </button>
       </form>
       <p className="mt-2 text-center text-[11px] text-on-surface-variant">
-        Actions require passenger confirmation.
+        {t('Actions require passenger confirmation.')}
       </p>
     </div>
   )

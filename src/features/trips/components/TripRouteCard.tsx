@@ -18,10 +18,10 @@ export default function TripRouteCard({ trip }: TripRouteCardProps) {
         <div className="flex-1 space-y-space-md">
           <div className="flex flex-wrap items-center gap-space-sm">
             <span className="rounded bg-deep-river px-space-sm py-1 text-xs font-bold uppercase tracking-wider text-on-primary">
-              Trip {trip.vesselCode}
+              {t('Trip {vesselCode}', { vesselCode: trip.vesselCode })}
             </span>
             <span className="rounded bg-mist px-space-sm py-1 text-xs font-semibold text-teal-flow">
-              {trip.direct ? 'Direct Crossing' : trip.crossingKind}
+              {trip.direct ? t('Direct Crossing') : trip.crossingKind}
             </span>
             <span className="flex items-center gap-1 rounded bg-sand-light px-space-sm py-1 text-xs font-semibold text-teal-flow">
               <Icon name="event_seat" className="text-[15px]" />
@@ -51,7 +51,10 @@ export default function TripRouteCard({ trip }: TripRouteCardProps) {
             <div className="flex flex-col items-center justify-center px-space-xs py-space-xs md:col-span-4">
               <span className="mb-1 flex items-center gap-1 text-body-sm font-semibold text-teal-flow">
                 <Icon name="schedule" className="text-[16px]" />
-                {trip.durationMins} min {trip.crossingKind}
+                {t('{durationMins} min {crossingKind}', {
+                  durationMins: trip.durationMins,
+                  crossingKind: trip.crossingKind,
+                })}
               </span>
               <div className="flex w-full items-center gap-2">
                 <div className="h-0.5 flex-1 rounded-full bg-gradient-to-r from-teal-flow to-sky-aqua" />
@@ -61,7 +64,7 @@ export default function TripRouteCard({ trip }: TripRouteCardProps) {
                 <div className="h-0.5 flex-1 rounded-full bg-gradient-to-r from-sky-aqua to-teal-flow" />
               </div>
               <span className="mt-1 text-body-sm text-on-surface-variant">
-                {trip.direct ? 'River Corridor Non-stop' : trip.crossingCaption}
+                {trip.direct ? t('River Corridor Non-stop') : trip.crossingCaption}
               </span>
             </div>
 
@@ -91,21 +94,21 @@ export default function TripRouteCard({ trip }: TripRouteCardProps) {
           <div>
             <div className="flex items-center justify-between">
               <span className="text-body-sm font-semibold uppercase tracking-wider text-on-surface-variant">
-                Transit Fare
+                {t('Transit Fare')}
               </span>
               <span className="rounded bg-secondary-container px-space-xs py-0.5 text-body-sm font-bold text-teal-flow">
-                1 Pax
+                {t('1 Pax')}
               </span>
             </div>
             <div className="mt-1 flex items-baseline gap-1">
               <span className="font-numeric-lg text-numeric-lg font-bold text-deep-river">
                 {formatNumber(trip.fareVnd)}
               </span>
-              <span className="text-body-md font-medium text-on-surface-variant">VND</span>
+              <span className="text-body-md font-medium text-on-surface-variant">{t('VND')}</span>
             </div>
             <div className="mt-0.5 flex items-center gap-1 text-body-sm text-on-surface-variant">
-              <Icon name="check_circle" className="text-[14px] text-teal-flow" /> Instant ticket
-              confirmation
+              <Icon name="check_circle" className="text-[14px] text-teal-flow" />{' '}
+              {t('Instant ticket confirmation')}
             </div>
           </div>
           <div className="space-y-space-xs pt-space-md">
@@ -113,14 +116,14 @@ export default function TripRouteCard({ trip }: TripRouteCardProps) {
               to={ROUTES.seatSelection}
               className="group inline-flex w-full items-center justify-center gap-space-xs rounded-full bg-teal-flow px-space-lg py-space-sm font-headline-sm text-[16px] font-semibold text-on-primary shadow-[0_2px_12px_rgba(20,122,126,0.25)] transition-all hover:bg-secondary"
             >
-              <span>Choose Seat</span>
+              <span>{t('Choose Seat')}</span>
               <Icon
                 name="arrow_forward"
                 className="text-[18px] transition-transform group-hover:translate-x-1"
               />
             </Link>
             <p className="text-center text-body-sm text-on-surface-variant">
-              Select your seat on the next step
+              {t('Select your seat on the next step')}
             </p>
           </div>
         </div>

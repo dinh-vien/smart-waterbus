@@ -7,6 +7,7 @@ import PaymentMethodPanel from '../../features/payment/components/PaymentMethodP
 import PaymentOrderSummary from '../../features/payment/components/PaymentOrderSummary'
 import { useDocumentTitle } from '../../hooks'
 import { ROUTES } from '../../routes/routes'
+import { t } from '../../i18n'
 
 export default function PaymentPage() {
   useDocumentTitle('Complete Your Payment')
@@ -19,7 +20,10 @@ export default function PaymentPage() {
 
   const steps: BookingStep[] = [
     { label: 'Trip', detail: trip.lineLabel },
-    { label: 'Seat', detail: `${seatId} ${seat?.window ? 'Window' : 'Aisle'}` },
+    {
+      label: 'Seat',
+      detail: seat?.window ? t('{id} Window', { id: seatId }) : t('{id} Aisle', { id: seatId }),
+    },
     { label: 'Details', detail: passenger.fullName },
     { label: 'Checkout', detail: 'Order Confirmed' },
     { label: 'Payment', detail: 'Instant QR / Card' },
@@ -37,7 +41,7 @@ export default function PaymentPage() {
         />
         <span className="inline-flex items-center gap-2 rounded-full bg-secondary-container/60 px-3 py-1 text-xs font-semibold text-on-secondary-container">
           <span className="h-2 w-2 rounded-full bg-teal-flow" />
-          River Crossing {trip.vesselCode} • Final Step
+          {t('River Crossing {vesselCode} • Final Step', { vesselCode: trip.vesselCode })}
         </span>
       </div>
 
@@ -48,16 +52,17 @@ export default function PaymentPage() {
       <div className="mt-space-lg flex flex-col justify-between gap-space-md md:flex-row md:items-end">
         <div>
           <h1 className="font-headline-xl text-headline-xl-mobile tracking-tight text-deep-river md:text-headline-lg">
-            Complete Your Payment
+            {t('Complete Your Payment')}
           </h1>
           <p className="text-body-md text-on-surface-variant">
-            Choose your payment method to finalize your river crossing reservation and issue your
-            ticket.
+            {t(
+              'Choose your payment method to finalize your river crossing reservation and issue your ticket.',
+            )}
           </p>
         </div>
         <span className="inline-flex items-center gap-2 self-start rounded-xl bg-surface-container px-space-md py-2 text-xs text-on-surface-variant md:self-auto">
           <Icon name="event_seat" className="text-[16px] text-teal-flow" />
-          Your selected seat remains reserved while you complete payment.
+          {t('Your selected seat remains reserved while you complete payment.')}
         </span>
       </div>
 

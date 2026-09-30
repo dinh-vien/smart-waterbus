@@ -8,6 +8,7 @@ import { selectTrip } from '../../booking/bookingSlice'
 import DepartureCard from '../../trips/components/DepartureCard'
 import type { CorridorMap, Departure } from '../../trips/types'
 import type { RouteFilter } from '../types'
+import { t } from '../../../i18n'
 
 interface CorridorSectionProps {
   filters: RouteFilter[]
@@ -35,14 +36,15 @@ export default function CorridorSection({ filters, map, departures }: CorridorSe
         <div className="flex flex-col justify-between gap-space-md md:flex-row md:items-end">
           <div>
             <span className="block text-body-sm font-bold uppercase tracking-wider text-teal-flow">
-              Connected Waterway Grid
+              {t('Connected Waterway Grid')}
             </span>
             <h2 className="font-headline-lg text-headline-lg font-bold tracking-tight text-deep-river">
-              Explore the River Corridor
+              {t('Explore the River Corridor')}
             </h2>
             <p className="pt-1 text-body-md text-on-surface-variant">
-              Real-time monitoring across 18 river stations connecting District 1, Thu Thiem, Binh
-              Thanh, and Thu Duc.
+              {t(
+                'Real-time monitoring across 18 river stations connecting District 1, Thu Thiem, Binh Thanh, and Thu Duc.',
+              )}
             </p>
           </div>
           <div
@@ -74,11 +76,11 @@ export default function CorridorSection({ filters, map, departures }: CorridorSe
               <div className="flex items-center gap-space-sm">
                 <span className="h-3 w-3 animate-ping rounded-full bg-teal-flow" />
                 <span className="font-headline-sm text-headline-sm font-bold text-deep-river">
-                  Live Waterway Vector
+                  {t('Live Waterway Vector')}
                 </span>
               </div>
               <span className="rounded-full bg-sand-light px-space-sm py-1 text-body-sm font-medium text-on-surface-variant">
-                GPS Radar Live • 10s cycle
+                {t('GPS Radar Live • 10s cycle')}
               </span>
             </div>
             <RiverMap map={map} />
@@ -88,12 +90,14 @@ export default function CorridorSection({ filters, map, departures }: CorridorSe
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="font-headline-sm text-headline-sm font-bold text-deep-river">
-                  Next Departures
+                  {t('Next Departures')}
                 </h3>
-                <span className="text-xs text-on-surface-variant">Live from Bach Dang Pier</span>
+                <span className="text-xs text-on-surface-variant">
+                  {t('Live from Bach Dang Pier')}
+                </span>
               </div>
               <span className="rounded-full bg-sand-light px-2.5 py-1 text-xs font-semibold text-teal-flow">
-                Updated Live
+                {t('Updated Live')}
               </span>
             </div>
 
@@ -108,7 +112,7 @@ export default function CorridorSection({ filters, map, departures }: CorridorSe
                 ))
               ) : (
                 <p className="rounded-2xl border border-dashed border-outline-variant bg-surface p-space-lg text-center text-body-md text-on-surface-variant">
-                  No departures on this line right now.
+                  {t('No departures on this line right now.')}
                 </p>
               )}
             </div>
@@ -117,14 +121,14 @@ export default function CorridorSection({ filters, map, departures }: CorridorSe
               <div className="flex items-center gap-2 text-deep-river">
                 <Icon name="schedule" className="text-[20px] text-teal-flow" />
                 <span className="text-xs font-medium">
-                  Boats arrive every 15 mins during peak hours (06:30–09:00 &amp; 16:30–19:30)
+                  {t('Boats arrive every 15 mins during peak hours (06:30–09:00 & 16:30–19:30)')}
                 </span>
               </div>
               <Link
                 to={ROUTES.searchResults}
                 className="flex items-center gap-0.5 text-xs font-bold text-teal-flow hover:underline"
               >
-                <span>Timetable</span>
+                <span>{t('Timetable')}</span>
                 <Icon name="chevron_right" className="text-[14px]" />
               </Link>
             </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Icon from './Icon'
+import { t } from '../../i18n'
 
 interface CopyButtonProps {
   value: string
@@ -29,11 +30,11 @@ export default function CopyButton({ value, className = '' }: CopyButtonProps) {
     <button
       type="button"
       onClick={copy}
-      aria-label={`Copy ${value}`}
+      aria-label={t('Copy {value}', { value })}
       className={`inline-flex items-center gap-1 text-xs font-semibold text-teal-flow transition-colors hover:text-deep-river ${className}`.trim()}
     >
       <Icon name={copied ? 'check' : 'content_copy'} className="text-[14px]" />
-      {copied ? 'Copied' : 'Copy'}
+      {copied ? t('Copied') : t('Copy')}
     </button>
   )
 }

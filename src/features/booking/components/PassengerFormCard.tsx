@@ -5,6 +5,7 @@ import { ASSISTANCE_OPTIONS, PASSENGER_CATEGORIES } from '../../../mocks/booking
 import { ROUTES } from '../../../routes/routes'
 import type { PassengerForm } from '../types'
 import { BookingCard } from './SummaryParts'
+import { t } from '../../../i18n'
 
 interface PassengerFormCardProps {
   passenger: PassengerForm
@@ -70,19 +71,21 @@ export default function PassengerFormCard({
             </div>
             <div>
               <h2 className="font-headline-md text-headline-sm text-deep-river">
-                Passenger 1 (Primary Traveler)
+                {t('Passenger 1 (Primary Traveler)')}
               </h2>
-              <p className="text-xs text-on-surface-variant">Primary traveler</p>
+              <p className="text-xs text-on-surface-variant">{t('Primary traveler')}</p>
             </div>
           </div>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary-container px-3 py-1 text-xs font-semibold text-on-secondary-container">
             <Icon name="airline_seat_recline_extra" className="text-[15px]" />
-            Seat {seatId} • {seatPosition}
+            {t('Seat {seatId} • {seatPosition}', { seatId, seatPosition })}
           </span>
         </div>
 
         <div className="mb-space-lg">
-          <div className="mb-1.5 text-xs font-semibold text-on-surface">Traveler Category</div>
+          <div className="mb-1.5 text-xs font-semibold text-on-surface">
+            {t('Traveler Category')}
+          </div>
           <div
             className="grid grid-cols-3 gap-1 rounded-xl bg-surface-container p-1"
             role="tablist"
@@ -100,14 +103,14 @@ export default function PassengerFormCard({
                     : 'text-on-surface-variant hover:text-deep-river'
                 }`}
               >
-                {c.label} <span className="text-xs text-on-surface-variant">{c.range}</span>
+                {t(c.label)} <span className="text-xs text-on-surface-variant">{c.range}</span>
               </button>
             ))}
           </div>
         </div>
 
         <div className="grid grid-cols-1 gap-space-md md:grid-cols-2">
-          <Field label="Full Name" icon="badge">
+          <Field label={t('Full Name')} icon="badge">
             <input
               className={`${FIELD} pl-10`}
               value={passenger.fullName}
@@ -115,17 +118,17 @@ export default function PassengerFormCard({
               autoComplete="name"
             />
           </Field>
-          <Field label="Date of Birth" hint="DD / MM / YYYY" icon="calendar_today">
+          <Field label={t('Date of Birth')} hint="DD / MM / YYYY" icon="calendar_today">
             <input
               className={`${FIELD} pl-10`}
               value={passenger.dateOfBirth}
               onChange={(e) => onChange({ dateOfBirth: e.target.value })}
             />
           </Field>
-          <Field label="Phone Number">
+          <Field label={t('Phone Number')}>
             <span className="flex gap-2">
               <span className="flex items-center rounded-xl bg-mist px-3 text-sm text-deep-river">
-                <span className="mr-1 text-xs text-on-surface-variant">VN</span>
+                <span className="mr-1 text-xs text-on-surface-variant">{t('VN')}</span>
                 {passenger.phoneCode}
               </span>
               <input
@@ -136,7 +139,7 @@ export default function PassengerFormCard({
               />
             </span>
           </Field>
-          <Field label="Email Address" icon="mail">
+          <Field label={t('Email Address')} icon="mail">
             <input
               className={`${FIELD} pl-10`}
               type="email"
@@ -154,10 +157,10 @@ export default function PassengerFormCard({
             </div>
             <div>
               <h3 className="font-headline-sm text-lg font-semibold text-deep-river">
-                Booking Contact &amp; E-Ticket Recipient
+                {t('Booking Contact & E-Ticket Recipient')}
               </h3>
               <p className="text-xs text-on-surface-variant">
-                All travel documents and vessel dispatch notifications will be routed here
+                {t('All travel documents and vessel dispatch notifications will be routed here')}
               </p>
             </div>
           </div>
@@ -168,7 +171,7 @@ export default function PassengerFormCard({
               onChange={(e) => onChange({ useAsContact: e.target.checked })}
               className="h-5 w-5 rounded border-outline-variant text-teal-flow accent-teal-flow focus:ring-teal-flow"
             />
-            Use passenger details as booking contact
+            {t('Use passenger details as booking contact')}
           </label>
         </div>
 
@@ -185,10 +188,10 @@ export default function PassengerFormCard({
               </span>
               <span>
                 <span className="block font-headline-sm text-lg font-semibold text-deep-river">
-                  Need boarding assistance?
+                  {t('Need boarding assistance?')}
                 </span>
                 <span className="block text-xs text-on-surface-variant">
-                  Optional assistance services at the pier
+                  {t('Optional assistance services at the pier')}
                 </span>
               </span>
             </span>
@@ -207,8 +210,8 @@ export default function PassengerFormCard({
                     className="absolute right-3 top-3 h-4 w-4 rounded border-outline-variant text-teal-flow accent-teal-flow focus:ring-teal-flow"
                   />
                   <Icon name={o.icon} className="text-[20px] text-teal-flow" />
-                  <div className="mt-1 text-sm font-semibold text-deep-river">{o.title}</div>
-                  <div className="text-xs text-on-surface-variant">{o.description}</div>
+                  <div className="mt-1 text-sm font-semibold text-deep-river">{t(o.title)}</div>
+                  <div className="text-xs text-on-surface-variant">{t(o.description)}</div>
                 </label>
               ))}
             </div>
@@ -219,13 +222,13 @@ export default function PassengerFormCard({
       <div className="flex items-center justify-between gap-3 rounded-2xl bg-white px-space-lg py-space-md text-xs text-on-surface-variant shadow-[0_2px_16px_rgba(13,37,56,0.05)]">
         <span className="flex items-center gap-2">
           <Icon name="lock" className="text-[18px] text-teal-flow" />
-          Your passenger information is protected by 256-bit waterway security encryption.
+          {t('Your passenger information is protected by 256-bit waterway security encryption.')}
         </span>
         <Link
           to={ROUTES.seatSelection}
           className="whitespace-nowrap font-semibold text-teal-flow hover:underline"
         >
-          Return to seat map
+          {t('Return to seat map')}
         </Link>
       </div>
     </div>

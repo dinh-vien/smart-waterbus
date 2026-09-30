@@ -8,6 +8,7 @@ import {
 import { useBooking } from '../../features/booking/hooks/useBooking'
 import { useDocumentTitle } from '../../hooks'
 import { ROUTES } from '../../routes/routes'
+import { t } from '../../i18n'
 
 const CUES = [
   {
@@ -42,7 +43,7 @@ export default function SeatSelectionPage() {
         items={[
           { label: 'Home', to: ROUTES.home },
           { label: 'Search Results', to: ROUTES.searchResults },
-          { label: `Trip ${trip.vesselCode}`, to: ROUTES.tripDetail },
+          { label: t('Trip {code}', { code: trip.vesselCode }), to: ROUTES.tripDetail },
           { label: 'Choose Your Seat' },
         ]}
       />
@@ -50,22 +51,23 @@ export default function SeatSelectionPage() {
         <div>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-teal-flow/20 bg-secondary-container/60 px-2.5 py-0.5 text-xs font-semibold text-teal-flow">
             <Icon name="airline_seat_recline_extra" className="text-[14px]" />
-            Step 2 of 4: Seat Selection
+            {t('Step 2 of 4: Seat Selection')}
           </span>
           <h1 className="mt-1 font-headline-lg text-headline-lg tracking-tight text-deep-river">
-            Choose Your Seat
+            {t('Choose Your Seat')}
           </h1>
           <p className="text-body-md text-on-surface-variant">
-            Select your preferred seat in the climate-controlled panoramic salon.
+            {t('Select your preferred seat in the climate-controlled panoramic salon.')}
           </p>
         </div>
         <div className="flex items-center gap-space-md self-start rounded-xl bg-white px-space-md py-2 text-xs shadow-sm md:self-auto">
           <span className="flex items-center gap-1.5 text-on-surface-variant">
-            <span className="h-2 w-2 rounded-full bg-signal-amber" /> Fast-filling morning service
+            <span className="h-2 w-2 rounded-full bg-signal-amber" />{' '}
+            {t('Fast-filling morning service')}
           </span>
           <span className="text-outline">•</span>
           <span className="flex items-center gap-1 font-semibold text-teal-flow">
-            <Icon name="timer" className="text-[15px]" /> Cart holds for 10:00
+            <Icon name="timer" className="text-[15px]" /> {t('Cart holds for 10:00')}
           </span>
         </div>
       </div>
@@ -75,11 +77,12 @@ export default function SeatSelectionPage() {
         <div className="flex items-center justify-between gap-2 rounded-xl border border-teal-flow/20 bg-sand-light/60 px-space-md py-2 text-xs text-on-surface-variant">
           <span className="flex items-center gap-2">
             <Icon name="touch_app" className="text-[18px] text-teal-flow" />
-            Tap an available seat to change your reservation. Seats are held for 10:00 during
-            checkout.
+            {t(
+              'Tap an available seat to change your reservation. Seats are held for 10:00 during checkout.',
+            )}
           </span>
           <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-teal-flow">
-            <span className="h-1.5 w-1.5 rounded-full bg-teal-flow" /> Live Inventory
+            <span className="h-1.5 w-1.5 rounded-full bg-teal-flow" /> {t('Live Inventory')}
           </span>
         </div>
       </div>

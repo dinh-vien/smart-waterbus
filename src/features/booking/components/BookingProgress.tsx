@@ -1,5 +1,6 @@
 import { Icon } from '../../../components/ui'
 import type { BookingStep } from '../types'
+import { t } from '../../../i18n'
 
 interface BookingProgressProps {
   steps: BookingStep[]
@@ -27,7 +28,7 @@ export default function BookingProgress({
             <div key={step.label}>
               <div className="mb-2 flex items-center justify-between text-xs font-semibold">
                 <span className={done || active ? 'text-teal-flow' : 'text-outline'}>
-                  {String(i + 1).padStart(2, '0')} {step.label}
+                  {String(i + 1).padStart(2, '0')} {t(step.label)}
                 </span>
                 {done && <Icon name="check_circle" className="text-[16px] text-teal-flow" />}
                 {active && (
@@ -42,7 +43,7 @@ export default function BookingProgress({
                   }`}
                 />
               </div>
-              <div className="mt-2 text-xs text-on-surface-variant">{step.detail}</div>
+              <div className="mt-2 text-xs text-on-surface-variant">{t(step.detail)}</div>
             </div>
           )
         })}
@@ -75,10 +76,10 @@ export default function BookingProgress({
                 }`}
               >
                 {numbered
-                  ? `${String(i + 1).padStart(2, '0')} ${step.label}`
+                  ? `${String(i + 1).padStart(2, '0')} ${t(step.label)}`
                   : active
-                  ? 'Active'
-                  : `Step ${i + 1}`}
+                  ? t('Active')
+                  : t('Step {n}', { n: i + 1 })}
                 {active && <span className="h-1.5 w-1.5 rounded-full bg-teal-flow" />}
               </div>
               <div
@@ -86,7 +87,7 @@ export default function BookingProgress({
                   active ? 'font-semibold text-deep-river' : 'text-on-surface-variant'
                 }`}
               >
-                {step.detail}
+                {t(step.detail)}
               </div>
             </div>
           </div>

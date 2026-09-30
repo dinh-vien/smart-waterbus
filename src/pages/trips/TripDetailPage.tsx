@@ -9,6 +9,7 @@ import TripRouteCard from '../../features/trips/components/TripRouteCard'
 import { useTripDetail } from '../../features/trips/hooks/useTripSearch'
 import { useDocumentTitle } from '../../hooks'
 import { ROUTES } from '../../routes/routes'
+import { t } from '../../i18n'
 
 const CUES = [
   {
@@ -30,7 +31,7 @@ const CUES = [
 
 export default function TripDetailPage() {
   const { detail, loading, error, retry } = useTripDetail()
-  useDocumentTitle(detail ? `Trip Detail (${detail.vesselCode})` : 'Trip Detail')
+  useDocumentTitle(detail ? t('Trip Detail ({code})', { code: detail.vesselCode }) : 'Trip Detail')
 
   if (error) return <ErrorState onRetry={retry} />
 
@@ -44,12 +45,12 @@ export default function TripDetailPage() {
             items={[
               { label: 'Home', to: ROUTES.home },
               { label: 'Search Results', to: ROUTES.searchResults },
-              { label: `Trip Detail (${detail.vesselCode})` },
+              { label: t('Trip Detail ({code})', { code: detail.vesselCode }) },
             ]}
           />
           <div className="flex items-center gap-space-sm pt-space-xs">
             <h1 className="font-headline-lg text-headline-lg tracking-tight text-deep-river">
-              Review Your Journey
+              {t('Review Your Journey')}
             </h1>
             <span className="hidden items-center gap-1.5 rounded-full bg-secondary-container px-space-sm py-0.5 text-body-sm font-semibold text-on-secondary-container sm:inline-flex">
               <span className="h-1.5 w-1.5 rounded-full bg-teal-flow" />
@@ -57,8 +58,9 @@ export default function TripDetailPage() {
             </span>
           </div>
           <p className="text-body-md text-on-surface-variant">
-            Verify your departure details, pier boarding gate, and vessel amenities before choosing
-            your seat.
+            {t(
+              'Verify your departure details, pier boarding gate, and vessel amenities before choosing your seat.',
+            )}
           </p>
         </div>
         <div className="flex items-center gap-space-md self-start rounded-xl bg-mist px-space-md py-space-sm shadow-sm md:self-auto">
@@ -67,10 +69,10 @@ export default function TripDetailPage() {
           </div>
           <div className="text-left">
             <div className="font-headline-sm text-[15px] leading-tight text-deep-river">
-              Calm River Flow
+              {t('Calm River Flow')}
             </div>
             <div className="flex items-center gap-1 text-body-sm font-medium text-teal-flow">
-              <span className="h-1.5 w-1.5 rounded-full bg-teal-flow" /> On-Time Departure
+              <span className="h-1.5 w-1.5 rounded-full bg-teal-flow" /> {t('On-Time Departure')}
             </div>
           </div>
         </div>

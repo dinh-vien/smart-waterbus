@@ -5,6 +5,7 @@ import AudioPlayer from '../../../components/audio/AudioPlayer'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
 import type { ExploreData, PoiCategory } from '../types'
+import { t } from '../../../i18n'
 
 const SECTION = 'mx-auto max-w-7xl px-margin'
 
@@ -26,21 +27,22 @@ export function ExploreHero({ onStories }: { onStories: () => void }) {
       <div className={`${SECTION} relative z-10 pb-space-xl pt-space-3xl`}>
         <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-sky-aqua">
           <span className="h-1.5 w-1.5 rounded-full bg-sky-aqua" />
-          Sightseeing &amp; River Discovery
+          {t('Sightseeing & River Discovery')}
         </span>
         <h1 className="mt-space-md max-w-2xl font-headline-xl text-4xl font-bold leading-tight tracking-tight md:text-headline-xl">
-          See the City Differently from the River
+          {t('See the City Differently from the River')}
         </h1>
         <p className="mt-space-md max-w-xl text-body-lg text-sand-light/85">
-          Curated catamaran journeys connecting modern Saigon with historic waterfront landmarks
-          through contextual stories and scenic cruising.
+          {t(
+            'Curated catamaran journeys connecting modern Saigon with historic waterfront landmarks through contextual stories and scenic cruising.',
+          )}
         </p>
         <div className="mt-space-lg flex flex-wrap gap-space-md">
           <Link
             to={ROUTES.searchResults}
             className="group inline-flex items-center gap-2 rounded-xl bg-teal-flow px-6 py-3 font-headline-sm text-sm font-semibold text-on-primary shadow-lg transition-colors hover:bg-secondary"
           >
-            Explore Sightseeing Journeys
+            {t('Explore Sightseeing Journeys')}
             <Icon
               name="arrow_forward"
               className="text-[18px] transition-transform group-hover:translate-x-1"
@@ -52,7 +54,7 @@ export function ExploreHero({ onStories }: { onStories: () => void }) {
             className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3 font-headline-sm text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
           >
             <Icon name="graphic_eq" className="text-[18px]" />
-            Discover River Stories
+            {t('Discover River Stories')}
           </button>
         </div>
         <div className="mt-space-2xl grid grid-cols-1 gap-space-md md:grid-cols-3">
@@ -65,8 +67,8 @@ export function ExploreHero({ onStories }: { onStories: () => void }) {
                 <Icon name={c.icon} className="text-[22px]" />
               </span>
               <div>
-                <div className="font-headline-sm text-sm font-semibold">{c.title}</div>
-                <div className="text-xs text-sand-light/70">{c.text}</div>
+                <div className="font-headline-sm text-sm font-semibold">{t(c.title)}</div>
+                <div className="text-xs text-sand-light/70">{t(c.text)}</div>
               </div>
             </div>
           ))}
@@ -83,21 +85,22 @@ export function JourneysSection({ journeys }: { journeys: ExploreData['journeys'
         <div className="mb-space-lg flex flex-col justify-between gap-space-sm md:flex-row md:items-end">
           <div>
             <span className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-teal-flow">
-              <Icon name="explore" className="text-[16px]" /> Signature Experiences
+              <Icon name="explore" className="text-[16px]" /> {t('Signature Experiences')}
             </span>
             <h2 className="font-headline-lg text-headline-lg tracking-tight text-deep-river">
-              Sightseeing Journeys
+              {t('Sightseeing Journeys')}
             </h2>
             <p className="max-w-xl text-body-md text-on-surface-variant">
-              Curated river experiences designed for leisure, photography, and cultural discovery
-              along the urban waterway.
+              {t(
+                'Curated river experiences designed for leisure, photography, and cultural discovery along the urban waterway.',
+              )}
             </p>
           </div>
           <Link
             to={ROUTES.searchResults}
             className="flex items-center gap-1 text-sm font-semibold text-teal-flow hover:underline"
           >
-            Browse All Journeys <Icon name="arrow_forward" className="text-[16px]" />
+            {t('Browse All Journeys')} <Icon name="arrow_forward" className="text-[16px]" />
           </Link>
         </div>
         <div className="grid grid-cols-1 gap-space-lg md:grid-cols-3">
@@ -135,7 +138,7 @@ export function JourneysSection({ journeys }: { journeys: ExploreData['journeys'
                   {j.route}
                 </div>
                 <div className="flex items-center justify-between border-t border-surface-container pt-space-sm text-sm font-semibold text-teal-flow">
-                  Explore Journey
+                  {t('Explore Journey')}
                   <Icon
                     name="arrow_forward"
                     className="text-[18px] transition-transform group-hover:translate-x-1"
@@ -156,14 +159,15 @@ export function ModesSection({ modes }: { modes: ExploreData['modes'] }) {
       <div className={SECTION}>
         <div className="mx-auto mb-space-xl max-w-2xl text-center">
           <span className="text-[11px] font-bold uppercase tracking-wider text-teal-flow">
-            Waterway Mobility Modes
+            {t('Waterway Mobility Modes')}
           </span>
           <h2 className="font-headline-lg text-headline-lg tracking-tight text-deep-river">
-            Two Ways to Experience the River
+            {t('Two Ways to Experience the River')}
           </h2>
           <p className="text-body-md text-on-surface-variant">
-            Whether you need efficient daily transport or an unhurried storytelling voyage, Smart
-            Waterbus accommodates your pace.
+            {t(
+              'Whether you need efficient daily transport or an unhurried storytelling voyage, Smart Waterbus accommodates your pace.',
+            )}
           </p>
         </div>
         <div className="mx-auto grid max-w-4xl grid-cols-1 gap-space-lg md:grid-cols-2">
@@ -261,13 +265,15 @@ export function LandmarksSection({
         <div className="mb-space-lg flex flex-col justify-between gap-space-md md:flex-row md:items-end">
           <div>
             <span className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-teal-flow">
-              <Icon name="location_city" className="text-[16px]" /> Waterfront Landmarks
+              <Icon name="location_city" className="text-[16px]" /> {t('Waterfront Landmarks')}
             </span>
             <h2 className="font-headline-lg text-headline-lg tracking-tight text-deep-river">
-              Explore Along the River
+              {t('Explore Along the River')}
             </h2>
             <p className="text-body-md text-on-surface-variant">
-              Icons, historic quays, and contemporary architecture along our waterway corridors.
+              {t(
+                'Icons, historic quays, and contemporary architecture along our waterway corridors.',
+              )}
             </p>
           </div>
           <div
@@ -281,7 +287,7 @@ export function LandmarksSection({
               onClick={() => setFilter('all')}
               className={pill(filter === 'all')}
             >
-              All POIs
+              {t('All POIs')}
             </button>
             {categories.map((c) => (
               <button
@@ -319,7 +325,7 @@ export function LandmarksSection({
                 <h3 className="font-headline-sm text-lg font-bold text-deep-river">{l.title}</h3>
                 <p className="text-xs text-on-surface-variant">{l.description}</p>
                 <div className="flex items-center gap-1 pt-1 text-xs font-semibold text-teal-flow">
-                  Discover Story <Icon name="arrow_forward" className="text-[14px]" />
+                  {t('Discover Story')} <Icon name="arrow_forward" className="text-[14px]" />
                 </div>
               </div>
             </Link>
@@ -348,37 +354,39 @@ export function StoriesSection({
       >
         <div>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-flow/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-sky-aqua">
-            <Icon name="headphones" className="text-[14px]" /> Available on Sightseeing Journeys
+            <Icon name="headphones" className="text-[14px]" />{' '}
+            {t('Available on Sightseeing Journeys')}
           </span>
           <h2 className="mt-space-md font-headline-lg text-headline-xl tracking-tight">
-            Stories That Travel With You
+            {t('Stories That Travel With You')}
           </h2>
           <p className="mt-space-sm max-w-md text-body-md text-sand-light/80">
-            Discover curated narrative episodes that share the history, culture, and architecture of
-            landmarks along your route.
+            {t(
+              'Discover curated narrative episodes that share the history, culture, and architecture of landmarks along your route.',
+            )}
           </p>
           <div className="mt-space-lg grid grid-cols-1 gap-space-sm sm:grid-cols-2">
             <div className="rounded-xl border border-white/10 bg-white/5 p-space-md">
               <div className="font-headline-sm text-sm font-bold text-sky-aqua">
-                Route Connected
+                {t('Route Connected')}
               </div>
               <p className="text-xs text-sand-light/70">
-                Connected to places along the sightseeing route.
+                {t('Connected to places along the sightseeing route.')}
               </p>
             </div>
             <div className="rounded-xl border border-white/10 bg-white/5 p-space-md">
               <div className="font-headline-sm text-sm font-bold text-coral-glow">
-                Contextual Audio
+                {t('Contextual Audio')}
               </div>
               <p className="text-xs text-sand-light/70">
-                Available during selected sightseeing journeys.
+                {t('Available during selected sightseeing journeys.')}
               </p>
             </div>
           </div>
         </div>
         <div>
           <div className="mb-2 text-xs font-semibold text-sand-light/70">
-            Audio Narration Language:
+            {t('Audio Narration Language:')}
           </div>
           <AudioPlayer
             key={episode.id}
@@ -393,7 +401,7 @@ export function StoriesSection({
           />
           <p className="mt-space-sm flex items-center gap-2 text-xs text-sand-light/70">
             <Icon name="info" className="text-[15px]" />
-            Audio stories may be available as you explore selected sightseeing routes.
+            {t('Audio stories may be available as you explore selected sightseeing routes.')}
           </p>
         </div>
       </div>
@@ -406,24 +414,28 @@ export function CorridorSection({ data }: { data: ExploreData }) {
     <section className="bg-surface py-space-3xl">
       <div className={SECTION}>
         <span className="text-[11px] font-bold uppercase tracking-wider text-teal-flow">
-          Navigation &amp; Landmarks
+          {t('Navigation & Landmarks')}
         </span>
         <div className="flex flex-col justify-between gap-space-sm md:flex-row md:items-end">
           <div>
             <h2 className="font-headline-lg text-headline-lg tracking-tight text-deep-river">
-              Saigon River Discovery Corridor
+              {t('Saigon River Discovery Corridor')}
             </h2>
             <p className="text-body-md text-on-surface-variant">
-              Trace our scenic cruising path connecting central piers with historic cultural quays.
+              {t(
+                'Trace our scenic cruising path connecting central piers with historic cultural quays.',
+              )}
             </p>
           </div>
           <div className="flex gap-2 text-xs font-semibold">
             <span className="flex items-center gap-1.5 rounded-full bg-sand-light px-3 py-1 text-teal-flow">
-              <span className="h-2 w-2 rounded-full bg-teal-flow" /> Active Sightseeing Route
+              <span className="h-2 w-2 rounded-full bg-teal-flow" /> {t('Active Sightseeing Route')}
             </span>
             <span className="flex items-center gap-1.5 rounded-full bg-surface-container px-3 py-1 text-on-surface-variant">
-              <span className="h-2 w-2 rounded-full bg-coral-glow" /> Curated POI Pins (
-              {data.pins.filter((p) => p.emphasis === 'poi').length + 2})
+              <span className="h-2 w-2 rounded-full bg-coral-glow" />{' '}
+              {t('Curated POI Pins ({count})', {
+                count: data.pins.filter((p) => p.emphasis === 'poi').length + 2,
+              })}
             </span>
           </div>
         </div>
@@ -483,23 +495,23 @@ export function CorridorSection({ data }: { data: ExploreData }) {
             <Icon name="navigation" className="text-[18px] text-teal-flow" />
             <div>
               <div className="text-[11px] font-bold text-deep-river">
-                Active Sightseeing Corridor
+                {t('Active Sightseeing Corridor')}
               </div>
-              <div className="text-[10px] text-on-surface-variant">Curated Scenic Route</div>
+              <div className="text-[10px] text-on-surface-variant">{t('Curated Scenic Route')}</div>
             </div>
           </div>
           <div className="absolute bottom-4 right-4 flex flex-wrap items-center gap-3 rounded-xl bg-white/95 px-3 py-2 text-[11px] font-semibold text-deep-river shadow">
             <span className="flex items-center gap-1">
               <Icon name="route" className="text-[14px] text-teal-flow" />
-              Saigon River Discovery Corridor
+              {t('Saigon River Discovery Corridor')}
             </span>
             <span className="flex items-center gap-1">
-              <Icon name="pin_drop" className="text-[14px] text-coral-glow" />4 Signature Points of
-              Interest
+              <Icon name="pin_drop" className="text-[14px] text-coral-glow" />
+              {t('4 Signature Points of Interest')}
             </span>
             <span className="flex items-center gap-1">
               <Icon name="explore" className="text-[14px] text-teal-flow" />
-              Scenic Route
+              {t('Scenic Route')}
             </span>
           </div>
         </div>
@@ -515,14 +527,15 @@ export function StepAboardBanner() {
         <div className="relative flex flex-col items-start justify-between gap-space-lg overflow-hidden rounded-panel bg-gradient-to-r from-deep-river to-teal-flow p-space-2xl text-on-primary md:flex-row md:items-center">
           <div className="max-w-xl">
             <span className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-sky-aqua">
-              <Icon name="sailing" className="text-[16px]" /> Step Aboard
+              <Icon name="sailing" className="text-[16px]" /> {t('Step Aboard')}
             </span>
             <h2 className="mt-1 font-headline-lg text-headline-lg tracking-tight">
-              Choose a Journey and See the River Differently
+              {t('Choose a Journey and See the River Differently')}
             </h2>
             <p className="mt-space-sm text-body-md text-sand-light/85">
-              Discover iconic landmarks and scenic riverbanks from the tranquil comfort of Smart
-              Waterbus.
+              {t(
+                'Discover iconic landmarks and scenic riverbanks from the tranquil comfort of Smart Waterbus.',
+              )}
             </p>
           </div>
           <div className="flex flex-wrap gap-space-sm">
@@ -530,13 +543,14 @@ export function StepAboardBanner() {
               to={ROUTES.search}
               className="inline-flex items-center gap-2 rounded-xl bg-teal-flow px-6 py-3 font-headline-sm text-sm font-semibold text-on-primary shadow-lg transition-colors hover:bg-secondary"
             >
-              Plan a Sightseeing Journey <Icon name="arrow_forward" className="text-[18px]" />
+              {t('Plan a Sightseeing Journey')}{' '}
+              <Icon name="arrow_forward" className="text-[18px]" />
             </Link>
             <Link
               to={ROUTES.search}
               className="inline-flex items-center rounded-xl border border-white/25 bg-white/10 px-6 py-3 font-headline-sm text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
             >
-              View Routes
+              {t('View Routes')}
             </Link>
           </div>
         </div>

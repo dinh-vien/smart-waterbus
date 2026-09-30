@@ -1,5 +1,3 @@
-import { vi } from './dictionaries/vi'
-
 export type Locale = 'en' | 'vi'
 
 export const LOCALES: { code: Locale; label: string; short: string }[] = [
@@ -9,7 +7,18 @@ export const LOCALES: { code: Locale; label: string; short: string }[] = [
 
 export const DEFAULT_LOCALE: Locale = 'en'
 
-const DICTIONARIES: Record<Locale, Record<string, string>> = { en: {}, vi }
+// English is the source language and needs no dictionary. Others are loaded on demand.
+const DICTIONARIES: Record<Locale, Record<string, string>> = { en: {}, vi: {} }
+const loaded = new Set<Locale>(['en'])
+
+export const hasDictionary = (locale: Locale): boolean => loaded.has(locale)
+
+/** Loads the translations for `locale` (a separate chunk, fetched the first time it is needed). */
+export async function loadDictionary(locale: Locale): Promise<void> {
+  if (loaded.has(locale)) return
+  if (locale === 'vi') DICTIONARIES.vi = (await import('./dictionaries/vi')).vi
+  loaded.add(locale)
+}
 
 // The active locale lives at module level so plain functions (services, formatters) can read it.
 // The provider updates it before rendering and remounts the tree when it changes.
@@ -44,18 +53,19 @@ const HAS_LETTER = /[A-Za-z]/
  */
 export function t(source: string, vars?: Vars): string {
   const translated = DICTIONARIES[active][source]
-  if (
-    translated === undefined &&
-    active !== 'en' &&
-    import.meta.env.DEV &&
-    HAS_LETTER.test(source)
-  ) {
-    reportMissing(source)
+  const result = interpolate(translated ?? source, vars)
+  if (import.meta.env.DEV && active !== 'en') {
+    if (translated === undefined && HAS_LETTER.test(source) && !produced.has(source)) {
+      reportMissing(source)
+    }
+    produced.add(result)
   }
-  return interpolate(translated ?? source, vars)
+  return result
 }
 
 const missing = new Set<string>()
+// Outputs of t(), so passing an already translated string to t() again is not reported as missing.
+const produced = new Set<string>()
 
 function reportMissing(source: string) {
   if (missing.has(source)) return

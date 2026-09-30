@@ -1,5 +1,6 @@
 import { Icon } from '../../../components/ui'
 import type { Seat, SeatMap } from '../types'
+import { t } from '../../../i18n'
 
 interface SeatMapViewProps {
   seatMap: SeatMap
@@ -26,20 +27,20 @@ function SeatButton({
             occupied ? 'bg-outline' : 'bg-sky-aqua'
           }`}
         >
-          W
+          {t('W')}
         </span>
       )}
       {selected && (
         <span className="absolute -top-2 left-1/2 z-10 -translate-x-1/2 rounded bg-signal-amber px-1 text-[8px] font-bold uppercase text-deep-river">
-          Selected
+          {t('Selected')}
         </span>
       )}
       <button
         type="button"
         disabled={occupied}
         aria-pressed={selected}
-        aria-label={`Seat ${seat.id}${seat.window ? ', window' : ''}${
-          occupied ? ', occupied' : ''
+        aria-label={`${t('Seat {id}', { id: seat.id })}${seat.window ? `, ${t('window')}` : ''}${
+          occupied ? `, ${t('occupied')}` : ''
         }`}
         onClick={() => onSelect(seat.id)}
         className={`flex h-[46px] w-[62px] flex-col items-center justify-center rounded-lg border-2 text-[11px] font-semibold transition-all ${
@@ -62,27 +63,27 @@ export function SeatLegend() {
     <div className="flex flex-wrap items-center gap-space-md text-xs text-on-surface-variant">
       <span className="flex items-center gap-1.5">
         <span className="flex h-5 w-5 items-center justify-center rounded border-2 border-teal-flow/40 bg-white text-[8px] font-bold text-deep-river">
-          A1
+          {t('A1')}
         </span>
-        Available
+        {t('Available')}
       </span>
       <span className="flex items-center gap-1.5 font-semibold text-deep-river">
         <span className="flex h-5 w-5 items-center justify-center rounded bg-teal-flow text-[8px] font-bold text-white">
-          A2
+          {t('A2')}
         </span>
-        Selected
+        {t('Selected')}
       </span>
       <span className="flex items-center gap-1.5">
         <span className="flex h-5 w-5 items-center justify-center rounded-full border border-sky-aqua bg-sky-aqua/20">
           <span className="h-2 w-2 rounded-full bg-sky-aqua" />
         </span>
-        Window River View
+        {t('Window River View')}
       </span>
       <span className="flex items-center gap-1.5">
         <span className="flex h-5 w-5 items-center justify-center rounded bg-outline-variant/50 text-outline">
           <Icon name="block" className="text-[13px]" />
         </span>
-        Occupied
+        {t('Occupied')}
       </span>
     </div>
   )
@@ -102,28 +103,28 @@ export default function SeatMapView({ seatMap, selectedId, onSelect }: SeatMapVi
       <div className="relative mx-auto max-w-sm rounded-t-[80px] rounded-b-3xl border border-outline-variant/40 bg-white px-space-md pb-space-md pt-space-lg shadow-lg">
         <div className="mx-auto mb-space-sm flex w-fit items-center gap-2 rounded-full border border-outline-variant/40 bg-white px-4 py-1.5 text-[11px] font-bold uppercase tracking-wider text-deep-river shadow-sm">
           <Icon name="navigation" className="text-[14px]" />
-          Forward / Bow • River Cruise Direction
+          {t('Forward / Bow • River Cruise Direction')}
         </div>
         <div className="mx-auto mb-space-md w-fit rounded-full border border-teal-flow/30 bg-teal-flow/10 px-4 py-1 text-[10px] font-bold uppercase tracking-wider text-teal-flow">
-          Wrap-Around Cockpit Bridge Glass
+          {t('Wrap-Around Cockpit Bridge Glass')}
         </div>
 
         <div className="mb-2 flex items-center justify-between text-[10px] font-semibold uppercase tracking-wider text-teal-flow">
           <span className="flex items-center gap-1">
-            <Icon name="waves" className="text-[13px]" /> Portside Panoramic Window
+            <Icon name="waves" className="text-[13px]" /> {t('Portside Panoramic Window')}
           </span>
           <span className="flex items-center gap-1">
-            Starboard Window <Icon name="waves" className="text-[13px]" />
+            {t('Starboard Window')} <Icon name="waves" className="text-[13px]" />
           </span>
         </div>
         <div className="grid grid-cols-[repeat(2,62px)_28px_repeat(2,62px)] justify-center gap-x-2 text-center text-[10px] font-semibold text-on-surface-variant">
-          <span>Port A</span>
-          <span>Aisle B</span>
+          <span>{t('Port A')}</span>
+          <span>{t('Aisle B')}</span>
           <span className="flex items-center justify-center">
             <Icon name="keyboard_double_arrow_down" className="text-[12px]" />
           </span>
-          <span>Aisle C</span>
-          <span>Starboard D</span>
+          <span>{t('Aisle C')}</span>
+          <span>{t('Starboard D')}</span>
         </div>
 
         <div className="mt-2 space-y-3">
@@ -141,7 +142,7 @@ export default function SeatMapView({ seatMap, selectedId, onSelect }: SeatMapVi
                 />
               ))}
               <span className="flex h-6 items-center justify-center rounded bg-mist text-[9px] font-bold text-outline">
-                R{row}
+                {t('R{row}', { row })}
               </span>
               {(['C', 'D'] as const).map((c) => (
                 <SeatButton
@@ -157,16 +158,16 @@ export default function SeatMapView({ seatMap, selectedId, onSelect }: SeatMapVi
 
         <div className="mt-space-md flex items-center gap-2 border-t border-dashed border-outline-variant pt-space-md text-[11px] font-semibold text-on-surface-variant">
           <span className="flex flex-1 items-center justify-center gap-1 rounded-lg border border-outline-variant/40 bg-mist px-2 py-2">
-            <Icon name="luggage" className="text-[15px]" /> Luggage Compartment
+            <Icon name="luggage" className="text-[15px]" /> {t('Luggage Compartment')}
           </span>
           <span className="flex flex-1 items-center justify-center gap-1 rounded-lg border border-outline-variant/40 bg-mist px-2 py-2">
-            <Icon name="door_open" className="text-[15px] text-signal-amber" /> Stern Boarding Gate
-            / Entry
+            <Icon name="door_open" className="text-[15px] text-signal-amber" />{' '}
+            {t('Stern Boarding Gate / Entry')}
           </span>
         </div>
         <div className="mt-2 flex items-center justify-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-teal-flow">
           <Icon name="arrow_downward" className="text-[12px]" />
-          Aft Gangway • Disembarkation Point
+          {t('Aft Gangway • Disembarkation Point')}
           <Icon name="arrow_downward" className="text-[12px]" />
         </div>
       </div>

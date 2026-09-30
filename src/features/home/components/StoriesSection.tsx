@@ -3,6 +3,7 @@ import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
 import { formatVnd } from '../../../utils/format'
 import type { Story } from '../types'
+import { t } from '../../../i18n'
 
 interface StoriesSectionProps {
   stories: Story[]
@@ -14,14 +15,15 @@ export default function StoriesSection({ stories }: StoriesSectionProps) {
       <div className="mx-auto max-w-7xl space-y-space-2xl px-margin">
         <div className="max-w-2xl space-y-space-xs">
           <span className="block text-body-sm font-bold uppercase tracking-wider text-coral-glow">
-            River Stories &amp; Destinations
+            {t('River Stories & Destinations')}
           </span>
           <h2 className="font-headline-lg text-headline-lg font-bold tracking-tight text-deep-river">
-            A Different Perspective on Saigon’s Skyline &amp; Heritage
+            {t('A Different Perspective on Saigon’s Skyline & Heritage')}
           </h2>
           <p className="text-body-md text-on-surface-variant">
-            Immerse yourself in centuries of river commerce, shimmering night architecture, and
-            peaceful winding canals away from crowded streets.
+            {t(
+              'Immerse yourself in centuries of river commerce, shimmering night architecture, and peaceful winding canals away from crowded streets.',
+            )}
           </p>
         </div>
 
@@ -44,7 +46,7 @@ export default function StoriesSection({ stories }: StoriesSectionProps) {
                   <span>{story.badge}</span>
                 </div>
                 <div className="absolute bottom-4 right-4 rounded-full bg-surface/90 px-3.5 py-1 font-numeric-md text-sm font-bold text-deep-river shadow-sm backdrop-blur-md">
-                  From {formatVnd(story.fromPriceVnd)}
+                  {t('From {price}', { price: formatVnd(story.fromPriceVnd) })}
                 </div>
               </div>
               <div className="flex flex-1 flex-col justify-between space-y-space-md p-space-lg">
@@ -52,7 +54,7 @@ export default function StoriesSection({ stories }: StoriesSectionProps) {
                   <div className="flex items-center gap-2 text-xs text-on-surface-variant">
                     <span className="flex items-center gap-1">
                       <Icon name="timer" className="text-[15px] text-teal-flow" />{' '}
-                      {story.durationMins} mins
+                      {t('{durationMins} mins', { durationMins: story.durationMins })}
                     </span>
                     <span>•</span>
                     <span className="flex items-center gap-1">
@@ -67,7 +69,7 @@ export default function StoriesSection({ stories }: StoriesSectionProps) {
                 </div>
                 <div className="flex items-center justify-between border-t border-surface-container pt-3 text-body-md font-semibold text-teal-flow">
                   <span className="inline-flex items-center gap-1 transition-transform group-hover:translate-x-1">
-                    Explore Tour
+                    {t('Explore Tour')}
                     <Icon name="arrow_forward" className="text-[18px]" />
                   </span>
                   <Icon

@@ -13,6 +13,7 @@ import { getNextSteps } from '../../features/payment/services/paymentService'
 import BoardingPassCard from '../../features/tickets/components/BoardingPassCard'
 import { useDocumentTitle, useFetch } from '../../hooks'
 import { ROUTES } from '../../routes/routes'
+import { t } from '../../i18n'
 
 export default function BookingSuccessPage() {
   useDocumentTitle('Booking Confirmed')
@@ -63,18 +64,21 @@ export default function BookingSuccessPage() {
             <BoardingPassCard
               pass={{
                 tripCode: trip.vesselCode,
-                lineName: 'Central Waterway Line',
+                lineName: t('Central Waterway Line'),
                 departTime: trip.departTime,
                 departPier: trip.originPierName,
                 arriveTime: trip.arriveTime,
                 arrivePier: trip.destinationPierName,
                 durationMins: trip.durationMins,
-                seat: `Seat ${seatId}`,
-                passenger: `1 Passenger (${passenger.fullName})`,
-                status: 'Confirmed',
+                seat: t('Seat {id}', { id: seatId }),
+                passenger: t('1 Passenger ({name})', { name: passenger.fullName }),
+                status: t('Confirmed'),
                 totalVnd: totals.totalVnd,
                 reference,
-                seatNote: `Trip ${trip.vesselCode} • ${seat?.window ? 'Window' : 'Aisle'}`,
+                seatNote: t('Trip {code} • {kind}', {
+                  code: trip.vesselCode,
+                  kind: seat?.window ? t('Window') : t('Aisle'),
+                }),
               }}
             />
           </div>

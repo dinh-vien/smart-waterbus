@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { formatNumber } from '../../../utils/format'
+import { t } from '../../../i18n'
 
 /** "Label ........ value" row used in every fare/summary card. */
 export function SummaryRow({
@@ -44,11 +45,11 @@ export function TotalRow({
           <div className="font-numeric-lg text-numeric-lg font-bold leading-none text-deep-river">
             {amount}
           </div>
-          <div className="text-xs font-semibold text-teal-flow">VND</div>
+          <div className="text-xs font-semibold text-teal-flow">{t('VND')}</div>
         </div>
       ) : (
         <div className="font-numeric-lg text-numeric-lg font-bold leading-none text-deep-river">
-          {amount} VND
+          {t('{amount} VND', { amount })}
         </div>
       )}
     </div>

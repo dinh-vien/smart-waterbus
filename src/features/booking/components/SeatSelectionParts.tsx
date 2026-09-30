@@ -6,6 +6,7 @@ import type { TripDetail } from '../../trips/types'
 import type { Seat } from '../types'
 import { seatPosition } from '../utils'
 import { BookingCard, SummaryRow, TotalRow } from './SummaryParts'
+import { t } from '../../../i18n'
 
 /** White strip under the page title: vessel, times, duration, fare and "Change Trip". */
 export function TripStrip({ trip }: { trip: TripDetail }) {
@@ -16,7 +17,7 @@ export function TripStrip({ trip }: { trip: TripDetail }) {
           <Icon name="directions_boat" className="text-[20px]" />
           <span className="font-headline-sm text-lg font-bold">{trip.vesselCode}</span>
           <span className="rounded bg-white/15 px-1.5 py-0.5 text-[10px] font-semibold">
-            Express
+            {t('Express')}
           </span>
         </div>
         <div className="flex items-center gap-space-md">
@@ -36,12 +37,15 @@ export function TripStrip({ trip }: { trip: TripDetail }) {
         </div>
         <span className="flex items-center gap-1 rounded-full bg-mist px-3 py-1.5 text-xs font-medium text-on-surface-variant">
           <Icon name="schedule" className="text-[15px] text-teal-flow" />
-          {trip.durationMins} min {trip.crossingKind} Crossing
+          {t('{durationMins} min {crossingKind} Crossing', {
+            durationMins: trip.durationMins,
+            crossingKind: trip.crossingKind,
+          })}
         </span>
       </div>
       <div className="flex items-center gap-space-lg">
         <div className="text-right">
-          <div className="text-[11px] text-on-surface-variant">1 Passenger • Eco Class</div>
+          <div className="text-[11px] text-on-surface-variant">{t('1 Passenger • Eco Class')}</div>
           <div className="font-headline-sm text-lg font-bold text-deep-river">
             {formatVndSuffix(trip.fareVnd)}
           </div>
@@ -50,7 +54,7 @@ export function TripStrip({ trip }: { trip: TripDetail }) {
           to={ROUTES.searchResults}
           className="flex items-center gap-1 text-sm font-semibold text-teal-flow hover:text-deep-river"
         >
-          Change Trip <Icon name="edit" className="text-[16px]" />
+          {t('Change Trip')} <Icon name="edit" className="text-[16px]" />
         </Link>
       </div>
     </div>
@@ -65,16 +69,16 @@ export function SeatRecommendation() {
       </div>
       <div className="text-xs text-on-surface-variant">
         <div className="font-headline-sm text-sm font-bold text-deep-river">
-          Seat Recommendation
+          {t('Seat Recommendation')}
         </div>
         <ul className="mt-1 list-disc space-y-0.5 pl-4">
           <li>
-            <strong className="text-deep-river">Best River View:</strong> Portside window seats
-            (A2–A4) offer open views of Ba Son Bridge and skyline.
+            <strong className="text-deep-river">{t('Best River View:')}</strong>{' '}
+            {t('Portside window seats (A2–A4) offer open views of Ba Son Bridge and skyline.')}
           </li>
           <li>
-            <strong className="text-deep-river">Fastest Pier Exit:</strong> Aft seats (Row 5–6) are
-            directly adjacent to the disembarkation gangway.
+            <strong className="text-deep-river">{t('Fastest Pier Exit:')}</strong>{' '}
+            {t('Aft seats (Row 5–6) are directly adjacent to the disembarkation gangway.')}
           </li>
         </ul>
       </div>
@@ -96,67 +100,80 @@ export function BookingSummary({ trip, seat, seatId, totalVnd, category }: Booki
     <div className="space-y-space-md lg:sticky lg:top-24">
       <BookingCard className="p-space-lg">
         <div className="mb-space-md flex items-center justify-between">
-          <h2 className="font-headline-md text-headline-sm text-deep-river">Booking Summary</h2>
+          <h2 className="font-headline-md text-headline-sm text-deep-river">
+            {t('Booking Summary')}
+          </h2>
           <span className="rounded-full bg-secondary-container px-2.5 py-0.5 text-[11px] font-bold text-teal-flow">
-            Trip {trip.vesselCode}
+            {t('Trip {vesselCode}', { vesselCode: trip.vesselCode })}
           </span>
         </div>
 
         <div className="space-y-2 rounded-xl border border-outline-variant/40 bg-mist/60 p-space-md">
-          <SummaryRow label="Route & Vessel" value={trip.vesselName} />
-          <SummaryRow label="Date & Time" value={`Today, ${trip.departTime} Departure`} />
+          <SummaryRow label={t('Route & Vessel')} value={trip.vesselName} />
+          <SummaryRow
+            label={t('Date & Time')}
+            value={t('Today, {time} Departure', { time: trip.departTime })}
+          />
           <div className="flex items-center justify-between gap-2 pt-1 text-xs text-deep-river">
             <span className="flex items-center gap-1.5 font-medium">
               <Icon name="directions_boat" className="text-[16px] text-teal-flow" />
               {trip.originPierName} ➔ {trip.destinationPierName}
             </span>
             <span className="rounded border border-outline-variant/40 bg-white px-2 py-1 text-[11px] text-teal-flow">
-              {trip.vesselCode} {trip.crossingKind} ({trip.durationMins} min)
+              {t('{vesselCode} {crossingKind} ({durationMins} min)', {
+                vesselCode: trip.vesselCode,
+                crossingKind: trip.crossingKind,
+                durationMins: trip.durationMins,
+              })}
             </span>
           </div>
         </div>
 
         <div className="mt-space-md rounded-xl border border-teal-flow/25 bg-sand-light/60 p-space-md">
           <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-teal-flow">
-            Reserved Seat Choice
+            {t('Reserved Seat Choice')}
             <Icon name="airline_seat_recline_extra" className="text-[16px]" />
           </div>
           <div className="mt-1 flex items-center justify-between">
             <div className="font-headline-xl text-4xl font-bold leading-none text-deep-river">
-              Seat
+              {t('Seat')}
               <br />
               {seatId}
             </div>
             <div className="text-right text-xs">
               <div className="font-semibold text-teal-flow">{seatPosition(seat)} •</div>
-              <div className="text-teal-flow">Main Saloon</div>
+              <div className="text-teal-flow">{t('Main Saloon')}</div>
               <div className="mt-1 rounded bg-white px-2 py-0.5 text-on-surface-variant">
-                Main Deck
+                {t('Main Deck')}
               </div>
             </div>
           </div>
           <p className="mt-2 text-xs text-on-surface-variant">
-            Standard Climate-Controlled Catamaran Seating with panoramic river view.
+            {t('Standard Climate-Controlled Catamaran Seating with panoramic river view.')}
           </p>
         </div>
 
         <div className="mt-space-md space-y-1.5">
           <SummaryRow
-            label={`Standard Transit Fare (1 ${category})`}
+            label={t('Standard Transit Fare (1 {category})', { category: t(category) })}
             value={formatVnd(trip.fareVnd)}
           />
-          <SummaryRow label="Seat Reservation Fee" value="Included (0 VND)" accent />
-          <SummaryRow label="Harbor Fees & VAT" value="Included" accent />
+          <SummaryRow label={t('Seat Reservation Fee')} value={t('Included (0 VND)')} accent />
+          <SummaryRow label={t('Harbor Fees & VAT')} value={t('Included')} accent />
         </div>
         <div className="mt-space-sm border-t border-surface-container">
-          <TotalRow label="Total Fare" caption="All fees & taxes included" amountVnd={totalVnd} />
+          <TotalRow
+            label={t('Total Fare')}
+            caption={t('All fees & taxes included')}
+            amountVnd={totalVnd}
+          />
         </div>
 
         <Link
           to={ROUTES.passengerDetails}
           className="group mt-space-sm flex w-full items-center justify-between rounded-xl bg-teal-flow px-space-lg py-space-md font-headline-sm text-lg font-semibold text-on-primary shadow-[0_2px_12px_rgba(20,122,126,0.25)] transition-all hover:bg-secondary"
         >
-          <span>Continue to Passenger Details</span>
+          <span>{t('Continue to Passenger Details')}</span>
           <Icon
             name="arrow_forward"
             className="text-[20px] transition-transform group-hover:translate-x-1"
@@ -164,17 +181,18 @@ export function BookingSummary({ trip, seat, seatId, totalVnd, category }: Booki
         </Link>
         <div className="mt-space-sm flex items-center justify-center gap-2 text-xs text-teal-flow">
           <Link to={ROUTES.searchResults} className="hover:underline">
-            Change Trip
+            {t('Change Trip')}
           </Link>
           <span className="text-outline">•</span>
           <button type="button" className="hover:underline">
-            Fare Policies
+            {t('Fare Policies')}
           </button>
         </div>
         <div className="mt-space-md flex items-start gap-2 rounded-lg bg-mist px-space-sm py-space-sm text-xs text-on-surface-variant">
           <Icon name="timer" className="text-[16px] text-teal-flow" />
-          Seats held for 10:00 during checkout. Instant digital QR boarding pass delivered
-          immediately.
+          {t(
+            'Seats held for 10:00 during checkout. Instant digital QR boarding pass delivered immediately.',
+          )}
         </div>
       </BookingCard>
 
@@ -184,12 +202,14 @@ export function BookingSummary({ trip, seat, seatId, totalVnd, category }: Booki
         </div>
         <div className="min-w-0 flex-1">
           <div className="text-sm font-semibold text-deep-river">
-            {trip.originPierName} Concierge
+            {t('{originPierName} Concierge', { originPierName: trip.originPierName })}
           </div>
-          <div className="text-xs text-on-surface-variant">Daily 06:00 - 22:00 Live Assistance</div>
+          <div className="text-xs text-on-surface-variant">
+            {t('Daily 06:00 - 22:00 Live Assistance')}
+          </div>
         </div>
         <button type="button" className="text-sm font-semibold text-teal-flow hover:underline">
-          Contact
+          {t('Contact')}
         </button>
       </div>
     </div>

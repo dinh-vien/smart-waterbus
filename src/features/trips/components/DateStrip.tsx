@@ -31,7 +31,7 @@ export default function DateStrip({ dates, selectedId, tripCount, onSelect }: Da
                 selected ? 'font-bold tracking-wide text-sky-aqua' : 'font-semibold text-outline'
               }`}
             >
-              {date.isToday ? `Today • ${date.weekday}` : date.weekday}
+              {date.isToday ? t('Today • {weekday}', { weekday: date.weekday }) : date.weekday}
             </span>
             <span
               className={`font-headline-sm text-sm font-bold ${
@@ -42,7 +42,7 @@ export default function DateStrip({ dates, selectedId, tripCount, onSelect }: Da
             </span>
             {selected ? (
               <span className="mt-0.5 inline-flex items-center rounded-full bg-teal-flow px-2 py-0.5 text-[10px] font-semibold text-white">
-                {tripCount} Trips
+                {t('{tripCount} Trips', { tripCount })}
               </span>
             ) : (
               <span className="text-[11px] font-medium text-teal-flow">

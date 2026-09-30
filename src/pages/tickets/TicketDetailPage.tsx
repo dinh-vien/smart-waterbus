@@ -11,6 +11,7 @@ import {
 import { useTicketDetail } from '../../features/tickets/hooks/useTickets'
 import { useDocumentTitle } from '../../hooks'
 import { ROUTES } from '../../routes/routes'
+import { t } from '../../i18n'
 
 export default function TicketDetailPage() {
   useDocumentTitle('Ticket Detail')
@@ -35,7 +36,7 @@ export default function TicketDetailPage() {
         <div>
           <div className="flex items-center gap-3">
             <h1 className="font-headline-xl text-4xl font-bold tracking-tight text-deep-river">
-              Your Ticket
+              {t('Your Ticket')}
             </h1>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary-container px-3 py-1 text-xs font-semibold text-on-secondary-container">
               <span className="h-1.5 w-1.5 rounded-full bg-teal-flow" />
@@ -43,11 +44,11 @@ export default function TicketDetailPage() {
             </span>
           </div>
           <p className="mt-1 text-body-md text-on-surface-variant">
-            Present this QR ticket when boarding your Smart Waterbus trip.
+            {t('Present this QR ticket when boarding your Smart Waterbus trip.')}
           </p>
         </div>
         <div className="flex items-center gap-3 self-start rounded-xl bg-white px-space-md py-2.5 shadow-sm md:self-auto">
-          <span className="text-xs text-on-surface-variant">Ref:</span>
+          <span className="text-xs text-on-surface-variant">{t('Ref:')}</span>
           <span className="font-mono text-sm font-semibold tracking-wide text-deep-river">
             {ticket.bookingRef}
           </span>
@@ -63,20 +64,20 @@ export default function TicketDetailPage() {
           <TicketCorridorCard ticket={ticket} />
           <div className="relative h-44 overflow-hidden rounded-2xl bg-deep-river">
             <img
-              alt="Smart Waterbus catamaran cruising the Saigon River"
+              alt={t('Smart Waterbus catamaran cruising the Saigon River')}
               src={vesselImage}
               className="h-full w-full object-cover opacity-70"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-deep-river via-deep-river/30 to-transparent" />
             <div className="absolute inset-x-space-md bottom-space-md text-white">
               <div className="text-[10px] font-bold uppercase tracking-wider text-sky-aqua">
-                Scenic Corridor Experience
+                {t('Scenic Corridor Experience')}
               </div>
               <div className="font-headline-sm text-base font-bold">
-                Smart Waterbus • Central River Corridor
+                {t('Smart Waterbus • Central River Corridor')}
               </div>
               <div className="text-xs text-sand-light/90">
-                Calm skyline and river panorama celebrating the Saigon River crossing.
+                {t('Calm skyline and river panorama celebrating the Saigon River crossing.')}
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ import { useSearchQuery } from '../hooks/useTripSearch'
 import type { DateOption, PierOption, TripType } from '../types'
 import { formatDateLabel } from '../utils'
 import PierField from './PierField'
+import { t } from '../../../i18n'
 
 interface SearchFormProps {
   piers: PierOption[]
@@ -92,13 +93,13 @@ export default function SearchForm({ piers, dates }: SearchFormProps) {
                   : 'text-on-surface-variant hover:text-deep-river'
               }`}
             >
-              {type.label}
+              {t(type.label)}
             </button>
           ))}
         </div>
         <span className="hidden items-center gap-1.5 text-xs font-medium text-on-surface-variant md:inline-flex">
           <span className="h-2 w-2 rounded-full bg-teal-flow" />
-          Direct Pier-to-Pier Water Transit Corridor
+          {t('Direct Pier-to-Pier Water Transit Corridor')}
         </span>
       </div>
 
@@ -108,7 +109,7 @@ export default function SearchForm({ piers, dates }: SearchFormProps) {
       >
         <PierField
           className="lg:col-span-3"
-          label="Departure Pier"
+          label={t('Departure Pier')}
           dotClass="bg-emerald-500 ring-4 ring-emerald-100"
           value={pier(query.originId)}
           options={piers}
@@ -117,7 +118,7 @@ export default function SearchForm({ piers, dates }: SearchFormProps) {
         <div className="z-10 hidden items-center justify-center lg:col-span-1 lg:-mx-3 lg:flex">
           <button
             type="button"
-            aria-label="Swap origin and destination"
+            aria-label={t('Swap origin and destination')}
             onClick={() =>
               updateQuery({ originId: query.destinationId, destinationId: query.originId })
             }
@@ -131,7 +132,7 @@ export default function SearchForm({ piers, dates }: SearchFormProps) {
         </div>
         <PierField
           className="lg:col-span-3"
-          label="Arrival Pier"
+          label={t('Arrival Pier')}
           dotClass="bg-teal-flow ring-4 ring-teal-100"
           value={pier(query.destinationId)}
           options={piers}
@@ -140,17 +141,17 @@ export default function SearchForm({ piers, dates }: SearchFormProps) {
         <div className="lg:col-span-2">
           <StaticField
             icon="calendar_today"
-            label="Date"
+            label={t('Date')}
             value={formatDateLabel(date)}
-            note="Service Every 15 min"
+            note={t('Service Every 15 min')}
           />
         </div>
         <div className="lg:col-span-2">
           <StaticField
             icon="person"
-            label="Passengers & Class"
-            value={query.passengers}
-            note={query.passengerNote}
+            label={t('Passengers & Class')}
+            value={t(query.passengers)}
+            note={t(query.passengerNote)}
           />
         </div>
         <div className="flex items-stretch lg:col-span-1">
@@ -158,7 +159,7 @@ export default function SearchForm({ piers, dates }: SearchFormProps) {
             type="submit"
             className="group flex min-h-[58px] w-full items-center justify-center gap-1 rounded-xl bg-teal-flow font-headline-sm text-sm font-bold text-on-primary shadow-[0_2px_12px_rgba(20,122,126,0.28)] transition-all hover:bg-secondary hover:shadow-[0_4px_16px_rgba(20,122,126,0.38)]"
           >
-            <span>Search</span>
+            <span>{t('Search')}</span>
             <Icon
               name="arrow_forward"
               className="text-[18px] transition-transform group-hover:translate-x-0.5"

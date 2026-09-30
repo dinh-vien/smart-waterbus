@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
+import { t } from '../../../i18n'
 
 export default function CtaBanner() {
   return (
@@ -26,21 +27,22 @@ export default function CtaBanner() {
           <div className="relative z-10 max-w-2xl space-y-space-lg">
             <div className="inline-flex items-center gap-space-sm rounded-full border border-white/15 bg-white/10 px-space-md py-1.5 text-body-sm text-sand-light backdrop-blur-md">
               <span className="h-2.5 w-2.5 animate-ping rounded-full bg-sky-aqua" />
-              <span>Normal River Operations • Optimal Water Level • 14 Vessels Active</span>
+              <span>{t('Normal River Operations • Optimal Water Level • 14 Vessels Active')}</span>
             </div>
             <h2 className="font-headline-lg text-3xl font-bold leading-tight tracking-tight text-on-primary sm:text-headline-lg md:text-headline-xl">
-              Ready to Experience Saigon from the Water?
+              {t('Ready to Experience Saigon from the Water?')}
             </h2>
             <p className="max-w-xl text-body-lg text-sand-light/90">
-              Join over 1.2M passengers discovering effortless urban mobility, breezy commutes, and
-              breathtaking twilight river journeys.
+              {t(
+                'Join over 1.2M passengers discovering effortless urban mobility, breezy commutes, and breathtaking twilight river journeys.',
+              )}
             </p>
             <div className="flex flex-wrap items-center gap-space-md pt-space-xs">
               <Link
                 to={ROUTES.search}
                 className="inline-flex items-center justify-center gap-space-sm rounded-xl bg-teal-flow px-space-xl py-4 font-headline-sm text-body-lg font-semibold text-on-primary shadow-lg transition-all hover:bg-secondary"
               >
-                <span>Plan Your Journey Now</span>
+                <span>{t('Plan Your Journey Now')}</span>
                 <Icon name="arrow_forward" className="text-[20px]" />
               </Link>
               <Link
@@ -48,7 +50,7 @@ export default function CtaBanner() {
                 className="inline-flex items-center justify-center gap-space-xs rounded-xl border border-white/20 bg-surface/10 px-space-xl py-4 font-headline-sm text-body-lg font-semibold text-on-primary backdrop-blur-md transition-all hover:bg-surface/20"
               >
                 <Icon name="calendar_month" className="text-[20px]" />
-                <span>View Live Timetable</span>
+                <span>{t('View Live Timetable')}</span>
               </Link>
             </div>
           </div>

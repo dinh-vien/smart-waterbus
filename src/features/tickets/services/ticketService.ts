@@ -6,7 +6,9 @@ import {
   MANAGE_BOOKING,
   TICKET_WALLET,
 } from '../../../mocks/tickets'
-import type { ManageBooking, Ticket, TicketWallet } from '../types'
+import { getTripDetail } from '../../trips/services/tripService'
+import { buildBookedTicket } from '../utils'
+import type { BookedSnapshot, ManageBooking, Ticket, TicketWallet } from '../types'
 
 // Mock service layer: swap for real API calls later without touching the UI.
 export function getTicketWallet(): Promise<TicketWallet> {
@@ -31,4 +33,20 @@ export function requestRefund(
   bookingCode: string,
 ): Promise<{ bookingCode: string; status: 'submitted' }> {
   return withDelay({ bookingCode, status: 'submitted' as const }, 500)
+}
+
+/** Rebuilds the wallet tickets for this session's bookings in the active language. */
+export function getBookedTickets(bookings: BookedSnapshot[]): Promise<Ticket[]> {
+  return Promise.all(
+    bookings.map(async (b) => {
+      const trip = await getTripDetail(b.tripId, b.query)
+      return buildBookedTicket({
+        trip,
+        seat: b.seat,
+        seatId: b.seatId,
+        passenger: b.passenger,
+        totalVnd: b.totalVnd,
+      })
+    }),
+  )
 }

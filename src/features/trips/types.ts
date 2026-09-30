@@ -165,6 +165,8 @@ export interface TripDetail extends Trip {
   dateLabel: string
   /** Full date with year, e.g. "Dec 16, 2025". */
   dateFull: string
+  /** Date without the year, e.g. "Dec 16". */
+  dateShort: string
   timeline: TimelineStep[]
   amenityDetails: AmenityDetail[]
   boardingSteps: BoardingStep[]

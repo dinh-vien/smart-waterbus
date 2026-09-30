@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { t } from '../../i18n'
 
 interface QrCodeProps {
   /** Text the pattern is derived from. Same value always yields the same pattern. */
@@ -62,7 +63,7 @@ export default function QrCode({ value, size = 160, className = '' }: QrCodeProp
       width={size}
       height={size}
       role="img"
-      aria-label={`Boarding QR for ${value}`}
+      aria-label={t('Boarding QR for {code}', { code: value })}
       className={className}
       shapeRendering="crispEdges"
     >

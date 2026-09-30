@@ -4,6 +4,7 @@ import NetworkSection from '../../features/trips/components/NetworkSection'
 import SearchForm from '../../features/trips/components/SearchForm'
 import { useSearchForm } from '../../features/trips/hooks/useTripSearch'
 import { useDocumentTitle } from '../../hooks'
+import { t } from '../../i18n'
 
 const CUES = [
   {
@@ -39,17 +40,19 @@ export default function SearchJourneyPage() {
             <div className="mb-space-xs inline-flex items-center gap-space-xs rounded-full border border-teal-flow/20 bg-sand-light px-3 py-1 font-headline-sm text-xs font-semibold text-teal-flow">
               <Icon name="water" className="text-[16px]" />
               <span className="text-[11px] font-bold uppercase tracking-wider">
-                River Route Planning
+                {t('River Route Planning')}
               </span>
             </div>
             <h1 className="font-headline-sm text-3xl font-extrabold leading-tight tracking-tight text-deep-river sm:text-4xl lg:text-[42px]">
-              Plan Your River Journey
+              {t('Plan Your River Journey')}
             </h1>
             <p className="mt-1.5 max-w-2xl text-base leading-relaxed text-on-surface-variant">
-              Select your departure pier and destination along the Saigon River transit corridor.
+              {t(
+                'Select your departure pier and destination along the Saigon River transit corridor.',
+              )}
             </p>
           </div>
-          <StatusPill>All 5 River Terminals Operational</StatusPill>
+          <StatusPill>{t('All 5 River Terminals Operational')}</StatusPill>
         </div>
       </section>
 

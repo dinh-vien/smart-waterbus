@@ -1,5 +1,6 @@
 import { Icon } from '../../../components/ui'
 import type { FeatureCard } from '../types'
+import { t } from '../../../i18n'
 
 interface WhyRiverSectionProps {
   features: FeatureCard[]
@@ -13,15 +14,16 @@ export default function WhyRiverSection({ features }: WhyRiverSectionProps) {
           <div className="max-w-2xl space-y-space-xs">
             <div className="inline-flex items-center gap-space-xs text-body-sm font-bold uppercase tracking-widest text-teal-flow">
               <span className="h-2 w-2 rounded-full bg-teal-flow" />
-              Why River Travel
+              {t('Why River Travel')}
             </div>
             <h2 className="font-headline-lg text-headline-lg font-bold tracking-tight text-deep-river">
-              More Than Transportation — A New Way to See Saigon
+              {t('More Than Transportation — A New Way to See Saigon')}
             </h2>
           </div>
           <p className="max-w-md text-body-md text-on-surface-variant">
-            From iconic skyline landmarks to hidden historical wharfs, Smart Waterbus brings you
-            closer to the city’s living river heritage.
+            {t(
+              'From iconic skyline landmarks to hidden historical wharfs, Smart Waterbus brings you closer to the city’s living river heritage.',
+            )}
           </p>
         </div>
 

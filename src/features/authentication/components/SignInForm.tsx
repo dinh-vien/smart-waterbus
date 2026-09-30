@@ -5,6 +5,7 @@ import { SIGN_IN_DEFAULTS } from '../../../mocks/auth'
 import type { SignInPayload } from '../authenticationTypes'
 import AuthButton from './authButton'
 import AuthField from './AuthField'
+import { t } from '../../../i18n'
 
 interface SignInFormProps {
   submitting: boolean
@@ -34,27 +35,27 @@ export default function SignInForm({
 
       <div className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-outline">
         <span className="h-px flex-1 bg-outline-variant/60" />
-        Or continue with email
+        {t('Or continue with email')}
         <span className="h-px flex-1 bg-outline-variant/60" />
       </div>
 
       <AuthField
         id="signin-email"
-        label="Email address"
+        label={t('Email address')}
         icon="mail"
         type="email"
-        placeholder="name@example.com"
+        placeholder={t('name@example.com')}
         autoComplete="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <AuthField
         id="signin-password"
-        label="Password"
+        label={t('Password')}
         icon="lock"
         type="password"
         revealable
-        placeholder="Enter your password"
+        placeholder={t('Enter your password')}
         autoComplete="current-password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -63,7 +64,7 @@ export default function SignInForm({
             type="button"
             className="text-xs font-semibold text-teal-flow transition-colors hover:text-deep-river hover:underline"
           >
-            Forgot password?
+            {t('Forgot password?')}
           </button>
         }
       />
@@ -76,7 +77,7 @@ export default function SignInForm({
           className="h-4 w-4 rounded border-outline-variant text-teal-flow accent-teal-flow focus:ring-teal-flow focus:ring-offset-0"
         />
         <span className="text-xs font-medium text-on-surface-variant">
-          Keep me signed in on this device
+          {t('Keep me signed in on this device')}
         </span>
       </label>
 
@@ -86,19 +87,19 @@ export default function SignInForm({
           disabled={submitting}
           className="flex w-full items-center justify-center gap-2 rounded-xl bg-teal-flow px-5 py-3 text-sm font-bold tracking-wide text-white shadow-md shadow-teal-flow/20 transition-all hover:bg-[#0f676b] hover:shadow-lg hover:shadow-teal-flow/30 active:scale-[0.99] disabled:opacity-60"
         >
-          <span>{submitting ? 'Signing in…' : 'Sign In'}</span>
+          <span>{submitting ? t('Signing in…') : t('Sign In')}</span>
           <Icon name="arrow_forward" className="text-[18px]" />
         </button>
       </div>
 
       <p className="pt-2 text-center text-xs text-on-surface-variant">
-        Don’t have an account yet?
+        {t('Don’t have an account yet?')}
         <button
           type="button"
           onClick={onSwitchToRegister}
           className="ml-1 font-bold text-teal-flow underline hover:text-deep-river"
         >
-          Create Account
+          {t('Create Account')}
         </button>
       </p>
     </form>

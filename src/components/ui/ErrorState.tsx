@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ROUTES } from '../../routes/routes'
 import Icon from './Icon'
+import { t } from '../../i18n'
 
 interface ErrorStateProps {
   onRetry?: () => void
@@ -13,8 +14,8 @@ interface ErrorStateProps {
 /** Shown when loading data fails. Offers a retry and a way back home. */
 export default function ErrorState({
   onRetry,
-  title = 'We couldn’t load this page',
-  message = 'Something went wrong while loading the data. Check your connection and try again.',
+  title = t('We couldn’t load this page'),
+  message = t('Something went wrong while loading the data. Check your connection and try again.'),
   compact = false,
 }: ErrorStateProps) {
   if (compact) {
@@ -33,7 +34,7 @@ export default function ErrorState({
             onClick={onRetry}
             className="shrink-0 rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-teal-flow shadow-sm hover:bg-surface-container-low"
           >
-            Try again
+            {t('Try again')}
           </button>
         )}
       </div>
@@ -58,14 +59,14 @@ export default function ErrorState({
             className="inline-flex items-center gap-2 rounded-full bg-teal-flow px-6 py-2.5 font-headline-sm text-body-md font-semibold text-on-primary shadow-sm transition-colors hover:bg-secondary"
           >
             <Icon name="refresh" className="text-[18px]" />
-            Try again
+            {t('Try again')}
           </button>
         )}
         <Link
           to={ROUTES.home}
           className="inline-flex items-center rounded-full border border-teal-flow px-6 py-2.5 font-headline-sm text-body-md font-semibold text-teal-flow transition-colors hover:bg-sand-light"
         >
-          Back to home
+          {t('Back to home')}
         </Link>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { Icon } from '../../../components/ui'
 import type { TechFeature } from '../types'
+import { t } from '../../../i18n'
 
 interface TechSectionProps {
   features: TechFeature[]
@@ -21,15 +22,16 @@ export default function TechSection({ features }: TechSectionProps) {
         <div className="flex flex-col justify-between gap-space-md md:flex-row md:items-end">
           <div className="max-w-xl space-y-space-xs">
             <span className="block text-body-sm font-bold uppercase tracking-wider text-sky-aqua">
-              Intelligent Navigation Tech
+              {t('Intelligent Navigation Tech')}
             </span>
             <h2 className="font-headline-lg text-headline-lg font-bold tracking-tight text-on-primary">
-              Next-Generation River Mobility Systems
+              {t('Next-Generation River Mobility Systems')}
             </h2>
           </div>
           <p className="max-w-md text-body-md text-sand-light/80">
-            Behind every quiet river glide is an advanced telemetry stack coordinating vessels,
-            tides, pier turnstiles, and passenger comfort.
+            {t(
+              'Behind every quiet river glide is an advanced telemetry stack coordinating vessels, tides, pier turnstiles, and passenger comfort.',
+            )}
           </p>
         </div>
 

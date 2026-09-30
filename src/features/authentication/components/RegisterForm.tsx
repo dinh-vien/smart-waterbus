@@ -4,6 +4,7 @@ import { Icon } from '../../../components/ui'
 import type { RegisterPayload } from '../authenticationTypes'
 import AuthButton from './authButton'
 import AuthField from './AuthField'
+import { t } from '../../../i18n'
 
 interface RegisterFormProps {
   submitting: boolean
@@ -33,37 +34,37 @@ export default function RegisterForm({
   return (
     <form className="space-y-3.5" onSubmit={handleSubmit} noValidate>
       <AuthButton onClick={onGoogle} disabled={submitting}>
-        Sign up with Google
+        {t('Sign up with Google')}
       </AuthButton>
 
       <div className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-outline">
         <span className="h-px flex-1 bg-outline-variant/60" />
-        Or register with email
+        {t('Or register with email')}
         <span className="h-px flex-1 bg-outline-variant/60" />
       </div>
 
       <AuthField
         id="reg-name"
-        label="Full name"
+        label={t('Full name')}
         icon="person"
-        placeholder="e.g. Nguyen Van An"
+        placeholder={t('e.g. Nguyen Van An')}
         autoComplete="name"
         value={fullName}
         onChange={(e) => setFullName(e.target.value)}
       />
       <AuthField
         id="reg-email"
-        label="Email address"
+        label={t('Email address')}
         icon="mail"
         type="email"
-        placeholder="passenger@example.com"
+        placeholder={t('passenger@example.com')}
         autoComplete="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <AuthField
         id="reg-phone"
-        label="Phone number"
+        label={t('Phone number')}
         icon="call"
         type="tel"
         placeholder="+84 90 123 4567"
@@ -74,18 +75,18 @@ export default function RegisterForm({
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <AuthField
           id="reg-password"
-          label="Password"
+          label={t('Password')}
           type="password"
-          placeholder="Min. 8 characters"
+          placeholder={t('Min. 8 characters')}
           autoComplete="new-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <AuthField
           id="reg-confirm"
-          label="Confirm password"
+          label={t('Confirm password')}
           type="password"
-          placeholder="Repeat password"
+          placeholder={t('Repeat password')}
           autoComplete="new-password"
           value={confirm}
           onChange={(e) => setConfirm(e.target.value)}
@@ -100,11 +101,13 @@ export default function RegisterForm({
           className="mt-0.5 h-4 w-4 rounded border-outline-variant text-teal-flow accent-teal-flow focus:ring-teal-flow"
         />
         <span className="text-[11px] leading-snug text-on-surface-variant">
-          I agree to the{' '}
-          <span className="font-medium text-teal-flow hover:underline">Terms of Carriage</span> and
-          acknowledge the{' '}
+          {t('I agree to the')}{' '}
           <span className="font-medium text-teal-flow hover:underline">
-            Waterway Safety &amp; Privacy Notice
+            {t('Terms of Carriage')}
+          </span>{' '}
+          {t('and acknowledge the')}{' '}
+          <span className="font-medium text-teal-flow hover:underline">
+            {t('Waterway Safety & Privacy Notice')}
           </span>
           .
         </span>
@@ -116,19 +119,19 @@ export default function RegisterForm({
           disabled={submitting}
           className="flex w-full items-center justify-center gap-2 rounded-xl bg-teal-flow px-5 py-3 text-sm font-bold tracking-wide text-white shadow-md shadow-teal-flow/20 transition-all hover:bg-[#0f676b] hover:shadow-lg hover:shadow-teal-flow/30 active:scale-[0.99] disabled:opacity-60"
         >
-          <span>{submitting ? 'Creating account…' : 'Create Account'}</span>
+          <span>{submitting ? t('Creating account…') : t('Create Account')}</span>
           <Icon name="arrow_forward" className="text-[18px]" />
         </button>
       </div>
 
       <p className="pt-2 text-center text-xs text-on-surface-variant">
-        Already registered with Smart Waterbus?
+        {t('Already registered with Smart Waterbus?')}
         <button
           type="button"
           onClick={onSwitchToSignIn}
           className="ml-1 font-bold text-teal-flow underline hover:text-deep-river"
         >
-          Sign In
+          {t('Sign In')}
         </button>
       </p>
     </form>

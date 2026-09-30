@@ -5,6 +5,7 @@ import { ROUTES } from '../../../routes/routes'
 import type { PierOption, Trip } from '../types'
 import { formatNumber } from '../../../utils/format'
 import { seatsLabel } from '../utils'
+import { t } from '../../../i18n'
 
 interface TripCardProps {
   trip: Trip
@@ -89,7 +90,10 @@ export default function TripCard({ trip, origin, destination, onSelect }: TripCa
           </div>
           <div className="flex flex-1 flex-col items-center px-2">
             <span className={`mb-1 text-center text-xs font-bold ${accent}`}>
-              {trip.durationMins} min • {trip.crossingKind}
+              {t('{durationMins} min • {crossingKind}', {
+                durationMins: trip.durationMins,
+                crossingKind: trip.crossingKind,
+              })}
             </span>
             <div className="relative flex w-full items-center">
               <div
@@ -138,7 +142,7 @@ export default function TripCard({ trip, origin, destination, onSelect }: TripCa
             </span>
             <div className="font-headline-md text-xl font-bold text-deep-river">
               {formatNumber(trip.fareVnd)}{' '}
-              <span className="text-xs font-medium text-on-surface-variant">VND</span>
+              <span className="text-xs font-medium text-on-surface-variant">{t('VND')}</span>
             </div>
           </div>
           <Link
@@ -152,7 +156,7 @@ export default function TripCard({ trip, origin, destination, onSelect }: TripCa
                 : 'border border-teal-flow/15 bg-sand-light text-deep-river hover:bg-[#dfe9e5]'
             }`}
           >
-            Select Trip
+            {t('Select Trip')}
             <Icon name="arrow_forward" className="text-[16px]" />
           </Link>
         </div>

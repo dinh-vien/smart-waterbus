@@ -1,5 +1,6 @@
 import mapImage from '../../../assets/images/corridor-map.jpg'
 import { Icon } from '../../../components/ui'
+import { t } from '../../../i18n'
 
 const NOTES = [
   {
@@ -25,26 +26,26 @@ export default function CorridorSidebar() {
       <div className="flex items-start justify-between gap-2">
         <div>
           <span className="text-[10px] font-semibold uppercase tracking-wider text-outline">
-            Corridor Overview
+            {t('Corridor Overview')}
           </span>
           <h3 className="font-headline-sm text-base font-bold leading-tight text-deep-river">
-            Corridor Crossing Overview
+            {t('Corridor Crossing Overview')}
           </h3>
         </div>
         <span className="rounded-full bg-white px-3 py-1 text-[11px] font-semibold text-teal-flow shadow-sm">
-          Line 1 Express • Calm River Flow
+          {t('Line 1 Express • Calm River Flow')}
         </span>
       </div>
 
       <div className="relative h-40 overflow-hidden rounded-xl border border-teal-flow/15 bg-white">
         <img
-          alt="Bach Dang to Thu Thiem river crossing map"
+          alt={t('Bach Dang to Thu Thiem river crossing map')}
           src={mapImage}
           className="h-full w-full object-cover"
         />
         <div className="absolute inset-x-3 bottom-3 flex items-center justify-between rounded-lg bg-white/95 px-3 py-1.5 text-[11px] font-semibold text-deep-river shadow-sm">
-          <span>1.2 km navigable river crossing</span>
-          <span className="text-teal-flow">WB-01 In Transit • 42 km/h</span>
+          <span>{t('1.2 km navigable river crossing')}</span>
+          <span className="text-teal-flow">{t('WB-01 In Transit • 42 km/h')}</span>
         </div>
       </div>
 
@@ -53,7 +54,7 @@ export default function CorridorSidebar() {
           <li key={n.title} className="flex items-start gap-2">
             <Icon name={n.icon} className="text-[18px] text-teal-flow" />
             <span>
-              <strong className="text-deep-river">{n.title}</strong> {n.text}
+              <strong className="text-deep-river">{t(n.title)}</strong> {t(n.text)}
             </span>
           </li>
         ))}
@@ -64,14 +65,16 @@ export default function CorridorSidebar() {
           <Icon name="support_agent" className="text-[22px]" />
         </div>
         <div className="min-w-0 flex-1">
-          <div className="font-headline-sm text-xs font-bold">Waterway Assistant</div>
-          <p className="text-[11px] text-sand-light/80">Need pier transfers or Sala connections?</p>
+          <div className="font-headline-sm text-xs font-bold">{t('Waterway Assistant')}</div>
+          <p className="text-[11px] text-sand-light/80">
+            {t('Need pier transfers or Sala connections?')}
+          </p>
         </div>
         <button
           type="button"
           className="inline-flex shrink-0 items-center gap-1 rounded-full bg-teal-flow px-3 py-2 text-[11px] font-bold text-on-primary transition-colors hover:bg-secondary"
         >
-          Ask Pier Concierge
+          {t('Ask Pier Concierge')}
           <Icon name="send" className="text-[13px]" />
         </button>
       </div>

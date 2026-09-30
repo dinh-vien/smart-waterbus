@@ -12,6 +12,7 @@ import { useBooking } from '../../features/booking/hooks/useBooking'
 import type { BookingStep } from '../../features/booking/types'
 import { useDocumentTitle } from '../../hooks'
 import { ROUTES } from '../../routes/routes'
+import { t } from '../../i18n'
 
 export default function CheckoutReviewPage() {
   useDocumentTitle('Review Your Booking')
@@ -54,7 +55,7 @@ export default function CheckoutReviewPage() {
         />
         <span className="inline-flex items-center gap-2 rounded-full bg-secondary-container/60 px-3 py-1 text-xs font-semibold text-on-secondary-container">
           <span className="h-2 w-2 rounded-full bg-teal-flow" />
-          River Crossing {trip.vesselCode} • Review Stage
+          {t('River Crossing {vesselCode} • Review Stage', { vesselCode: trip.vesselCode })}
         </span>
       </div>
 
@@ -65,15 +66,15 @@ export default function CheckoutReviewPage() {
       <div className="mt-space-xl flex flex-col justify-between gap-space-md md:flex-row md:items-end">
         <div>
           <h1 className="font-headline-xl text-headline-xl-mobile tracking-tight text-deep-river md:text-headline-xl">
-            Review Your Booking
+            {t('Review Your Booking')}
           </h1>
           <p className="text-body-md text-on-surface-variant">
-            Confirm your trip, passenger, seat, and fare before proceeding to payment.
+            {t('Confirm your trip, passenger, seat, and fare before proceeding to payment.')}
           </p>
         </div>
         <span className="inline-flex items-center gap-2 self-start rounded-full bg-sand-light px-space-md py-2 text-xs text-teal-flow md:self-auto">
           <Icon name="verified_user" className="text-[16px]" />
-          Your selected seat remains reserved while you complete checkout.
+          {t('Your selected seat remains reserved while you complete checkout.')}
         </span>
       </div>
 

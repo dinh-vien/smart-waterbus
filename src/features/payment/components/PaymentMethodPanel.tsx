@@ -5,6 +5,7 @@ import { useFetch } from '../../../hooks'
 import { getEwallets, getPaymentMethods } from '../services/paymentService'
 import type { PaymentMethodId } from '../types'
 import { formatVndSuffix } from '../../../utils/format'
+import { t } from '../../../i18n'
 
 interface PaymentMethodPanelProps {
   tripCode: string
@@ -30,26 +31,26 @@ function QrPanel({
   return (
     <div className={INNER}>
       <h3 className="font-headline-sm text-xl font-bold text-deep-river">
-        Scan to Pay with Any Banking App
+        {t('Scan to Pay with Any Banking App')}
       </h3>
       <p className="text-xs text-on-surface-variant">
-        Compatible with major banking and mobile payment applications.
+        {t('Compatible with major banking and mobile payment applications.')}
       </p>
       <div className="mt-space-md flex flex-col gap-space-lg md:flex-row md:items-center">
         <div className="rounded-2xl bg-white p-space-md text-center shadow-sm">
           <QrCode value={`${reference}-${amountVnd}`} size={170} className="mx-auto" />
-          <div className="mt-2 text-[11px] text-on-surface-variant">Amount to pay</div>
+          <div className="mt-2 text-[11px] text-on-surface-variant">{t('Amount to pay')}</div>
           <div className="font-headline-sm text-lg font-bold text-deep-river">
             {formatVndSuffix(amountVnd)}
           </div>
         </div>
         <div className="flex-1 space-y-space-md">
           <p className="text-sm text-on-surface-variant">
-            Scan this QR code using your preferred banking or payment app.
+            {t('Scan this QR code using your preferred banking or payment app.')}
           </p>
           <div className="rounded-xl bg-white/70 p-space-md">
             <div className="flex items-center justify-between text-xs text-on-surface-variant">
-              Booking Reference
+              {t('Booking Reference')}
               <CopyButton value={reference} />
             </div>
             <div className="mt-1 font-headline-sm text-xl font-bold tracking-wide text-deep-river">
@@ -63,7 +64,7 @@ function QrPanel({
         onClick={onOther}
         className="mt-space-md text-xs font-semibold text-teal-flow hover:underline"
       >
-        Choose another payment method
+        {t('Choose another payment method')}
       </button>
     </div>
   )
@@ -72,13 +73,17 @@ function QrPanel({
 function CardPanel() {
   return (
     <div className={INNER}>
-      <h3 className="font-headline-sm text-xl font-bold text-deep-river">Pay with Bank Card</h3>
+      <h3 className="font-headline-sm text-xl font-bold text-deep-river">
+        {t('Pay with Bank Card')}
+      </h3>
       <p className="text-xs text-on-surface-variant">
-        Visa, Mastercard and domestic cards are accepted.
+        {t('Visa, Mastercard and domestic cards are accepted.')}
       </p>
       <div className="mt-space-md grid grid-cols-1 gap-space-sm md:grid-cols-2">
         <label className="md:col-span-2">
-          <span className="mb-1 block text-xs font-semibold text-on-surface">Card number</span>
+          <span className="mb-1 block text-xs font-semibold text-on-surface">
+            {t('Card number')}
+          </span>
           <input
             className={`${FIELD} px-3`}
             placeholder="4242 4242 4242 4242"
@@ -86,16 +91,16 @@ function CardPanel() {
           />
         </label>
         <label>
-          <span className="mb-1 block text-xs font-semibold text-on-surface">Expiry</span>
-          <input className={`${FIELD} px-3`} placeholder="MM / YY" />
+          <span className="mb-1 block text-xs font-semibold text-on-surface">{t('Expiry')}</span>
+          <input className={`${FIELD} px-3`} placeholder={t('MM / YY')} />
         </label>
         <label>
-          <span className="mb-1 block text-xs font-semibold text-on-surface">CVC</span>
+          <span className="mb-1 block text-xs font-semibold text-on-surface">{t('CVC')}</span>
           <input className={`${FIELD} px-3`} placeholder="123" inputMode="numeric" />
         </label>
       </div>
       <p className="mt-space-sm text-xs text-on-surface-variant">
-        Demo only: nothing is charged and card details are not stored.
+        {t('Demo only: nothing is charged and card details are not stored.')}
       </p>
     </div>
   )
@@ -105,8 +110,12 @@ function WalletPanel() {
   const { data, error, retry } = useFetch(getEwallets)
   return (
     <div className={INNER}>
-      <h3 className="font-headline-sm text-xl font-bold text-deep-river">Pay with E-Wallet</h3>
-      <p className="text-xs text-on-surface-variant">Choose your mobile wallet to continue.</p>
+      <h3 className="font-headline-sm text-xl font-bold text-deep-river">
+        {t('Pay with E-Wallet')}
+      </h3>
+      <p className="text-xs text-on-surface-variant">
+        {t('Choose your mobile wallet to continue.')}
+      </p>
       {error && (
         <div className="mt-space-md">
           <ErrorState compact onRetry={retry} />
@@ -142,9 +151,9 @@ export default function PaymentMethodPanel({
 
   return (
     <div className="rounded-2xl bg-surface-container-lowest p-space-lg shadow-[0_2px_16px_rgba(13,37,56,0.05)] md:p-space-xl">
-      <h2 className="font-headline-lg text-headline-md text-deep-river">Payment Method</h2>
+      <h2 className="font-headline-lg text-headline-md text-deep-river">{t('Payment Method')}</h2>
       <p className="text-sm text-on-surface-variant">
-        Select how you would like to pay for trip {tripCode}
+        {t('Select how you would like to pay for trip {tripCode}', { tripCode })}
       </p>
 
       {methodsError && (
@@ -156,7 +165,7 @@ export default function PaymentMethodPanel({
       <div
         ref={groupRef}
         role="radiogroup"
-        aria-label="Payment method"
+        aria-label={t('Payment method')}
         className="mt-space-md grid grid-cols-1 gap-space-sm md:grid-cols-3"
       >
         {(methods ?? []).map((m) => {
@@ -211,15 +220,16 @@ export default function PaymentMethodPanel({
         <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-teal-flow" />
         <div>
           <div className="font-semibold text-deep-river">
-            Payment status: Waiting for confirmation
+            {t('Payment status: Waiting for confirmation')}
           </div>
-          After completing payment, continue to check the booking status.
+          {t('After completing payment, continue to check the booking status.')}
         </div>
       </div>
       <p className="mt-space-sm flex items-center gap-2 text-xs text-on-surface-variant">
         <Icon name="verified_user" className="text-[16px] text-teal-flow" />
-        Payment details are handled securely. Your ticket will become available after the booking is
-        successfully confirmed.
+        {t(
+          'Payment details are handled securely. Your ticket will become available after the booking is successfully confirmed.',
+        )}
       </p>
     </div>
   )

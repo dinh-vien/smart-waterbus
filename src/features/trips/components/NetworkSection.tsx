@@ -26,22 +26,24 @@ export default function NetworkSection({ routes, piers }: NetworkSectionProps) {
           <div className="flex items-center gap-space-xs">
             <span className="h-2.5 w-2.5 rounded-full bg-teal-flow" />
             <h2 className="font-headline-sm text-2xl font-bold tracking-tight text-deep-river">
-              Explore the River Network
+              {t('Explore the River Network')}
             </h2>
           </div>
           <p className="mt-1 text-sm text-on-surface-variant">
-            Select a popular waterway connection or trace vessels across our five active piers.
+            {t(
+              'Select a popular waterway connection or trace vessels across our five active piers.',
+            )}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-4 rounded-xl border border-[#E2ECEE] bg-[#F4F7F8] px-4 py-2 text-xs font-medium text-on-surface-variant">
           <div className="flex items-center gap-1.5">
             <span className="h-1.5 w-3 rounded-full bg-teal-flow" />
-            <span className="font-semibold text-deep-river">Line 1 Main Corridor</span>
+            <span className="font-semibold text-deep-river">{t('Line 1 Main Corridor')}</span>
           </div>
           <span className="text-outline-variant">•</span>
           <div className="flex items-center gap-1.5">
             <span className="h-2.5 w-2.5 rounded-full border border-white bg-deep-river" />
-            <span>Pier Station Hub</span>
+            <span>{t('Pier Station Hub')}</span>
           </div>
           <span className="text-outline-variant">•</span>
           <div className="flex items-center gap-1.5">
@@ -49,7 +51,7 @@ export default function NetworkSection({ routes, piers }: NetworkSectionProps) {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-aqua opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-teal-flow" />
             </span>
-            <span className="font-semibold text-teal-flow">Live Vessel WB-01</span>
+            <span className="font-semibold text-teal-flow">{t('Live Vessel WB-01')}</span>
           </div>
         </div>
       </div>
@@ -80,7 +82,7 @@ export default function NetworkSection({ routes, piers }: NetworkSectionProps) {
               <div className="mt-3 flex items-center justify-between border-t border-outline-variant/40 pt-2.5">
                 <div>
                   <span className="block text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">
-                    Standard Fare
+                    {t('Standard Fare')}
                   </span>
                   <span className="font-headline-sm text-sm font-bold text-teal-flow">
                     {t('From {price}', { price: formatVndSuffix(route.fromFareVnd) })}
@@ -91,7 +93,7 @@ export default function NetworkSection({ routes, piers }: NetworkSectionProps) {
                   onClick={() => applyRoute(route)}
                   className="group inline-flex items-center gap-1 rounded-lg border border-teal-flow/20 bg-white px-3 py-1.5 font-headline-sm text-xs font-bold text-teal-flow shadow-2xs transition-all hover:bg-teal-flow hover:text-on-primary"
                 >
-                  <span>Use this route</span>
+                  <span>{t('Use this route')}</span>
                   <Icon
                     name="arrow_forward"
                     className="text-[14px] transition-transform group-hover:translate-x-0.5"

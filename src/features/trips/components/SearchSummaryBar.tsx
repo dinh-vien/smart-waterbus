@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
 import type { PierOption, SearchQuery } from '../types'
+import { t } from '../../../i18n'
 
 interface SearchSummaryBarProps {
   query: SearchQuery
@@ -51,23 +52,28 @@ export default function SearchSummaryBar({ query, piers, dateLabel }: SearchSumm
   return (
     <div className="flex flex-col items-stretch justify-between gap-space-md rounded-2xl border border-deep-river/10 bg-white p-space-md shadow-[0_4px_16px_rgba(13,37,56,0.04)] xl:flex-row xl:items-center">
       <div className="grid flex-1 grid-cols-2 items-center gap-space-md md:grid-cols-4">
-        <Item icon="trip_origin" label="Origin Pier" value={pier(query.originId).name} strong />
+        <Item
+          icon="trip_origin"
+          label={t('Origin Pier')}
+          value={pier(query.originId).name}
+          strong
+        />
         <Item
           icon="location_on"
-          label="Destination Pier"
+          label={t('Destination Pier')}
           value={pier(query.destinationId).name}
           strong
         />
         <Item
           icon="calendar_today"
-          label="Departure Date"
+          label={t('Departure Date')}
           value={dateLabel}
           iconClass="text-deep-river"
         />
         <Item
           icon="group"
-          label="Passengers"
-          value={query.passengers}
+          label={t('Passengers')}
+          value={t(query.passengers)}
           iconClass="text-deep-river"
         />
       </div>
@@ -77,7 +83,7 @@ export default function SearchSummaryBar({ query, piers, dateLabel }: SearchSumm
           className="inline-flex w-full items-center justify-center gap-space-xs rounded-full border border-teal-flow/15 bg-sand-light px-5 py-2.5 text-xs font-semibold text-deep-river transition-all hover:bg-[#dfe9e5] md:text-sm xl:w-auto"
         >
           <Icon name="tune" className="text-[18px] text-teal-flow" />
-          Modify Search
+          {t('Modify Search')}
         </Link>
       </div>
     </div>

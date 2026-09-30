@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Logo } from '../../components/brand'
 import { Icon } from '../../components/ui'
 import { ROUTES } from '../../routes/routes'
+import { t } from '../../i18n'
 
 const SOCIALS = [
   { label: 'River radar', icon: 'radar' },
@@ -38,15 +39,17 @@ export default function Footer() {
             </span>
             <div>
               <span className="block font-headline-sm text-headline-sm font-bold text-deep-river">
-                River Corridor Status: Normal Service
+                {t('River Corridor Status: Normal Service')}
               </span>
               <span className="text-body-sm text-on-surface-variant">
-                All 18 river stations operational • Average headway 12 mins • Water condition: Calm
+                {t(
+                  'All 18 river stations operational • Average headway 12 mins • Water condition: Calm',
+                )}
               </span>
             </div>
           </div>
           <span className="rounded-full border border-teal-flow/20 bg-sand-light px-space-md py-1.5 text-body-sm font-semibold text-teal-flow">
-            Waterway Patrol Active
+            {t('Waterway Patrol Active')}
           </span>
         </div>
 
@@ -54,15 +57,16 @@ export default function Footer() {
           <div className="space-y-space-md lg:col-span-2 lg:pr-space-xl">
             <Logo className="h-8 w-auto" />
             <p className="max-w-sm text-body-md text-on-surface-variant">
-              Pioneering high-frequency electric river transit and immersive city voyages.
-              Experience sustainable urban waterways crafted for commuters and explorers alike.
+              {t(
+                'Pioneering high-frequency electric river transit and immersive city voyages. Experience sustainable urban waterways crafted for commuters and explorers alike.',
+              )}
             </p>
             <div className="flex items-center gap-space-md pt-space-xs">
               {SOCIALS.map((s) => (
                 <button
                   key={s.icon}
                   type="button"
-                  aria-label={s.label}
+                  aria-label={t(s.label)}
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-outline-variant/30 bg-surface text-on-surface-variant transition-colors hover:bg-mist hover:text-teal-flow"
                 >
                   <Icon name={s.icon} className="text-[18px]" />
@@ -73,13 +77,13 @@ export default function Footer() {
 
           <div className="space-y-space-md">
             <span className="block font-headline-sm text-body-lg font-bold text-deep-river">
-              Quick Links
+              {t('Quick Links')}
             </span>
             <ul className="space-y-space-sm text-body-md text-on-surface-variant">
               {QUICK_LINKS.map((l) => (
                 <li key={l.label}>
                   <Link to={l.to} className="transition-colors hover:text-deep-river">
-                    {l.label}
+                    {t(l.label)}
                   </Link>
                 </li>
               ))}
@@ -88,13 +92,13 @@ export default function Footer() {
 
           <div className="space-y-space-md">
             <span className="block font-headline-sm text-body-lg font-bold text-deep-river">
-              Tourism Experiences
+              {t('Tourism Experiences')}
             </span>
             <ul className="space-y-space-sm text-body-md text-on-surface-variant">
               {EXPERIENCES.map((label) => (
                 <li key={label}>
                   <Link to={ROUTES.explore} className="transition-colors hover:text-deep-river">
-                    {label}
+                    {t(label)}
                   </Link>
                 </li>
               ))}
@@ -103,29 +107,29 @@ export default function Footer() {
 
           <div className="space-y-space-md">
             <span className="block font-headline-sm text-body-lg font-bold text-deep-river">
-              Support &amp; Contact
+              {t('Support & Contact')}
             </span>
             <div className="space-y-space-xs text-body-md text-on-surface-variant">
-              <p className="font-semibold text-deep-river">Operational Hours</p>
-              <p className="text-body-sm">Mon – Sun: 06:00 – 23:00</p>
-              <p className="pt-space-xs font-semibold text-deep-river">Dispatch Hotline</p>
+              <p className="font-semibold text-deep-river">{t('Operational Hours')}</p>
+              <p className="text-body-sm">{t('Mon – Sun: 06:00 – 23:00')}</p>
+              <p className="pt-space-xs font-semibold text-deep-river">{t('Dispatch Hotline')}</p>
               <p className="text-body-sm">+84 (0) 28 3822 5555</p>
             </div>
             <div className="inline-flex items-center gap-space-sm rounded-xl border border-outline-variant/30 bg-surface px-space-md py-space-xs">
               <Icon name="qr_code_2" className="text-[20px] text-teal-flow" />
               <span className="text-body-sm font-semibold text-deep-river">
-                Transit App Scanner
+                {t('Transit App Scanner')}
               </span>
             </div>
           </div>
         </div>
 
         <div className="flex flex-col items-center justify-between gap-space-md border-t border-outline-variant/30 pt-space-xl text-body-sm text-on-surface-variant md:flex-row">
-          <p>© 2025 Smart Waterbus. River Connects Greater Stories.</p>
+          <p>{t('© 2025 Smart Waterbus. River Connects Greater Stories.')}</p>
           <div className="flex flex-wrap items-center justify-center gap-space-lg font-medium">
             {LEGAL.map((label) => (
               <button key={label} type="button" className="transition-colors hover:text-deep-river">
-                {label}
+                {t(label)}
               </button>
             ))}
           </div>
