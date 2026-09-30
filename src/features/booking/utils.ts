@@ -25,3 +25,8 @@ export function seatPosition(seat: Seat | undefined): string {
   const side = seat.column === 'A' || seat.column === 'B' ? 'Portside' : 'Starboard'
   return `${side} ${seat.window ? 'Window' : 'Aisle'}`
 }
+
+/** Mock booking reference, e.g. WB-2025-0842-A2. Real references will come from the backend. */
+export function bookingReference(seatId: string): string {
+  return `WB-2025-0842-${seatId}`
+}

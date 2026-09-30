@@ -1,8 +1,15 @@
 import { useFetch } from '../../../hooks'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import { useTripDetail } from '../../trips/hooks/useTripSearch'
-import { applyVoucher, selectSeat, setTermsAccepted, updatePassenger } from '../bookingSlice'
+import {
+  applyVoucher,
+  selectSeat,
+  setPaymentMethod,
+  setTermsAccepted,
+  updatePassenger,
+} from '../bookingSlice'
 import { getSeatMap } from '../services/bookingService'
+import type { PaymentMethodId } from '../../payment/types'
 import type { PassengerForm, Voucher } from '../types'
 import { computeTotals } from '../utils'
 
@@ -24,10 +31,12 @@ export function useBooking() {
     passenger: booking.passenger,
     voucher: booking.voucher,
     termsAccepted: booking.termsAccepted,
+    paymentMethod: booking.paymentMethod,
     totals: detail ? computeTotals(detail, booking.voucher) : undefined,
     chooseSeat: (id: string) => dispatch(selectSeat(id)),
     editPassenger: (patch: Partial<PassengerForm>) => dispatch(updatePassenger(patch)),
     setVoucher: (v: Voucher | null) => dispatch(applyVoucher(v)),
     setTerms: (v: boolean) => dispatch(setTermsAccepted(v)),
+    setMethod: (m: PaymentMethodId) => dispatch(setPaymentMethod(m)),
   }
 }

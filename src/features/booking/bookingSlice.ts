@@ -3,6 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { DEFAULT_PASSENGER, DEFAULT_SEAT_ID } from '../../mocks/booking'
 import { DEFAULT_SEARCH_QUERY } from '../../mocks/tripSearch'
 import type { SearchQuery } from '../trips/types'
+import type { PaymentMethodId } from '../payment/types'
 import type { PassengerForm, Voucher } from './types'
 
 // Client-side booking state shared by the booking pages. Every field has a default,
@@ -14,6 +15,7 @@ export interface BookingState {
   passenger: PassengerForm
   voucher: Voucher | null
   termsAccepted: boolean
+  paymentMethod: PaymentMethodId
 }
 
 const initialState: BookingState = {
@@ -23,6 +25,7 @@ const initialState: BookingState = {
   passenger: DEFAULT_PASSENGER,
   voucher: null,
   termsAccepted: true,
+  paymentMethod: 'qr',
 }
 
 const bookingSlice = createSlice({
@@ -47,9 +50,19 @@ const bookingSlice = createSlice({
     setTermsAccepted(state, action: PayloadAction<boolean>) {
       state.termsAccepted = action.payload
     },
+    setPaymentMethod(state, action: PayloadAction<PaymentMethodId>) {
+      state.paymentMethod = action.payload
+    },
   },
 })
 
-export const { setQuery, selectTrip, selectSeat, updatePassenger, applyVoucher, setTermsAccepted } =
-  bookingSlice.actions
+export const {
+  setQuery,
+  selectTrip,
+  selectSeat,
+  updatePassenger,
+  applyVoucher,
+  setTermsAccepted,
+  setPaymentMethod,
+} = bookingSlice.actions
 export default bookingSlice.reducer
