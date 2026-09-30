@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Breadcrumb } from '../../components/ui'
+import { Breadcrumb, PageLoader } from '../../components/ui'
 import {
   AssistantChat,
   BookingSummaryCard,
@@ -17,7 +17,7 @@ export default function ManageBookingPage() {
   const { manage, loading } = useManageBooking()
   const [option, setOption] = useState<ManageOption>('change')
 
-  if (loading || !manage) return <div className="min-h-[60vh]" aria-busy="true" />
+  if (loading || !manage) return <PageLoader />
 
   return (
     <div className="mx-auto w-full max-w-6xl px-margin pb-space-3xl pt-space-md">

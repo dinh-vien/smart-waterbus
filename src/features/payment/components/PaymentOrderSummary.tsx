@@ -2,14 +2,18 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Icon } from '../../../components/ui'
 import { BookingCard, SummaryRow, TotalRow } from '../../booking/components/SummaryParts'
-import type { PassengerForm } from '../../booking/types'
+import type { PassengerForm, Seat } from '../../booking/types'
 import type { TripDetail } from '../../trips/types'
 import { ROUTES } from '../../../routes/routes'
+import { useAppDispatch } from '../../../store/hooks'
+import { addBookedTicket } from '../../tickets/ticketsSlice'
+import { buildBookedTicket } from '../../tickets/utils'
 import { formatVnd } from '../../../utils/format'
 import { confirmPayment } from '../services/paymentService'
 
 interface PaymentOrderSummaryProps {
   trip: TripDetail
+  seat: Seat | undefined
   seatId: string
   passenger: PassengerForm
   fareVnd: number
@@ -19,6 +23,7 @@ interface PaymentOrderSummaryProps {
 
 export default function PaymentOrderSummary({
   trip,
+  seat,
   seatId,
   passenger,
   fareVnd,
@@ -26,12 +31,14 @@ export default function PaymentOrderSummary({
   totalVnd,
 }: PaymentOrderSummaryProps) {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const [busy, setBusy] = useState(false)
 
   // Mock: always succeeds, then moves on to the confirmation page.
   const complete = async () => {
     setBusy(true)
     await confirmPayment()
+    dispatch(addBookedTicket(buildBookedTicket({ trip, seat, seatId, passenger, totalVnd })))
     navigate(ROUTES.bookingSuccess)
   }
 

@@ -42,7 +42,6 @@ export interface VoucherCredit {
 export interface ManageBooking {
   bookingCode: string
   ticket: Ticket
-  alternative: { departTime: string; arriveTime: string; route: string; note: string }
   voucherCredit: VoucherCredit[]
 }
 

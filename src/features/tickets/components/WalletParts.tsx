@@ -89,7 +89,11 @@ export function NextDepartureCard({
           <div className="mt-space-md grid grid-cols-2 gap-space-md border-t border-surface-container pt-space-md md:grid-cols-4">
             <Fact label="Travel Date" value={`Today, ${ticket.dateLabel.slice(0, 6)}`} />
             <Fact label="Passenger" value={ticket.passenger} />
-            <Fact label="Assigned Seat" value={`${ticket.seat} (Window)`} icon="chair" />
+            <Fact
+              label="Assigned Seat"
+              value={`${ticket.seat}${ticket.seatNote.includes('Window') ? ' (Window)' : ''}`}
+              icon="chair"
+            />
             <Fact label="Fare Paid" value={formatVnd(ticket.fareVnd)} />
           </div>
 

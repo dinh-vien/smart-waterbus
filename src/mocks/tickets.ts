@@ -99,12 +99,6 @@ export const ALL_TICKETS: Ticket[] = [NEXT, ...LATER, ...PAST]
 export const MANAGE_BOOKING: ManageBooking = {
   bookingCode: 'SWB-8942-01',
   ticket: NEXT,
-  alternative: {
-    departTime: '09:00',
-    arriveTime: '09:12',
-    route: 'Bach Dang → Thu Thiem',
-    note: 'Seats available',
-  },
   voucherCredit: [
     { code: 'WELCOME-RIVER', description: 'Welcome credit for first-time riders', valueVnd: 10000 },
   ],

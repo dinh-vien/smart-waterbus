@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Icon } from '../../../components/ui'
 import { ROUTES } from '../../../routes/routes'
 import { formatVnd } from '../../../utils/format'
+import { addMinutes } from '../../../utils/time'
 import { askAssistant, requestRefund } from '../services/ticketService'
 import type { ChatMessage, ManageBooking, Ticket } from '../types'
 
@@ -265,7 +266,9 @@ export function OptionPanel({ option, manage }: { option: ManageOption; manage: 
     )
   }
 
-  const alt = manage.alternative
+  const route = `${t.departPier.replace(/ Pier$/, '')} → ${t.arrivePier.replace(/ Pier$/, '')}`
+  // Suggested alternative: the same crossing 30 minutes later.
+  const alt = { departTime: addMinutes(t.departTime, 30), arriveTime: addMinutes(t.arriveTime, 30) }
   return (
     <div className={shell}>
       <div className="flex items-center justify-between">
@@ -285,7 +288,7 @@ export function OptionPanel({ option, manage }: { option: ManageOption; manage: 
           <div className="mt-1 font-headline-sm text-lg font-bold text-deep-river">
             {t.departTime} → {t.arriveTime}
           </div>
-          <div className="text-xs text-on-surface-variant">{alt.route}</div>
+          <div className="text-xs text-on-surface-variant">{route}</div>
           <div className="mt-1 text-xs font-semibold text-teal-flow">{t.seat}</div>
         </div>
         <div className="rounded-xl border border-dashed border-teal-flow/50 bg-sand-light/40 p-space-md">
@@ -295,8 +298,8 @@ export function OptionPanel({ option, manage }: { option: ManageOption; manage: 
           <div className="mt-1 font-headline-sm text-lg font-bold text-deep-river">
             {alt.departTime} → {alt.arriveTime}
           </div>
-          <div className="text-xs text-on-surface-variant">{alt.route}</div>
-          <div className="mt-1 text-xs text-on-surface-variant">{alt.note}</div>
+          <div className="text-xs text-on-surface-variant">{route}</div>
+          <div className="mt-1 text-xs text-on-surface-variant">Seats available</div>
         </div>
       </div>
       <div className="mt-space-md flex items-center justify-between border-t border-surface-container pt-space-md">

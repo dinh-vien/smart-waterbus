@@ -1,4 +1,4 @@
-import { Breadcrumb } from '../../components/ui'
+import { Breadcrumb, PageLoader } from '../../components/ui'
 import { useBooking } from '../../features/booking/hooks/useBooking'
 import { bookingReference } from '../../features/booking/utils'
 import {
@@ -19,11 +19,10 @@ export default function BookingSuccessPage() {
   const { loading, trip, seat, seatId, passenger, totals } = useBooking()
   const steps = useFetch(getNextSteps)
 
-  if (loading || !trip || !totals || !steps.data)
-    return <div className="min-h-[60vh]" aria-busy="true" />
+  if (loading || !trip || !totals || !steps.data) return <PageLoader />
 
   const reference = bookingReference(seatId)
-  const pier = `${trip.originPierName} Pier`
+  const pier = trip.originPierName
   const nextSteps = steps.data.map((s) => ({
     ...s,
     title: s.title.replace('{pier}', pier),
@@ -54,9 +53,9 @@ export default function BookingSuccessPage() {
                 tripCode: trip.vesselCode,
                 lineName: 'Central Waterway Line',
                 departTime: trip.departTime,
-                departPier: trip.originPierName + ' Pier',
+                departPier: trip.originPierName,
                 arriveTime: trip.arriveTime,
-                arrivePier: trip.destinationPierName + ' Pier',
+                arrivePier: trip.destinationPierName,
                 durationMins: trip.durationMins,
                 seat: `Seat ${seatId}`,
                 passenger: `1 Passenger (${passenger.fullName})`,

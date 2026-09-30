@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import vesselImage from '../../assets/images/vessel.jpg'
-import { Breadcrumb, CopyButton } from '../../components/ui'
+import { Breadcrumb, CopyButton, PageLoader } from '../../components/ui'
 import {
   BoardingGuidance,
   QrModal,
@@ -17,7 +17,7 @@ export default function TicketDetailPage() {
   const { ticket, loading } = useTicketDetail()
   const [qrOpen, setQrOpen] = useState(false)
 
-  if (loading || !ticket) return <div className="min-h-[60vh]" aria-busy="true" />
+  if (loading || !ticket) return <PageLoader />
 
   return (
     <div className="mx-auto w-full max-w-7xl px-margin pb-space-3xl pt-space-md">

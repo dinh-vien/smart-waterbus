@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Breadcrumb, Icon } from '../../components/ui'
+import { Breadcrumb, Icon, PageLoader } from '../../components/ui'
 import {
   NextDepartureCard,
   PastJourneyRow,
@@ -17,7 +17,7 @@ export default function MyTicketsPage() {
   const { wallet, loading, openTicket } = useTicketWallet()
   const [tab, setTab] = useState<Tab>('upcoming')
 
-  if (loading || !wallet) return <div className="min-h-[60vh]" aria-busy="true" />
+  if (loading || !wallet) return <PageLoader />
 
   const upcomingCount = 1 + wallet.later.length
   const tabClass = (active: boolean) =>

@@ -1,4 +1,4 @@
-import { Breadcrumb, Icon } from '../../components/ui'
+import { Breadcrumb, Icon, PageLoader } from '../../components/ui'
 import BookingProgress from '../../features/booking/components/BookingProgress'
 import { useBooking } from '../../features/booking/hooks/useBooking'
 import type { BookingStep } from '../../features/booking/types'
@@ -10,13 +10,13 @@ import { ROUTES } from '../../routes/routes'
 
 export default function PaymentPage() {
   useDocumentTitle('Complete Your Payment')
-  const { loading, trip, seatId, passenger, totals, paymentMethod, setMethod } = useBooking()
+  const { loading, trip, seat, seatId, passenger, totals, paymentMethod, setMethod } = useBooking()
 
-  if (loading || !trip || !totals) return <div className="min-h-[60vh]" aria-busy="true" />
+  if (loading || !trip || !totals) return <PageLoader />
 
   const steps: BookingStep[] = [
-    { label: 'Trip', detail: 'Express Line 1' },
-    { label: 'Seat', detail: `${seatId} Window` },
+    { label: 'Trip', detail: trip.lineLabel.replace('Line 1 Express', 'Express Line 1') },
+    { label: 'Seat', detail: `${seatId} ${seat?.window ? 'Window' : 'Aisle'}` },
     { label: 'Details', detail: passenger.fullName },
     { label: 'Checkout', detail: 'Order Confirmed' },
     { label: 'Payment', detail: 'Instant QR / Card' },
@@ -71,6 +71,7 @@ export default function PaymentPage() {
         <div className="lg:col-span-4">
           <PaymentOrderSummary
             trip={trip}
+            seat={seat}
             seatId={seatId}
             passenger={passenger}
             fareVnd={totals.fareVnd}
