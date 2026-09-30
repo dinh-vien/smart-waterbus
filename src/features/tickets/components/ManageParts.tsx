@@ -196,13 +196,17 @@ export function ManageOptions({
 }
 
 export function OptionPanel({ option, manage }: { option: ManageOption; manage: ManageBooking }) {
-  const [refundState, setRefundState] = useState<'idle' | 'busy' | 'done'>('idle')
+  const [refundState, setRefundState] = useState<'idle' | 'busy' | 'done' | 'failed'>('idle')
   const t = manage.ticket
 
   const submitRefund = async () => {
     setRefundState('busy')
-    await requestRefund(manage.bookingCode)
-    setRefundState('done')
+    try {
+      await requestRefund(manage.bookingCode)
+      setRefundState('done')
+    } catch {
+      setRefundState('failed')
+    }
   }
 
   const shell = 'rounded-2xl bg-white p-space-lg shadow-[0_2px_16px_rgba(13,37,56,0.06)]'
@@ -219,12 +223,16 @@ export function OptionPanel({ option, manage }: { option: ManageOption; manage: 
           available up to 30 minutes before departure. Requests need your confirmation.
         </p>
         <div className="mt-space-md flex items-center justify-between border-t border-surface-container pt-space-md">
-          <span role="status" className="text-xs text-teal-flow">
-            {refundState === 'done' ? 'Refund request submitted. We will email you an update.' : ''}
+          <span
+            role={refundState === 'failed' ? 'alert' : 'status'}
+            className={`text-xs ${refundState === 'failed' ? 'text-coral-glow' : 'text-teal-flow'}`}
+          >
+            {refundState === 'done' && 'Refund request submitted. We will email you an update.'}
+            {refundState === 'failed' && 'We couldn’t submit your request. Please try again.'}
           </span>
           <button
             type="button"
-            disabled={refundState !== 'idle'}
+            disabled={refundState === 'busy' || refundState === 'done'}
             onClick={submitRefund}
             className="rounded-lg bg-teal-flow px-5 py-2.5 text-sm font-semibold text-on-primary transition-colors hover:bg-secondary disabled:opacity-60"
           >
@@ -232,6 +240,8 @@ export function OptionPanel({ option, manage }: { option: ManageOption; manage: 
               ? 'Submitting…'
               : refundState === 'done'
               ? 'Submitted'
+              : refundState === 'failed'
+              ? 'Try again'
               : 'Confirm Refund Request'}
           </button>
         </div>
@@ -331,7 +341,12 @@ export function AssistantChat() {
     setMessages((m) => [...m, { id: m.length + 1, from: 'user', text: clean }])
     setDraft('')
     setBusy(true)
-    const reply = await askAssistant(clean)
+    let reply: string
+    try {
+      reply = await askAssistant(clean)
+    } catch {
+      reply = 'Sorry, I couldn’t reach the assistant. Please try again in a moment.'
+    }
     setMessages((m) => [...m, { id: m.length + 1, from: 'assistant', text: reply }])
     setBusy(false)
   }

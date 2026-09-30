@@ -24,3 +24,10 @@ Source of truth: `src/routes/routes.ts` (paths) and `src/routes/AppRoutes.tsx` (
 | `/sitemap` | All routes |
 
 Unknown paths redirect to `/`.
+
+## Trying the error screens
+
+All data comes from mock services, so nothing fails on its own. Add `?mockError=1` to the URL of the
+page you load (e.g. `/tickets?mockError=1`): every mock request in the first 2 seconds fails and the
+page shows the error screen. Wait a moment, then click "Try again" and it loads normally.
+Use `?mockError=5` to keep failing for 5 seconds.

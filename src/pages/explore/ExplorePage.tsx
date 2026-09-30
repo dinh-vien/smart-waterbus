@@ -10,12 +10,14 @@ import {
 } from '../../features/explore/components/ExploreSections'
 import { getExploreData } from '../../features/explore/services/exploreService'
 import { useDocumentTitle, useFetch } from '../../hooks'
-import { PageLoader } from '../../components/ui'
+import { ErrorState, PageLoader } from '../../components/ui'
 
 export default function ExplorePage() {
   useDocumentTitle('Explore River Journeys')
-  const { data, loading } = useFetch(getExploreData)
+  const { data, loading, error, retry } = useFetch(getExploreData)
   const storiesRef = useRef<HTMLElement>(null)
+
+  if (error) return <ErrorState onRetry={retry} />
 
   if (loading || !data) return <PageLoader />
 

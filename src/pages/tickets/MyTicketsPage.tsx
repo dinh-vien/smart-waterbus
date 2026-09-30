@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Breadcrumb, Icon, PageLoader } from '../../components/ui'
+import { Breadcrumb, ErrorState, Icon, PageLoader } from '../../components/ui'
 import {
   NextDepartureCard,
   PastJourneyRow,
@@ -14,8 +14,10 @@ type Tab = 'upcoming' | 'past'
 
 export default function MyTicketsPage() {
   useDocumentTitle('My Tickets')
-  const { wallet, loading, openTicket } = useTicketWallet()
+  const { wallet, loading, error, retry, openTicket } = useTicketWallet()
   const [tab, setTab] = useState<Tab>('upcoming')
+
+  if (error) return <ErrorState onRetry={retry} />
 
   if (loading || !wallet) return <PageLoader />
 

@@ -33,13 +33,20 @@ export default function PaymentOrderSummary({
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const [busy, setBusy] = useState(false)
+  const [failed, setFailed] = useState(false)
 
   // Mock: always succeeds, then moves on to the confirmation page.
   const complete = async () => {
     setBusy(true)
-    await confirmPayment()
-    dispatch(addBookedTicket(buildBookedTicket({ trip, seat, seatId, passenger, totalVnd })))
-    navigate(ROUTES.bookingSuccess)
+    setFailed(false)
+    try {
+      await confirmPayment()
+      dispatch(addBookedTicket(buildBookedTicket({ trip, seat, seatId, passenger, totalVnd })))
+      navigate(ROUTES.bookingSuccess)
+    } catch {
+      setBusy(false)
+      setFailed(true)
+    }
   }
 
   return (
@@ -107,6 +114,11 @@ export default function PaymentOrderSummary({
           className="text-[18px] transition-transform group-hover:translate-x-1"
         />
       </button>
+      {failed && (
+        <p role="alert" className="mt-2 text-center text-xs text-coral-glow">
+          We couldn’t confirm your payment. Nothing was charged, please try again.
+        </p>
+      )}
       <div className="mt-space-sm text-center">
         <Link
           to={ROUTES.checkoutReview}

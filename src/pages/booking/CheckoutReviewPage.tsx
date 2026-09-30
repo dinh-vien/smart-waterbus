@@ -1,4 +1,4 @@
-import { Breadcrumb, Icon, PageLoader } from '../../components/ui'
+import { Breadcrumb, ErrorState, Icon, PageLoader } from '../../components/ui'
 import BookingProgress from '../../features/booking/components/BookingProgress'
 import {
   ETicketContactCard,
@@ -17,6 +17,8 @@ export default function CheckoutReviewPage() {
   useDocumentTitle('Review Your Booking')
   const {
     loading,
+    error,
+    retry,
     trip,
     seat,
     seatId,
@@ -27,6 +29,8 @@ export default function CheckoutReviewPage() {
     setVoucher,
     setTerms,
   } = useBooking()
+
+  if (error) return <ErrorState onRetry={retry} />
 
   if (loading || !trip || !totals) return <PageLoader />
 

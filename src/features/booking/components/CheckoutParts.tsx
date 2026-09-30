@@ -176,15 +176,25 @@ export function VoucherCard({
   const [code, setCode] = useState(voucher?.code ?? '')
   const [message, setMessage] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
+  const [failed, setFailed] = useState(false)
 
   const apply = async () => {
     setBusy(true)
-    const result = await validateVoucher(code)
-    setBusy(false)
-    onApply(result)
-    setMessage(
-      result ? `Voucher applied: ${result.percentOff}% off your fare.` : 'This code is not valid.',
-    )
+    try {
+      const result = await validateVoucher(code)
+      onApply(result)
+      setMessage(
+        result
+          ? `Voucher applied: ${result.percentOff}% off your fare.`
+          : 'This code is not valid.',
+      )
+      setFailed(false)
+    } catch {
+      setMessage('We couldn’t check this code. Please try again.')
+      setFailed(true)
+    } finally {
+      setBusy(false)
+    }
   }
 
   return (
@@ -212,8 +222,10 @@ export function VoucherCard({
       </div>
       {message && (
         <p
-          role="status"
-          className={`mt-2 text-xs ${voucher ? 'text-teal-flow' : 'text-on-surface-variant'}`}
+          role={failed ? 'alert' : 'status'}
+          className={`mt-2 text-xs ${
+            failed ? 'text-coral-glow' : voucher ? 'text-teal-flow' : 'text-on-surface-variant'
+          }`}
         >
           {message}
         </p>

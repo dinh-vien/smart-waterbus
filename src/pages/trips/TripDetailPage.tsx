@@ -1,4 +1,4 @@
-import { Breadcrumb, FeatureStrip, Icon, PageLoader } from '../../components/ui'
+import { Breadcrumb, ErrorState, FeatureStrip, Icon, PageLoader } from '../../components/ui'
 import TripAside from '../../features/trips/components/TripAside'
 import {
   BoardingSteps,
@@ -29,8 +29,10 @@ const CUES = [
 ]
 
 export default function TripDetailPage() {
-  const { detail, loading } = useTripDetail()
+  const { detail, loading, error, retry } = useTripDetail()
   useDocumentTitle(detail ? `Trip Detail (${detail.vesselCode})` : 'Trip Detail')
+
+  if (error) return <ErrorState onRetry={retry} />
 
   if (loading || !detail) return <PageLoader />
 

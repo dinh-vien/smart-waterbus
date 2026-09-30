@@ -1,4 +1,4 @@
-import { useFetch } from '../../../hooks'
+import { combineFetches, useFetch } from '../../../hooks'
 import { getCorridorMap, getHomeData, getNextDepartures } from '../services/homeService'
 
 export function useHomeData() {
@@ -10,6 +10,6 @@ export function useHomeData() {
     home: home.data,
     departures: departures.data,
     corridor: corridor.data,
-    loading: home.loading || departures.loading || corridor.loading,
+    ...combineFetches(home, departures, corridor),
   }
 }

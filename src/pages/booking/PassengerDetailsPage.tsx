@@ -1,4 +1,4 @@
-import { Breadcrumb, PageLoader } from '../../components/ui'
+import { Breadcrumb, ErrorState, PageLoader } from '../../components/ui'
 import BookingProgress from '../../features/booking/components/BookingProgress'
 import CrossingSummary from '../../features/booking/components/CrossingSummary'
 import PassengerFormCard from '../../features/booking/components/PassengerFormCard'
@@ -10,7 +10,10 @@ import { ROUTES } from '../../routes/routes'
 
 export default function PassengerDetailsPage() {
   useDocumentTitle('Passenger Details')
-  const { loading, trip, seat, seatId, passenger, totals, editPassenger } = useBooking()
+  const { loading, error, retry, trip, seat, seatId, passenger, totals, editPassenger } =
+    useBooking()
+
+  if (error) return <ErrorState onRetry={retry} />
 
   if (loading || !trip || !totals) return <PageLoader />
 

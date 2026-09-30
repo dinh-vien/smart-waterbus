@@ -1,4 +1,4 @@
-import { Breadcrumb, FeatureStrip, Icon, PageLoader } from '../../components/ui'
+import { Breadcrumb, ErrorState, FeatureStrip, Icon, PageLoader } from '../../components/ui'
 import SeatMapView, { SeatLegend } from '../../features/booking/components/SeatMapView'
 import {
   BookingSummary,
@@ -29,7 +29,10 @@ const CUES = [
 
 export default function SeatSelectionPage() {
   useDocumentTitle('Choose Your Seat')
-  const { loading, trip, seatMap, seat, seatId, totals, passenger, chooseSeat } = useBooking()
+  const { loading, error, retry, trip, seatMap, seat, seatId, totals, passenger, chooseSeat } =
+    useBooking()
+
+  if (error) return <ErrorState onRetry={retry} />
 
   if (loading || !trip || !seatMap || !totals) return <PageLoader />
 

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { FeatureStrip, PageLoader, StatusPill } from '../../components/ui'
+import { ErrorState, FeatureStrip, PageLoader, StatusPill } from '../../components/ui'
 import CorridorSidebar from '../../features/trips/components/CorridorSidebar'
 import DateStrip from '../../features/trips/components/DateStrip'
 import ResultFilters from '../../features/trips/components/ResultFilters'
@@ -30,7 +30,8 @@ const CUES = [
 
 export default function SearchResultsPage() {
   useDocumentTitle('Available Departures')
-  const { query, updateQuery, piers, dates, trips, loading, chooseTrip } = useSearchResults()
+  const { query, updateQuery, piers, dates, trips, loading, error, retry, chooseTrip } =
+    useSearchResults()
   const [time, setTime] = useState<TimeFilter>('all')
   const [vessel, setVessel] = useState('all')
   const [sort, setSort] = useState<SortKey>('time')
@@ -47,6 +48,8 @@ export default function SearchResultsPage() {
     }
     return [...list].sort(by[sort])
   }, [trips, time, vessel, sort])
+
+  if (error) return <ErrorState onRetry={retry} />
 
   if (loading || !piers || !dates || !trips) return <PageLoader />
 

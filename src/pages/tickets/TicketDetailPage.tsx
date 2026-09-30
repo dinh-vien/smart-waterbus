@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import vesselImage from '../../assets/images/vessel.jpg'
-import { Breadcrumb, CopyButton, PageLoader } from '../../components/ui'
+import { Breadcrumb, CopyButton, ErrorState, PageLoader } from '../../components/ui'
 import {
   BoardingGuidance,
   QrModal,
@@ -14,8 +14,10 @@ import { ROUTES } from '../../routes/routes'
 
 export default function TicketDetailPage() {
   useDocumentTitle('Ticket Detail')
-  const { ticket, loading } = useTicketDetail()
+  const { ticket, loading, error, retry } = useTicketDetail()
   const [qrOpen, setQrOpen] = useState(false)
+
+  if (error) return <ErrorState onRetry={retry} />
 
   if (loading || !ticket) return <PageLoader />
 

@@ -23,6 +23,8 @@ export function useTicketWallet() {
   return {
     wallet,
     loading: fetched.loading,
+    error: fetched.error,
+    retry: fetched.retry,
     openTicket: (id: string) => dispatch(selectTicket(id)),
   }
 }
@@ -36,6 +38,8 @@ export function useTicketDetail() {
   return {
     ticket: bookedMatch ?? fetched.data,
     loading: !bookedMatch && fetched.loading,
+    error: bookedMatch ? undefined : fetched.error,
+    retry: fetched.retry,
   }
 }
 
@@ -49,5 +53,5 @@ export function useManageBooking() {
       ? { ...fetched.data, bookingCode: booked[0].bookingRef, ticket: booked[0] }
       : fetched.data
 
-  return { manage, loading: fetched.loading }
+  return { manage, loading: fetched.loading, error: fetched.error, retry: fetched.retry }
 }

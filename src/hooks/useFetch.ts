@@ -1,14 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
-interface FetchState<T> {
+export interface FetchState<T> {
   data: T | undefined
   loading: boolean
   error: Error | undefined
+  /** Runs the loader again, e.g. from a "Try again" button. */
+  retry: () => void
 }
 
-/** Runs an async loader once on mount and tracks its state. */
+/** Runs an async loader on mount (and on every `retry`) and tracks its state. */
 export function useFetch<T>(loader: () => Promise<T>): FetchState<T> {
-  const [state, setState] = useState<FetchState<T>>({
+  const [attempt, setAttempt] = useState(0)
+  const [state, setState] = useState<Omit<FetchState<T>, 'retry'>>({
     data: undefined,
     loading: true,
     error: undefined,
@@ -22,9 +25,30 @@ export function useFetch<T>(loader: () => Promise<T>): FetchState<T> {
     return () => {
       cancelled = true
     }
-    // The loader is a stable module-level function in every caller.
+    // The loader is re-created every render by callers; only `attempt` should re-run it.
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [attempt])
+
+  const retry = useCallback(() => {
+    setState({ data: undefined, loading: true, error: undefined })
+    setAttempt((n) => n + 1)
   }, [])
 
-  return state
+  return { ...state, retry }
+}
+
+interface Combined {
+  loading: boolean
+  error: Error | undefined
+  /** Re-runs only the requests that failed. */
+  retry: () => void
+}
+
+/** Merges several fetches into one loading/error/retry for a page that needs all of them. */
+export function combineFetches(...fetches: FetchState<unknown>[]): Combined {
+  return {
+    loading: fetches.some((f) => f.loading),
+    error: fetches.find((f) => f.error)?.error,
+    retry: () => fetches.forEach((f) => f.error && f.retry()),
+  }
 }

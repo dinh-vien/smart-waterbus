@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Icon } from '../../../components/ui'
+import { ErrorState, Icon } from '../../../components/ui'
 import { useFetch } from '../../../hooks'
 import { ROUTES } from '../../../routes/routes'
 import type { AuthMode, RegisterPayload, SignInPayload } from '../authenticationTypes'
@@ -27,12 +27,19 @@ export default function AuthCard() {
   const navigate = useNavigate()
   const [mode, setMode] = useState<AuthMode>('signin')
   const [submitting, setSubmitting] = useState(false)
-  const { data: showcase } = useFetch(getAuthShowcase)
+  const [failed, setFailed] = useState(false)
+  const showcase = useFetch(getAuthShowcase)
 
   const finish = async (action: Promise<unknown>) => {
     setSubmitting(true)
-    await action
-    navigate(AFTER_AUTH)
+    setFailed(false)
+    try {
+      await action
+      navigate(AFTER_AUTH)
+    } catch {
+      setSubmitting(false)
+      setFailed(true)
+    }
   }
 
   const tabClass = (active: boolean) =>
@@ -44,7 +51,17 @@ export default function AuthCard() {
 
   return (
     <div className="grid min-h-[640px] w-full grid-cols-1 overflow-hidden rounded-panel border border-outline-variant/60 bg-white shadow-xl shadow-deep-river/5 lg:grid-cols-12">
-      {showcase && <AuthShowcasePanel showcase={showcase} />}
+      {showcase.data ? (
+        <AuthShowcasePanel showcase={showcase.data} />
+      ) : showcase.error ? (
+        <div className="flex items-center bg-deep-river p-8 lg:col-span-5">
+          <div className="w-full">
+            <ErrorState compact onRetry={showcase.retry} />
+          </div>
+        </div>
+      ) : (
+        <div className="bg-deep-river lg:col-span-5" />
+      )}
 
       <div className="flex flex-col justify-between bg-white p-8 sm:p-12 lg:col-span-7 lg:p-14">
         <div className="mx-auto w-full max-w-md">
@@ -91,6 +108,15 @@ export default function AuthCard() {
               <span>Create Account</span>
             </button>
           </div>
+
+          {failed && (
+            <p
+              role="alert"
+              className="mb-4 rounded-xl border border-coral-glow/30 bg-coral-glow/10 px-4 py-3 text-sm text-deep-river"
+            >
+              We couldn’t complete that just now. Please check your connection and try again.
+            </p>
+          )}
 
           {mode === 'signin' ? (
             <SignInForm

@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { CopyButton, Icon } from '../../../components/ui'
+import { CopyButton, ErrorState, Icon } from '../../../components/ui'
 import QrCode from '../../../components/ticket/QrCode'
 import { useFetch } from '../../../hooks'
 import { getEwallets, getPaymentMethods } from '../services/paymentService'
@@ -101,11 +101,16 @@ function CardPanel() {
 }
 
 function WalletPanel() {
-  const { data } = useFetch(getEwallets)
+  const { data, error, retry } = useFetch(getEwallets)
   return (
     <div className={INNER}>
       <h3 className="font-headline-sm text-xl font-bold text-deep-river">Pay with E-Wallet</h3>
       <p className="text-xs text-on-surface-variant">Choose your mobile wallet to continue.</p>
+      {error && (
+        <div className="mt-space-md">
+          <ErrorState compact onRetry={retry} />
+        </div>
+      )}
       <ul className="mt-space-md space-y-space-sm">
         {(data ?? []).map((w) => (
           <li
@@ -131,7 +136,7 @@ export default function PaymentMethodPanel({
   amountVnd,
   reference,
 }: PaymentMethodPanelProps) {
-  const { data: methods } = useFetch(getPaymentMethods)
+  const { data: methods, error: methodsError, retry: retryMethods } = useFetch(getPaymentMethods)
   const groupRef = useRef<HTMLDivElement>(null)
 
   return (
@@ -140,6 +145,12 @@ export default function PaymentMethodPanel({
       <p className="text-sm text-on-surface-variant">
         Select how you would like to pay for trip {tripCode}
       </p>
+
+      {methodsError && (
+        <div className="mt-space-md">
+          <ErrorState compact onRetry={retryMethods} />
+        </div>
+      )}
 
       <div
         ref={groupRef}

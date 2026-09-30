@@ -1,4 +1,4 @@
-import { FeatureStrip, Icon, PageLoader, StatusPill } from '../../components/ui'
+import { ErrorState, FeatureStrip, Icon, PageLoader, StatusPill } from '../../components/ui'
 import DiscoverBanner from '../../features/trips/components/DiscoverBanner'
 import NetworkSection from '../../features/trips/components/NetworkSection'
 import SearchForm from '../../features/trips/components/SearchForm'
@@ -25,7 +25,9 @@ const CUES = [
 
 export default function SearchJourneyPage() {
   useDocumentTitle('Search Journey')
-  const { piers, routes, dates, loading } = useSearchForm()
+  const { piers, routes, dates, loading, error, retry } = useSearchForm()
+
+  if (error) return <ErrorState onRetry={retry} />
 
   if (loading || !piers || !routes || !dates) return <PageLoader />
 

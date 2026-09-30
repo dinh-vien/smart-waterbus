@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
-import { useFetch } from '../../../hooks'
+import { combineFetches, useFetch } from '../../../hooks'
 import { selectTrip, setQuery } from '../../booking/bookingSlice'
 import {
   getDateOptions,
@@ -24,7 +24,7 @@ export function useSearchForm() {
     piers: piers.data,
     routes: routes.data,
     dates: dates.data,
-    loading: piers.loading || routes.loading || dates.loading,
+    ...combineFetches(piers, routes, dates),
   }
 }
 
@@ -41,7 +41,7 @@ export function useSearchResults() {
     piers: piers.data,
     dates: dates.data,
     trips: trips.data,
-    loading: piers.loading || dates.loading || trips.loading,
+    ...combineFetches(piers, dates, trips),
     chooseTrip: (id: string) => dispatch(selectTrip(id)),
   }
 }
@@ -50,5 +50,5 @@ export function useTripDetail() {
   const query = useAppSelector((s) => s.booking.query)
   const selectedTripId = useAppSelector((s) => s.booking.selectedTripId)
   const detail = useFetch(() => getTripDetail(selectedTripId, query))
-  return { detail: detail.data, loading: detail.loading }
+  return { detail: detail.data, loading: detail.loading, error: detail.error, retry: detail.retry }
 }

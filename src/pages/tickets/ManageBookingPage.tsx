@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Breadcrumb, PageLoader } from '../../components/ui'
+import { Breadcrumb, ErrorState, PageLoader } from '../../components/ui'
 import {
   AssistantChat,
   BookingSummaryCard,
@@ -14,8 +14,10 @@ import { ROUTES } from '../../routes/routes'
 
 export default function ManageBookingPage() {
   useDocumentTitle('Manage Booking')
-  const { manage, loading } = useManageBooking()
+  const { manage, loading, error, retry } = useManageBooking()
   const [option, setOption] = useState<ManageOption>('change')
+
+  if (error) return <ErrorState onRetry={retry} />
 
   if (loading || !manage) return <PageLoader />
 

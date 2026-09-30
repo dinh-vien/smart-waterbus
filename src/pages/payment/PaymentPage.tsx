@@ -1,4 +1,4 @@
-import { Breadcrumb, Icon, PageLoader } from '../../components/ui'
+import { Breadcrumb, ErrorState, Icon, PageLoader } from '../../components/ui'
 import BookingProgress from '../../features/booking/components/BookingProgress'
 import { useBooking } from '../../features/booking/hooks/useBooking'
 import type { BookingStep } from '../../features/booking/types'
@@ -10,7 +10,10 @@ import { ROUTES } from '../../routes/routes'
 
 export default function PaymentPage() {
   useDocumentTitle('Complete Your Payment')
-  const { loading, trip, seat, seatId, passenger, totals, paymentMethod, setMethod } = useBooking()
+  const { loading, error, retry, trip, seat, seatId, passenger, totals, paymentMethod, setMethod } =
+    useBooking()
+
+  if (error) return <ErrorState onRetry={retry} />
 
   if (loading || !trip || !totals) return <PageLoader />
 

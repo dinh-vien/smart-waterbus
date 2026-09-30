@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import LiveTripMap from '../../components/map/LiveTripMap'
-import { Breadcrumb, Icon, PageLoader } from '../../components/ui'
+import { Breadcrumb, ErrorState, Icon, PageLoader } from '../../components/ui'
 import { Itinerary, ModeToggle, SidePanel } from '../../features/tracking/components/TrackingParts'
 import { getTrackingData } from '../../features/tracking/services/trackingService'
 import type { TrackingMode } from '../../features/tracking/types'
@@ -9,9 +9,11 @@ import { ROUTES } from '../../routes/routes'
 
 export default function LiveTrackingPage() {
   useDocumentTitle('Live Trip Tracking')
-  const { data, loading } = useFetch(getTrackingData)
+  const { data, loading, error, retry } = useFetch(getTrackingData)
   const [mode, setMode] = useState<TrackingMode>('sightseeing')
   const [selectedId, setSelectedId] = useState<string | null>(null)
+
+  if (error) return <ErrorState onRetry={retry} />
 
   if (loading || !data) return <PageLoader />
 

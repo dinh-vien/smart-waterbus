@@ -1,4 +1,4 @@
-import { Breadcrumb, PageLoader } from '../../components/ui'
+import { Breadcrumb, ErrorState, PageLoader } from '../../components/ui'
 import { useBooking } from '../../features/booking/hooks/useBooking'
 import { bookingReference } from '../../features/booking/utils'
 import {
@@ -16,8 +16,20 @@ import { ROUTES } from '../../routes/routes'
 
 export default function BookingSuccessPage() {
   useDocumentTitle('Booking Confirmed')
-  const { loading, trip, seat, seatId, passenger, totals } = useBooking()
+  const { loading, error, retry, trip, seat, seatId, passenger, totals } = useBooking()
   const steps = useFetch(getNextSteps)
+  const failure = error ?? steps.error
+
+  if (failure) {
+    return (
+      <ErrorState
+        onRetry={() => {
+          if (error) retry()
+          if (steps.error) steps.retry()
+        }}
+      />
+    )
+  }
 
   if (loading || !trip || !totals || !steps.data) return <PageLoader />
 

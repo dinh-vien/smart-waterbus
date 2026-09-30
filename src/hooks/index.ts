@@ -1,2 +1,2 @@
 export { useDocumentTitle } from './useDocumentTitle'
-export { useFetch } from './useFetch'
+export { combineFetches, useFetch } from './useFetch'

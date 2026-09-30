@@ -17,13 +17,18 @@ import { computeTotals } from '../utils'
 export function useBooking() {
   const dispatch = useAppDispatch()
   const booking = useAppSelector((s) => s.booking)
-  const { detail, loading: tripLoading } = useTripDetail()
+  const { detail, loading: tripLoading, error: tripError, retry: retryTrip } = useTripDetail()
   const seatMap = useFetch(getSeatMap)
 
   const seat = seatMap.data?.seats.find((s) => s.id === booking.seatId)
 
   return {
     loading: tripLoading || seatMap.loading || !detail || !seatMap.data,
+    error: tripError ?? seatMap.error,
+    retry: () => {
+      if (tripError) retryTrip()
+      if (seatMap.error) seatMap.retry()
+    },
     trip: detail,
     seatMap: seatMap.data,
     seat,
