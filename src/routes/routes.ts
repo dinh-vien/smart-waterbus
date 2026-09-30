@@ -82,14 +82,14 @@ export const ROUTE_LIST: RouteMeta[] = [
     path: ROUTES.payment,
     title: 'Payment',
     branch: 'feature/payment',
-    built: false,
+    built: true,
   },
   {
     key: 'bookingSuccess',
     path: ROUTES.bookingSuccess,
     title: 'Booking confirmed',
     branch: 'feature/payment',
-    built: false,
+    built: true,
   },
   {
     key: 'myTickets',

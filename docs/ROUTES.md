@@ -14,8 +14,8 @@ Source of truth: `src/routes/routes.ts`.
 | `/booking/seats` | Seat selection | feature/booking-flow | done |
 | `/booking/passenger` | Passenger details | feature/booking-flow | done |
 | `/booking/review` | Review booking | feature/booking-flow | done |
-| `/payment` | Payment | feature/payment | placeholder |
-| `/payment/success` | Booking confirmed | feature/payment | placeholder |
+| `/payment` | Payment | feature/payment | done |
+| `/payment/success` | Booking confirmed | feature/payment | done |
 | `/tickets` | My tickets | feature/my-tickets | placeholder |
 | `/tickets/detail` | Ticket detail | feature/my-tickets | placeholder |
 | `/tickets/manage` | Manage booking | feature/my-tickets | placeholder |

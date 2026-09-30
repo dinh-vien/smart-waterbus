@@ -8,6 +8,8 @@ import TripDetailPage from '../pages/trips/TripDetailPage'
 import CheckoutReviewPage from '../pages/booking/CheckoutReviewPage'
 import PassengerDetailsPage from '../pages/booking/PassengerDetailsPage'
 import SeatSelectionPage from '../pages/booking/SeatSelectionPage'
+import BookingSuccessPage from '../pages/payment/BookingSuccessPage'
+import PaymentPage from '../pages/payment/PaymentPage'
 import PlaceholderPage from '../pages/placeholder/PlaceholderPage'
 import SitemapPage from '../pages/sitemap/SitemapPage'
 import PublicRoute from './PublicRoute'
@@ -24,6 +26,8 @@ const PAGES: Partial<Record<string, ComponentType>> = {
   [ROUTES.seatSelection]: SeatSelectionPage,
   [ROUTES.passengerDetails]: PassengerDetailsPage,
   [ROUTES.checkoutReview]: CheckoutReviewPage,
+  [ROUTES.payment]: PaymentPage,
+  [ROUTES.bookingSuccess]: BookingSuccessPage,
 }
 
 export default function AppRoutes() {
