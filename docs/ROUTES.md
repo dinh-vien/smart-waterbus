@@ -16,9 +16,9 @@ Source of truth: `src/routes/routes.ts`.
 | `/booking/review` | Review booking | feature/booking-flow | done |
 | `/payment` | Payment | feature/payment | done |
 | `/payment/success` | Booking confirmed | feature/payment | done |
-| `/tickets` | My tickets | feature/my-tickets | placeholder |
-| `/tickets/detail` | Ticket detail | feature/my-tickets | placeholder |
-| `/tickets/manage` | Manage booking | feature/my-tickets | placeholder |
+| `/tickets` | My tickets | feature/my-tickets | done |
+| `/tickets/detail` | Ticket detail | feature/my-tickets | done |
+| `/tickets/manage` | Manage booking | feature/my-tickets | done |
 | `/tracking` | Live trip tracking | feature/live-tracking | placeholder |
 | `/explore` | Explore river journeys | feature/explore | placeholder |
 | `/sitemap` | All routes | feature/foundation | done |
