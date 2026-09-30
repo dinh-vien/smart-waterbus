@@ -33,7 +33,7 @@ export interface RouteMeta {
 }
 
 export const ROUTE_LIST: RouteMeta[] = [
-  { key: 'home', path: ROUTES.home, title: 'Home', branch: 'feature/home', built: false },
+  { key: 'home', path: ROUTES.home, title: 'Home', branch: 'feature/home', built: true },
   { key: 'signIn', path: ROUTES.signIn, title: 'Sign in', branch: 'feature/auth', built: false },
   {
     key: 'search',

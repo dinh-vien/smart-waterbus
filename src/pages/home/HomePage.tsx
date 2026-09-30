@@ -1,0 +1,30 @@
+import CorridorSection from '../../features/home/components/CorridorSection'
+import CtaBanner from '../../features/home/components/CtaBanner'
+import HeroSection from '../../features/home/components/HeroSection'
+import HowItWorksSection from '../../features/home/components/HowItWorksSection'
+import StoriesSection from '../../features/home/components/StoriesSection'
+import TechSection from '../../features/home/components/TechSection'
+import WhyRiverSection from '../../features/home/components/WhyRiverSection'
+import { useHomeData } from '../../features/home/hooks/useHomeData'
+import { useDocumentTitle } from '../../hooks'
+
+export default function HomePage() {
+  useDocumentTitle('River Connects Greater Stories')
+  const { home, departures, corridor, loading } = useHomeData()
+
+  if (loading || !home || !departures || !corridor) {
+    return <div className="min-h-[60vh]" aria-busy="true" />
+  }
+
+  return (
+    <div className="flex w-full flex-col">
+      <HeroSection cues={home.heroCues} />
+      <WhyRiverSection features={home.features} />
+      <CorridorSection filters={home.routeFilters} map={corridor} departures={departures} />
+      <StoriesSection stories={home.stories} />
+      <HowItWorksSection steps={home.steps} />
+      <TechSection features={home.techFeatures} />
+      <CtaBanner />
+    </div>
+  )
+}

@@ -6,7 +6,7 @@ Source of truth: `src/routes/routes.ts`.
 
 | Route | Screen | Branch | Status |
 |---|---|---|---|
-| `/` | Home | feature/home | placeholder |
+| `/` | Home | feature/home | done |
 | `/sign-in` | Sign in | feature/auth | placeholder |
 | `/search` | Search journey | feature/trip-search | placeholder |
 | `/search/results` | Search results | feature/trip-search | placeholder |

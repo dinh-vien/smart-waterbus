@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
+import HomePage from '../pages/home/HomePage'
 import PlaceholderPage from '../pages/placeholder/PlaceholderPage'
 import SitemapPage from '../pages/sitemap/SitemapPage'
 import PublicRoute from './PublicRoute'
@@ -7,7 +8,9 @@ import RouteWithLayout from './RouteWithLayout'
 import { ROUTES, ROUTE_LIST } from './routes'
 
 // Screens that already have a real page. Everything else renders a placeholder.
-const PAGES: Partial<Record<string, ComponentType>> = {}
+const PAGES: Partial<Record<string, ComponentType>> = {
+  [ROUTES.home]: HomePage,
+}
 
 export default function AppRoutes() {
   return (
