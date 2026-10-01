@@ -15,6 +15,7 @@ export const ROUTES = {
   manageBooking: '/tickets/manage',
   liveTracking: '/tracking',
   explore: '/explore',
+  help: '/help',
   sitemap: '/sitemap',
 } as const
 
@@ -35,4 +36,5 @@ export const SITEMAP_ENTRIES: { path: string; title: string }[] = [
   { path: ROUTES.manageBooking, title: 'Manage booking' },
   { path: ROUTES.liveTracking, title: 'Live trip tracking' },
   { path: ROUTES.explore, title: 'Explore river journeys' },
+  { path: ROUTES.help, title: 'Help & About' },
 ]

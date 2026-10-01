@@ -7,16 +7,17 @@ import { ROUTES } from '../../routes/routes'
 import { t } from '../../i18n'
 
 const NAV_ITEMS = [
+  { label: 'Timetable', to: ROUTES.searchResults },
   { label: 'Explore', to: ROUTES.explore },
-  { label: 'Routes', to: ROUTES.search },
-  { label: 'Experience', to: ROUTES.liveTracking },
-  { label: 'About', to: ROUTES.sitemap },
+  { label: 'Live Tracking', to: ROUTES.liveTracking },
+  { label: 'My Tickets', to: ROUTES.myTickets },
+  { label: 'Help', to: ROUTES.help },
 ]
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>
   isActive
-    ? 'text-body-lg font-semibold text-teal-flow border-b-2 border-teal-flow pb-0.5 transition-colors'
-    : 'text-body-md font-medium text-on-surface-variant hover:text-deep-river transition-colors'
+    ? 'whitespace-nowrap text-body-lg font-semibold text-teal-flow border-b-2 border-teal-flow pb-0.5 transition-colors'
+    : 'whitespace-nowrap text-body-md font-medium text-on-surface-variant hover:text-deep-river transition-colors'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
@@ -28,7 +29,7 @@ export default function Header() {
           <Link to={ROUTES.home} aria-label={t('Smart Waterbus home')}>
             <Logo className="h-9 w-auto" />
           </Link>
-          <nav className="hidden items-center gap-space-xl lg:flex" aria-label={t('Main')}>
+          <nav className="hidden items-center gap-space-lg xl:flex" aria-label={t('Main')}>
             {NAV_ITEMS.map((item) => (
               <NavLink key={item.label} to={item.to} className={linkClass}>
                 {t(item.label)}
@@ -38,18 +39,22 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-space-md">
-          <button
-            type="button"
+          <Link
+            to={ROUTES.search}
             aria-label={t('Search routes and piers')}
             className="flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-all hover:bg-surface-container hover:text-deep-river"
           >
             <Icon name="search" className="text-[20px]" />
-          </button>
+          </Link>
           <LanguageSwitcher />
-          <Button to={ROUTES.signIn} variant="dark" className="hidden sm:inline-flex">
+          <Button
+            to={ROUTES.signIn}
+            variant="dark"
+            className="hidden whitespace-nowrap sm:inline-flex"
+          >
             {t('Sign in')}
           </Button>
-          <Button to={ROUTES.search} className="hidden md:inline-flex">
+          <Button to={ROUTES.search} className="hidden whitespace-nowrap md:inline-flex">
             {t('Book a Trip')}
           </Button>
           <button
@@ -57,7 +62,7 @@ export default function Header() {
             aria-label={t('Toggle menu')}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="flex h-10 w-10 items-center justify-center rounded-full text-deep-river hover:bg-surface-container lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-deep-river hover:bg-surface-container xl:hidden"
           >
             <Icon name={open ? 'close' : 'menu'} />
           </button>
@@ -66,7 +71,7 @@ export default function Header() {
 
       {open && (
         <nav
-          className="border-t border-surface-container/60 bg-mist px-margin py-space-md lg:hidden"
+          className="border-t border-surface-container/60 bg-mist px-margin py-space-md xl:hidden"
           aria-label={t('Mobile')}
         >
           <ul className="flex flex-col gap-space-sm">

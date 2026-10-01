@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import heroVideo from '../../../assets/videos/saigon-waterbus.mp4'
 import heroPoster from '../../../assets/videos/saigon-waterbus-poster.jpg'
@@ -7,16 +6,11 @@ import { ROUTES } from '../../../routes/routes'
 import type { HeroCue } from '../types'
 import { t } from '../../../i18n'
 
-const SLIDE_COUNT = 3
-
 interface HeroSectionProps {
   cues: HeroCue[]
 }
 
 export default function HeroSection({ cues }: HeroSectionProps) {
-  const [slide, setSlide] = useState(1)
-  const step = (delta: number) => setSlide((s) => ((s - 1 + delta + SLIDE_COUNT) % SLIDE_COUNT) + 1)
-
   return (
     <section className="relative flex min-h-[720px] w-full flex-col justify-between overflow-hidden bg-gradient-to-b from-mist via-[#EDF4F5] to-surface lg:h-[86vh] lg:max-h-[920px] lg:min-h-[780px]">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
@@ -35,37 +29,6 @@ export default function HeroSection({ cues }: HeroSectionProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-deep-river/85 via-deep-river/55 to-transparent lg:w-[72%]" />
         <div className="absolute inset-0 bg-gradient-to-t from-deep-river/85 via-transparent to-deep-river/25" />
-        <svg
-          className="absolute left-0 top-0 h-full w-full text-sky-aqua opacity-25"
-          fill="none"
-          preserveAspectRatio="none"
-          viewBox="0 0 1440 800"
-          aria-hidden="true"
-        >
-          <path
-            d="M-80 160 C 220 120, 420 320, 780 240 C 1100 170, 1320 280, 1540 220"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeWidth="32"
-          />
-          <path
-            d="M-100 320 C 260 260, 520 440, 880 340 C 1180 260, 1380 400, 1580 330"
-            stroke="currentColor"
-            strokeDasharray="10 16"
-            strokeWidth="16"
-          />
-        </svg>
-      </div>
-
-      <div className="absolute right-8 top-8 z-20 hidden items-center gap-3 rounded-full border border-white/15 bg-deep-river/85 px-4 py-2 text-on-primary shadow-[0_12px_32px_rgba(13,37,56,0.25)] backdrop-blur-md md:flex lg:right-16">
-        <div className="h-2.5 w-2.5 animate-ping rounded-full bg-sky-aqua" />
-        <span className="font-numeric-md text-xs font-semibold uppercase tracking-wider text-sand-light">
-          {t('WB-01 • Bach Dang → Thu Thiem')}
-        </span>
-        <span className="text-white/40">|</span>
-        <span className="flex items-center gap-1 text-xs font-semibold text-sky-aqua">
-          <Icon name="speed" className="text-[15px]" /> {t('42 km/h • On Time')}
-        </span>
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-margin pt-10 sm:pt-14 lg:pt-20">
@@ -127,30 +90,6 @@ export default function HeroSection({ cues }: HeroSectionProps) {
                 </div>
               </div>
             ))}
-          </div>
-          <div className="flex items-center justify-end gap-3 border-t border-white/15 pt-2 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
-            <span className="font-numeric-md text-sm font-semibold tracking-wider text-sand-light">
-              {String(slide).padStart(2, '0')} <span className="text-white/40">—</span>{' '}
-              {String(SLIDE_COUNT).padStart(2, '0')}
-            </span>
-            <div className="flex items-center gap-1.5">
-              <button
-                type="button"
-                aria-label={t('Previous vessel')}
-                onClick={() => step(-1)}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
-              >
-                <Icon name="chevron_left" className="text-[16px]" />
-              </button>
-              <button
-                type="button"
-                aria-label={t('Next vessel')}
-                onClick={() => step(1)}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-deep-river shadow-sm transition-colors hover:bg-sand-light"
-              >
-                <Icon name="chevron_right" className="text-[16px]" />
-              </button>
-            </div>
           </div>
         </div>
       </div>

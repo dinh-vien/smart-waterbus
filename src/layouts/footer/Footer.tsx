@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Logo } from '../../components/brand'
 import { Icon } from '../../components/ui'
+import { CONTACT } from '../../constant/contact'
 import { ROUTES } from '../../routes/routes'
 import { t } from '../../i18n'
 
@@ -15,7 +16,7 @@ const QUICK_LINKS = [
   { label: 'Routes & Lines', to: ROUTES.search },
   { label: 'Timetable & Headways', to: ROUTES.searchResults },
   { label: 'Pier Terminals & Amenities', to: ROUTES.explore },
-  { label: 'Fleet & Waterway Safety', to: ROUTES.sitemap },
+  { label: 'Help & About', to: ROUTES.help },
 ]
 
 const EXPERIENCES = [
@@ -111,9 +112,11 @@ export default function Footer() {
             </span>
             <div className="space-y-space-xs text-body-md text-on-surface-variant">
               <p className="font-semibold text-deep-river">{t('Operational Hours')}</p>
-              <p className="text-body-sm">{t('Mon – Sun: 06:00 – 23:00')}</p>
+              <p className="text-body-sm">{t(CONTACT.hours)}</p>
               <p className="pt-space-xs font-semibold text-deep-river">{t('Dispatch Hotline')}</p>
-              <p className="text-body-sm">+84 (0) 28 3822 5555</p>
+              <a href={CONTACT.hotlineHref} className="text-body-sm hover:text-deep-river">
+                {CONTACT.hotline}
+              </a>
             </div>
             <div className="inline-flex items-center gap-space-sm rounded-xl border border-outline-variant/30 bg-surface px-space-md py-space-xs">
               <Icon name="qr_code_2" className="text-[20px] text-teal-flow" />

@@ -30,44 +30,6 @@ export const HOME_DATA: HomeData = {
       iconClass: 'text-secondary-fixed',
     },
   ],
-  features: [
-    {
-      icon: 'directions_boat',
-      title: 'Real-time Vessel Radar',
-      description:
-        'Live GPS telemetry, millisecond river arrival forecasts, and accurate passenger crowd gauges at every station.',
-      footnote: 'Always know where you are',
-      footnoteIcon: 'sensors',
-      tone: 'teal',
-    },
-    {
-      icon: 'confirmation_number',
-      title: 'Easy & Secure Booking',
-      description:
-        'Instant QR e-tickets, interactive deck seat selection, contactless checkout with Apple Pay, cards, and MoMo.',
-      footnote: 'Book in just a few taps',
-      footnoteIcon: 'touch_app',
-      tone: 'teal',
-    },
-    {
-      icon: 'anchor',
-      title: 'Scenic & Cultural Routes',
-      description:
-        'Expansive panoramic windows, whisper-quiet electric cruising, refreshing open air deck, and curated audio stories.',
-      footnote: 'See a different side',
-      footnoteIcon: 'photo_camera',
-      tone: 'teal',
-    },
-    {
-      icon: 'energy_savings_leaf',
-      title: 'Sustainable Urban Transit',
-      description:
-        'Zero tailpipe emissions along Saigon’s vital river corridor, reducing street gridlock and protecting biodiversity.',
-      footnote: 'For a greener tomorrow',
-      footnoteIcon: 'eco',
-      tone: 'coral',
-    },
-  ],
   routeFilters: [
     { id: 'all', label: 'All Routes' },
     { id: 'line1', label: 'Line 1 (Express)' },
@@ -145,36 +107,6 @@ export const HOME_DATA: HomeData = {
       title: 'Board with QR',
       description: 'Scan your e-ticket barcode at turnstiles and step aboard directly.',
       numberClass: 'bg-teal-flow text-on-primary',
-    },
-  ],
-  techFeatures: [
-    {
-      icon: 'satellite_alt',
-      title: 'Realtime Fleet Telemetry',
-      description:
-        'GPS vessel tracking with 10-second refresh cycles and dynamic arrival predictions displayed across all pier monitors.',
-      metric: '99.4% On-Time Index',
-    },
-    {
-      icon: 'translate',
-      title: 'Multilingual Platform',
-      description:
-        'Seamless digital booking and onboard signage in Vietnamese, English, Japanese, Korean, and French for global explorers.',
-      metric: '5 Supported Languages',
-    },
-    {
-      icon: 'psychology',
-      title: 'AI Route Concierge',
-      description:
-        'Dynamic journey recommendations tuned to hourly river tidal shifts, golden hour sunlight angles, and seat availability.',
-      metric: 'Tide-Aware Planning',
-    },
-    {
-      icon: 'podcasts',
-      title: 'Immersive Audio Guide',
-      description:
-        'Geo-fenced automated audio storytelling that synchronizes precisely with the vessel’s GPS coordinates as you cruise past landmarks.',
-      metric: '32 Geo-Trigger Points',
     },
   ],
 }
