@@ -5,15 +5,6 @@ export interface HeroCue {
   iconClass: string
 }
 
-export interface FeatureCard {
-  icon: string
-  title: string
-  description: string
-  footnote: string
-  footnoteIcon: string
-  tone: 'teal' | 'coral'
-}
-
 export interface RouteFilter {
   id: 'all' | 'line1' | 'line2' | 'sunset'
   label: string
@@ -41,18 +32,9 @@ export interface Step {
   numberClass: string
 }
 
-export interface TechFeature {
-  icon: string
-  title: string
-  description: string
-  metric: string
-}
-
 export interface HomeData {
   heroCues: HeroCue[]
-  features: FeatureCard[]
   routeFilters: RouteFilter[]
   stories: Story[]
   steps: Step[]
-  techFeatures: TechFeature[]
 }

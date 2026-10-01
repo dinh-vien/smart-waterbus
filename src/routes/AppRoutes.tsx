@@ -20,6 +20,7 @@ const TicketDetailPage = lazy(() => import('../pages/tickets/TicketDetailPage'))
 const ManageBookingPage = lazy(() => import('../pages/tickets/ManageBookingPage'))
 const LiveTrackingPage = lazy(() => import('../pages/tracking/LiveTrackingPage'))
 const ExplorePage = lazy(() => import('../pages/explore/ExplorePage'))
+const HelpPage = lazy(() => import('../pages/help/HelpPage'))
 const SitemapPage = lazy(() => import('../pages/sitemap/SitemapPage'))
 
 const PAGES = [
@@ -38,6 +39,7 @@ const PAGES = [
   { path: ROUTES.manageBooking, Page: ManageBookingPage },
   { path: ROUTES.liveTracking, Page: LiveTrackingPage },
   { path: ROUTES.explore, Page: ExplorePage },
+  { path: ROUTES.help, Page: HelpPage },
   { path: ROUTES.sitemap, Page: SitemapPage },
 ]
 

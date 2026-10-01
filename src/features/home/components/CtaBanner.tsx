@@ -25,16 +25,12 @@ export default function CtaBanner() {
             </svg>
           </div>
           <div className="relative z-10 max-w-2xl space-y-space-lg">
-            <div className="inline-flex items-center gap-space-sm rounded-full border border-white/15 bg-white/10 px-space-md py-1.5 text-body-sm text-sand-light backdrop-blur-md">
-              <span className="h-2.5 w-2.5 animate-ping rounded-full bg-sky-aqua" />
-              <span>{t('Normal River Operations • Optimal Water Level • 14 Vessels Active')}</span>
-            </div>
             <h2 className="font-headline-lg text-3xl font-bold leading-tight tracking-tight text-on-primary sm:text-headline-lg md:text-headline-xl">
               {t('Ready to Experience Saigon from the Water?')}
             </h2>
             <p className="max-w-xl text-body-lg text-sand-light/90">
               {t(
-                'Join over 1.2M passengers discovering effortless urban mobility, breezy commutes, and breathtaking twilight river journeys.',
+                'Effortless urban mobility, breezy commutes and breathtaking twilight river journeys.',
               )}
             </p>
             <div className="flex flex-wrap items-center gap-space-md pt-space-xs">

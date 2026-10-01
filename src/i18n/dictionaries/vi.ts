@@ -64,7 +64,6 @@ export const vi: Record<string, string> = {
   '24 min • Scenic river journey passing Saigon Pearl & landmarks':
     '24 phút • Hành trình ngắm cảnh sông đi qua Saigon Pearl và các địa danh',
   '24 min express': '24 phút tốc hành',
-  '32 Geo-Trigger Points': '32 điểm kích hoạt theo vị trí',
   '4 Signature Points of Interest': '4 điểm tham quan đặc trưng',
   '42 km/h': '42 km/h',
   '42 km/h • On Time': '42 km/h • Đúng giờ',
@@ -72,16 +71,13 @@ export const vi: Record<string, string> = {
     '42 phút • Hành trình ngắm cảnh trọn tuyến từ bến đầu đến bến cuối',
   '42 min full run': '42 phút trọn tuyến',
   '5 Piers': '5 bến',
-  '5 Supported Languages': '5 ngôn ngữ được hỗ trợ',
   '60 min scenic': '60 phút ngắm cảnh',
-  '99.4% On-Time Index': 'Chỉ số đúng giờ 99,4%',
   'A Brighter Saigon': 'Một Sài Gòn rạng rỡ hơn',
   'A Different Perspective on Saigon’s Skyline & Heritage':
     'Góc nhìn khác về đường chân trời và di sản Sài Gòn',
   'A Smarter Journey,': 'Hành trình thông minh hơn,',
   A1: 'A1',
   A2: 'A2',
-  About: 'Giới thiệu',
   'Access QR Ticket': 'Mở vé QR',
   'Access your QR ticket': 'Mở vé QR của bạn',
   'Access your saved river trips and pier schedules':
@@ -104,7 +100,6 @@ export const vi: Record<string, string> = {
   'After completing payment, continue to check the booking status.':
     'Sau khi thanh toán xong, hãy tiếp tục để kiểm tra trạng thái đặt chỗ.',
   Afternoon: 'Buổi chiều',
-  'AI Route Concierge': 'Trợ lý tuyến AI',
   'Air-Conditioned': 'Có điều hòa',
   'Air-Conditioned Cabin': 'Khoang có điều hòa',
   Aisle: 'Lối đi',
@@ -127,7 +122,6 @@ export const vi: Record<string, string> = {
   'All Vessels ({length})': 'Tất cả tàu ({length})',
   'Along Your River Journey': 'Dọc hành trình trên sông của bạn',
   'Already registered with Smart Waterbus?': 'Đã có tài khoản Smart Waterbus?',
-  'Always know where you are': 'Luôn biết bạn đang ở đâu',
   'Amount to pay': 'Số tiền cần thanh toán',
   and: 'và',
   'and acknowledge the': 'và xác nhận đã đọc',
@@ -175,8 +169,6 @@ export const vi: Record<string, string> = {
   'Back to home': 'Về trang chủ',
   'Back to My Tickets': 'Về Vé của tôi',
   'Bank Card': 'Thẻ ngân hàng',
-  'Behind every quiet river glide is an advanced telemetry stack coordinating vessels, tides, pier turnstiles, and passenger comfort.':
-    'Sau mỗi chuyến lướt êm trên sông là một hệ thống viễn trắc tiên tiến điều phối tàu, thủy triều, cổng soát vé tại bến và sự thoải mái của hành khách.',
   'Best River View:': 'Ngắm sông đẹp nhất:',
   'Binh An': 'Bình An',
   'Binh An Pier': 'Bến Bình An',
@@ -195,7 +187,6 @@ export const vi: Record<string, string> = {
   'Boats arrive every 15 mins during peak hours (06:30–09:00 & 16:30–19:30)':
     'Tàu đến mỗi 15 phút vào giờ cao điểm (06:30–09:00 và 16:30–19:30)',
   'Book a Trip': 'Đặt chuyến',
-  'Book in just a few taps': 'Đặt vé chỉ với vài chạm',
   'Book New Trip': 'Đặt chuyến mới',
   Booking: 'Đặt chỗ',
   'Booking Code:': 'Mã đặt chỗ:',
@@ -377,13 +368,10 @@ export const vi: Record<string, string> = {
   'District 2 Waterfront • Pontoon A': 'Bờ sông Quận 2 • Cầu phao A',
   'Don’t have an account yet?': 'Chưa có tài khoản?',
   Done: 'Xong',
-  'Dynamic journey recommendations tuned to hourly river tidal shifts, golden hour sunlight angles, and seat availability.':
-    'Gợi ý hành trình linh hoạt theo thủy triều từng giờ, góc nắng giờ vàng và số chỗ còn trống.',
   'E-Ticket & Booking Contact': 'Vé điện tử và liên hệ đặt chỗ',
   'E-Wallet': 'Ví điện tử',
   'e.g. Nguyen Van An': 'VD: Nguyễn Văn An',
   'Earliest Departure': 'Khởi hành sớm nhất',
-  'Easy & Secure Booking': 'Đặt vé dễ dàng và an toàn',
   'Easy booking': 'Đặt vé dễ dàng',
   'Eco-Corridor to Thanh Da Peninsula': 'Hành lang sinh thái đến bán đảo Thanh Đa',
   'Edit Passenger Details': 'Sửa thông tin hành khách',
@@ -410,9 +398,6 @@ export const vi: Record<string, string> = {
     'Mọi trang đều mở được trực tiếp bằng đường dẫn, không cần đăng nhập hay làm các bước trước.',
   'Expansive contemporary waterfront parkland connecting urban transit with scenic walking paths.':
     'Công viên ven sông hiện đại rộng lớn, kết nối giao thông đô thị với các lối đi bộ ngắm cảnh.',
-  'Expansive panoramic windows, whisper-quiet electric cruising, refreshing open air deck, and curated audio stories.':
-    'Cửa sổ toàn cảnh rộng, tàu điện chạy êm, boong mở thoáng mát và các câu chuyện âm thanh chọn lọc.',
-  Experience: 'Trải nghiệm',
   'Experience Fare': 'Giá trải nghiệm',
   'Experience the city skyline from panoramic catamarans with curated audio guides and sunset sailings.':
     'Ngắm đường chân trời thành phố từ catamaran toàn cảnh với hướng dẫn âm thanh chọn lọc và những chuyến đi lúc hoàng hôn.',
@@ -451,18 +436,14 @@ export const vi: Record<string, string> = {
   'Fast-filling morning service': 'Chuyến sáng nhanh hết chỗ',
   'Fastest Crossing': 'Qua sông nhanh nhất',
   'Fastest Pier Exit:': 'Ra bến nhanh nhất:',
-  'Fleet & Waterway Safety': 'Đội tàu và an toàn đường thủy',
   'Follow your catamaran crossing along the central Saigon River with real-time positioning, contextual river heritage stories, and synchronized audio commentary.':
     'Theo dõi chuyến catamaran của bạn dọc sông Sài Gòn trung tâm với định vị thời gian thực, những câu chuyện di sản sông theo ngữ cảnh và thuyết minh âm thanh đồng bộ.',
-  'For a greener tomorrow': 'Vì một ngày mai xanh hơn',
   'Forgot password?': 'Quên mật khẩu?',
   'Forward / Bow • River Cruise Direction': 'Phía trước / Mũi tàu • Hướng chạy trên sông',
   'Forward 10 seconds': 'Tua 10 giây',
   'Fresh Drinks Kiosk': 'Quầy nước giải khát',
   Fri: 'T6',
   'From {price}': 'Từ {price}',
-  'From iconic skyline landmarks to hidden historical wharfs, Smart Waterbus brings you closer to the city’s living river heritage.':
-    'Từ những địa danh nổi bật của đường chân trời đến các bến cảng lịch sử ít người biết, Smart Waterbus đưa bạn đến gần hơn với di sản sống bên dòng sông của thành phố.',
   'From trip planning to boarding turnstiles in under sixty seconds.':
     'Từ lên kế hoạch đến qua cổng lên tàu trong chưa đầy sáu mươi giây.',
   'Full Legal Name': 'Họ tên đầy đủ',
@@ -472,16 +453,12 @@ export const vi: Record<string, string> = {
   'Gate 1': 'Cổng 1',
   'Gate 2': 'Cổng 2',
   'General pier assistance': 'Hỗ trợ chung tại bến',
-  'Geo-fenced automated audio storytelling that synchronizes precisely with the vessel’s GPS coordinates as you cruise past landmarks.':
-    'Kể chuyện âm thanh tự động theo vị trí, đồng bộ chính xác với tọa độ GPS của tàu khi bạn đi ngang các địa danh.',
   'Glide past illuminated bridges and towering downtown landmarks as golden dusk illuminates the central river corridor.':
     'Lướt qua những cây cầu rực sáng và các công trình cao tầng khi hoàng hôn vàng nhuộm hành lang sông trung tâm.',
   'Golden Hour Special': 'Đặc biệt giờ vàng',
   'GPS Auto-Triggered': 'Tự kích hoạt bằng GPS',
   'GPS Live Fleet Radar': 'Radar đội tàu GPS trực tiếp',
   'GPS Radar Live • 10s cycle': 'Radar GPS trực tiếp • Chu kỳ 10 giây',
-  'GPS vessel tracking with 10-second refresh cycles and dynamic arrival predictions displayed across all pier monitors.':
-    'Theo dõi tàu bằng GPS, làm mới mỗi 10 giây, dự báo giờ đến hiển thị trên mọi màn hình tại bến.',
   'Greener future': 'Tương lai xanh hơn',
   'Guest Ticket Lookup': 'Tra cứu vé cho khách',
   'Harbor Fees & VAT': 'Phí cảng và VAT',
@@ -522,7 +499,6 @@ export const vi: Record<string, string> = {
     'Biểu tượng, cầu cảng lịch sử và kiến trúc đương đại dọc các hành lang đường thủy của chúng tôi.',
   'Immerse yourself in centuries of river commerce, shimmering night architecture, and peaceful winding canals away from crowded streets.':
     'Đắm mình trong nhiều thế kỷ thương mại đường sông, kiến trúc lung linh về đêm và những con kênh yên bình tránh xa phố đông đúc.',
-  'Immersive Audio Guide': 'Hướng dẫn âm thanh sống động',
   Included: 'Đã bao gồm',
   'Included (0 VND)': 'Đã bao gồm (0 VND)',
   'Includes Ba Son Bridge view': 'Có cảnh cầu Ba Son',
@@ -534,13 +510,8 @@ export const vi: Record<string, string> = {
     'Vé điện tử tức thì, chạm là qua cổng soát vé.',
   'Instant mobile ticket verification': 'Xác minh vé trên điện thoại tức thì',
   'Instant QR / Card': 'QR / Thẻ tức thì',
-  'Instant QR e-tickets, interactive deck seat selection, contactless checkout with Apple Pay, cards, and MoMo.':
-    'Vé QR điện tử tức thì, chọn ghế trên boong tương tác, thanh toán không chạm bằng Apple Pay, thẻ và MoMo.',
   'Instant ticket confirmation': 'Xác nhận vé tức thì',
-  'Intelligent Navigation Tech': 'Công nghệ dẫn đường thông minh',
   'Interactive Audio & Sightseeing POIs': 'Điểm âm thanh và ngắm cảnh tương tác',
-  'Join over 1.2M passengers discovering effortless urban mobility, breezy commutes, and breathtaking twilight river journeys.':
-    'Cùng hơn 1,2 triệu hành khách khám phá cách di chuyển đô thị nhẹ nhàng, những chuyến đi mát mẻ và hành trình hoàng hôn trên sông ngoạn mục.',
   'Journey Details': 'Chi tiết hành trình',
   'Journey Timeline': 'Lộ trình hành trình',
   'Keep me signed in on this device': 'Giữ đăng nhập trên thiết bị này',
@@ -574,8 +545,6 @@ export const vi: Record<string, string> = {
   'Live from Bach Dang Pier': 'Trực tiếp từ Bến Bạch Đằng',
   'Live GPS positioning and accurate pier arrival predictions.':
     'Định vị GPS trực tiếp và dự báo giờ đến bến chính xác.',
-  'Live GPS telemetry, millisecond river arrival forecasts, and accurate passenger crowd gauges at every station.':
-    'Viễn trắc GPS trực tiếp, dự báo giờ đến tính bằng mili giây và mức độ đông hành khách chính xác tại mọi bến.',
   'Live Inventory': 'Chỗ còn trống trực tiếp',
   'Live map of the river crossing': 'Bản đồ trực tiếp của tuyến qua sông',
   'Live Trip': 'Chuyến đang chạy',
@@ -612,10 +581,7 @@ export const vi: Record<string, string> = {
   Mon: 'T2',
   'Mon – Sun: 06:00 – 23:00': 'Thứ 2 – CN: 06:00 – 23:00',
   'More than a ride ~': 'Hơn cả một chuyến đi ~',
-  'More Than Transportation — A New Way to See Saigon':
-    'Hơn cả phương tiện di chuyển — Một cách mới để ngắm Sài Gòn',
   Morning: 'Buổi sáng',
-  'Multilingual Platform': 'Nền tảng đa ngôn ngữ',
   'My tickets': 'Vé của tôi',
   'My Tickets': 'Vé của tôi',
   'name@example.com': 'name@example.com',
@@ -633,7 +599,6 @@ export const vi: Record<string, string> = {
   'Next Departure • Today': 'Chuyến kế tiếp • Hôm nay',
   'Next Departures': 'Các chuyến kế tiếp',
   'Next vessel': 'Tàu kế tiếp',
-  'Next-Generation River Mobility Systems': 'Hệ thống giao thông sông thế hệ mới',
   'Nguyen Van An': 'Nguyen Van An',
   'No audio story at the terminal pier. Walking tour suggestions are ready after docking.':
     'Không có câu chuyện âm thanh tại bến cuối. Gợi ý đi bộ sẽ sẵn sàng sau khi tàu cập bến.',
@@ -641,8 +606,6 @@ export const vi: Record<string, string> = {
   'No departures on this line right now.': 'Hiện chưa có chuyến nào trên tuyến này.',
   'Non-stop': 'Không dừng',
   'Non-stop express run': 'Chạy tốc hành không dừng',
-  'Normal River Operations • Optimal Water Level • 14 Vessels Active':
-    'Vận hành sông bình thường • Mực nước tối ưu • 14 tàu đang chạy',
   'North Corridor': 'Hành lang phía Bắc',
   'Notification Email': 'Email nhận thông báo',
   'Now Approaching': 'Sắp đến',
@@ -768,9 +731,7 @@ export const vi: Record<string, string> = {
   'Real-time tracking': 'Theo dõi thời gian thực',
   'Real-time updates available after booking confirmation':
     'Cập nhật thời gian thực sau khi đặt chỗ được xác nhận',
-  'Real-time Vessel Radar': 'Radar tàu thời gian thực',
   'Real-Time Vessel Tracking': 'Theo dõi tàu thời gian thực',
-  'Realtime Fleet Telemetry': 'Viễn trắc đội tàu thời gian thực',
   'Recent Past Journeys': 'Các chuyến gần đây',
   'Recenter view': 'Về giữa bản đồ',
   'RECOMMENDED • FASTEST': 'ĐỀ XUẤT • NHANH NHẤT',
@@ -826,7 +787,6 @@ export const vi: Record<string, string> = {
   'Round-trip Cruise': 'Khứ hồi',
   'Route & Vessel': 'Tuyến và tàu',
   'Route Connected': 'Kết nối tuyến',
-  Routes: 'Tuyến',
   'Routes & Lines': 'Tuyến và lộ trình',
   'Saigon Central River Crossing': 'Chuyến qua sông Sài Gòn trung tâm',
   'Saigon River {line} • {code}': 'Sông Sài Gòn {line} • {code}',
@@ -842,7 +802,6 @@ export const vi: Record<string, string> = {
   'Scan to Pay with Any Banking App': 'Quét để thanh toán bằng mọi ứng dụng ngân hàng',
   'Scan your e-ticket barcode at turnstiles and step aboard directly.':
     'Quét mã vé điện tử tại cổng soát vé và lên tàu ngay.',
-  'Scenic & Cultural Routes': 'Tuyến ngắm cảnh và văn hóa',
   'Scenic Corridor Experience': 'Trải nghiệm hành lang ngắm cảnh',
   'Scenic Full Route': 'Trọn tuyến ngắm cảnh',
   'Scenic glide': 'Lướt ngắm cảnh',
@@ -859,8 +818,6 @@ export const vi: Record<string, string> = {
   'Scheduled docking at {pier}.': 'Dự kiến cập bến {pier}.',
   'scheduled for today': 'trong hôm nay',
   'Scheduled upcoming river voyages': 'Các chuyến sông sắp tới đã lên lịch',
-  'Seamless digital booking and onboard signage in Vietnamese, English, Japanese, Korean, and French for global explorers.':
-    'Đặt vé điện tử liền mạch và biển chỉ dẫn trên tàu bằng tiếng Việt, Anh, Nhật, Hàn và Pháp cho du khách toàn cầu.',
   'Seamless Transit': 'Di chuyển liền mạch',
   Search: 'Tìm',
   'Search journey': 'Tìm hành trình',
@@ -997,7 +954,6 @@ export const vi: Record<string, string> = {
   'Sunset Twilight': 'Hoàng hôn chạng vạng',
   'Support & Contact': 'Hỗ trợ và liên hệ',
   'Sustainable travel': 'Du lịch bền vững',
-  'Sustainable Urban Transit': 'Giao thông đô thị bền vững',
   'Swap origin and destination': 'Đổi chỗ bến đi và bến đến',
   'Tap an available seat to change your reservation. Seats are held for 10:00 during checkout.':
     'Chạm vào ghế còn trống để đổi chỗ. Ghế được giữ 10:00 trong lúc thanh toán.',
@@ -1030,7 +986,6 @@ export const vi: Record<string, string> = {
   'Ticket detail': 'Chi tiết vé',
   'Ticket Detail': 'Chi tiết vé',
   'Tide Alert: Clear': 'Cảnh báo thủy triều: Không',
-  'Tide-Aware Planning': 'Lập kế hoạch theo thủy triều',
   Timetable: 'Lịch chạy',
   'Timetable & Headways': 'Lịch chạy và giãn cách',
   Today: 'Hôm nay',
@@ -1175,7 +1130,6 @@ export const vi: Record<string, string> = {
     'Nơi chuyến đi bắt đầu: Nhà Hải quan thời Pháp đứng canh bến cảng lịch sử ven sông.',
   'Whether you need efficient daily transport or an unhurried storytelling voyage, Smart Waterbus accommodates your pace.':
     'Dù bạn cần di chuyển hằng ngày hiệu quả hay một hành trình kể chuyện thong thả, Smart Waterbus đều phù hợp nhịp của bạn.',
-  'Why River Travel': 'Vì sao đi đường sông',
   window: 'cửa sổ',
   Window: 'Cửa sổ',
   'Window River View': 'Cửa sổ nhìn ra sông',
@@ -1200,8 +1154,6 @@ export const vi: Record<string, string> = {
   'Your selected seat remains reserved while you complete payment.':
     'Ghế bạn chọn vẫn được giữ trong lúc bạn thanh toán.',
   'Your Ticket': 'Vé của bạn',
-  'Zero tailpipe emissions along Saigon’s vital river corridor, reducing street gridlock and protecting biodiversity.':
-    'Không khí thải dọc hành lang sông trọng yếu của Sài Gòn, giảm kẹt xe trên đường phố và bảo vệ đa dạng sinh học.',
   'Zoom in': 'Phóng to',
   'Zoom out': 'Thu nhỏ',
   'Eco Class': 'Hạng phổ thông',
@@ -1220,4 +1172,39 @@ export const vi: Record<string, string> = {
   'VIP Seat Surcharge': 'Phụ thu ghế VIP',
   'Please choose an available seat to continue.': 'Vui lòng chọn một ghế còn trống để tiếp tục.',
   'VIP Lounge • Air-Conditioned': 'Khoang VIP • Có điều hòa',
+  'Effortless urban mobility, breezy commutes and breathtaking twilight river journeys.':
+    'Di chuyển đô thị dễ dàng, những chuyến đi thoáng mát và các hành trình sông hoàng hôn ngoạn mục.',
+  'Live Tracking': 'Theo dõi tàu',
+  Help: 'Trợ giúp',
+  'Help & About': 'Trợ giúp & Giới thiệu',
+  'About Smart Waterbus': 'Về Smart Waterbus',
+  'Smart Waterbus is an electric river bus service for Saigon, with online booking, QR e-tickets and live vessel tracking.':
+    'Smart Waterbus là dịch vụ xe buýt sông chạy điện tại Sài Gòn, với đặt vé trực tuyến, vé điện tử QR và theo dõi tàu trực tiếp.',
+  'Book online': 'Đặt vé trực tuyến',
+  'Choose your trip and seat, pay securely and get a QR e-ticket instantly.':
+    'Chọn chuyến và ghế, thanh toán an toàn và nhận ngay vé điện tử QR.',
+  'Track your vessel': 'Theo dõi tàu của bạn',
+  'See where your boat is and when it reaches your pier.':
+    'Xem tàu đang ở đâu và khi nào tới bến của bạn.',
+  'Electric river transit': 'Giao thông sông chạy điện',
+  'Quiet, low-emission crossings along Saigon’s river corridor.':
+    'Những chuyến qua sông êm ái, ít phát thải dọc hành lang sông Sài Gòn.',
+  'Frequently Asked Questions': 'Câu hỏi thường gặp',
+  'Contact and shortcuts': 'Liên hệ và lối tắt',
+  'How do I book a ticket?': 'Làm sao để đặt vé?',
+  'Pick your departure and arrival piers and a date, choose a trip and a seat, enter the passenger details and pay. Your QR e-ticket is ready straight away in My Tickets.':
+    'Chọn bến đi, bến đến và ngày, chọn chuyến và ghế, nhập thông tin hành khách rồi thanh toán. Vé điện tử QR có ngay trong mục Vé của tôi.',
+  'What is the difference between standard and VIP seats?':
+    'Ghế thường và ghế VIP khác nhau thế nào?',
+  'VIP seats are in the aft lounge (rows 5–6) with priority disembarkation, for a surcharge shown on the seat map. Standard seats have no extra fee.':
+    'Ghế VIP nằm ở khoang đuôi (hàng 5–6), được xuống tàu ưu tiên, kèm khoản phụ thu hiển thị trên sơ đồ ghế. Ghế thường không phụ thu.',
+  'Which payment methods are accepted?': 'Có những hình thức thanh toán nào?',
+  'QR payment, bank cards, and the MoMo, VNPay and ZaloPay e-wallets.':
+    'Thanh toán QR, thẻ ngân hàng và các ví điện tử MoMo, VNPay, ZaloPay.',
+  'Can I get a refund?': 'Tôi có được hoàn tiền không?',
+  'Refunds are available up to 30 minutes before departure. Open My Tickets, choose the ticket and select Request Refund.':
+    'Có thể hoàn tiền đến 30 phút trước giờ khởi hành. Mở Vé của tôi, chọn vé rồi bấm Yêu cầu hoàn tiền.',
+  'When does boarding open?': 'Khi nào bắt đầu lên tàu?',
+  'Boarding opens 10 minutes before departure. Arrive at the pier with your QR ticket and scan it at the turnstile.':
+    'Lên tàu mở 10 phút trước giờ khởi hành. Hãy tới bến cùng vé QR và quét tại cổng soát vé.',
 }
